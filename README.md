@@ -15,6 +15,9 @@ TV codes are found at http://www.remotecentral.com/cgi-bin/codes/
 
 IR api on android is found at https://developer.android.com/reference/android/hardware/ConsumerIrManager.html
 
+TV Premieres List: http://www.metacritic.com/feature/tv-premiere-dates
+
+TV Guide API Documentation: http://developer.rovicorp.com/docs
 
 modules/archetecture
 
