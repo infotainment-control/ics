@@ -5,3 +5,18 @@ Infotainment Control Show
 
 1. Download android studio from https://developer.android.com/studio/index.html
 2. 
+
+Assume we have at least Android 4.4 kit kat.
+
+
+TV codes are found at http://www.remotecentral.com/cgi-bin/codes/
+
+IR api on android is found at https://developer.android.com/reference/android/hardware/ConsumerIrManager.html
+
+
+modules/archetecture
+
+- Library
+- UI
+- Online database for premiers.
+- Online database for guide.
