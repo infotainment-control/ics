@@ -19,6 +19,8 @@ TV Premieres List: http://www.metacritic.com/feature/tv-premiere-dates
 
 TV Guide API Documentation: http://developer.rovicorp.com/docs
 
+IR blaster howto: http://stackoverflow.com/questions/20244337/consumerirmanager-api-19
+
 modules/archetecture
 
 - Library
