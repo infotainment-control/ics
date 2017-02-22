@@ -6,6 +6,8 @@ Infotainment Control Show
 1. Download android studio from https://developer.android.com/studio/index.html
 2. 
 
+Instructions to run an app on a hardware device are here: https://developer.android.com/studio/run/device.html
+
 Assume we have at least Android 4.4 kit kat.
 
 
