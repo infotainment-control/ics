@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Infortainment_Control</string>
+    <string name="title_activity_index">Index</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="tv">TV</string>
+    <string name="cable">Cable Box</string>
+    <string name="premieres">Premieres</string>
+    <string name="settings">Settings</string>
+</resources>
