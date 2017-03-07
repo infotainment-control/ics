@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
-
-
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
-
-public class Index extends ActionBarActivity {
+public class InfortainmentControl extends ActionBarActivity {
 
     private TextView mTextMessage;
 

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".Index"
+            android:name=".InfortainmentControl"
             android:label="@string/title_activity_index"
             android:theme="@style/Theme.AppCompat.NoActionBar" >
             <intent-filter>
