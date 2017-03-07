@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_tv"
+        android:icon="@drawable/ic_tv_black_24px"
+        android:title="@string/tv" />
+
+    <item
+        android:id="@+id/navigation_cable"
+        android:icon="@drawable/ic_router_black_24px"
+        android:title="@string/cable" />
+
+    <item
+        android:id="@+id/navigation_premieres"
+        android:icon="@drawable/ic_star_black_24px"
+        android:title="@string/premieres" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_black_24px"
+        android:title="@string/settings" />
+
+</menu>
