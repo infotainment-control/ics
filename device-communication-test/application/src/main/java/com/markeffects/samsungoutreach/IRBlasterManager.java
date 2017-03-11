@@ -1,5 +1,6 @@
 package com.markeffects.samsungoutreach;
 
+import android.hardware.ConsumerIrManager;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -9,14 +10,36 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Utility class for translating IR codes
- * TODO sharpen up all the descriptions, eh? - mark
  *
- * TODO also, and this is big, these should be (still static) methods belonging to an InfraredCommand class, not a utility class
  */
-public class InfraredCodeUtility {
+
+// TODO this class is 100% ass. Definitely separate frequency and pulse derivation, tidy up the collections... etc. etc.
+public class IRBlasterManager {
 
     private static final String TAG = "[INFRARED_CODE_UTILITY]";
+
+    // TODO investigate static..... the Manager classes ought to be singletons, right?
+    private final ConsumerIrManager irManager;
+
+    IRBlasterManager(ConsumerIrManager irManager) {
+        this.irManager = irManager;
+    }
+
+    public void issueCommand(String rawHexCode) {
+        Map<String, List<Integer>> commandData = translateStandardCommandFormat(rawHexCode);
+
+        int frequency = commandData.get("frequency").get(0);
+
+        List<Integer> decimalDurationsList = commandData.get("durations");
+        int[] decimalDurations = new int[decimalDurationsList.size()];
+        //for(Integer duration : decimalDurationsList ) {
+        for(int i = 0; i < decimalDurationsList.size(); ++i) {
+            decimalDurations[i] = decimalDurationsList.get(i);
+        }
+
+        irManager.transmit(frequency, decimalDurations);
+    }
+
 
     /**
      * Method that does the thing, you dig? No? Fine, I'll comment better later.
@@ -82,8 +105,6 @@ public class InfraredCodeUtility {
         }
         return irData;
     }
-
-
 
     /**
      * Method for converting...... you get the picture

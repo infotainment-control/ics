@@ -15,15 +15,20 @@ import android.view.MenuItem;
 import java.util.List;
 import java.util.Map;
 
+// TODO refactor to be general commanding interface hookup thing
+// TODO also, make a few unit tests (those utility methods in IRBlasterManager, I'm looking at you)
 public class PowerCommand extends AppCompatActivity {
 
     private static final int   SAMSUNG_FREQUENCY = 38028;
     private static final int[] SAMSUNG_POWER_TOGGLE_DURATION = {4495,4368,546,1638,546,1638,546,1638,546,546,546,546,546,546,546,546,546,546,546,1638,546,1638,546,1638,546,546,546,546,546,546,546,546,546,546,546,546,546,1638,546,546,546,546,546,546,546,546,546,546,546,546,546,1664,546,546,546,1638,546,1638,546,1638,546,1638,546,1638,546,1638,546,46644,4394,4368,546,546,546,96044};
 
-    private static final int INSIGNIA_FREQUENCY = -1;
+    private static final int   INSIGNIA_FREQUENCY = -1;
     private static final int[] INSIGNIA_POWER_TOGGLE_DURATION = {-1,-1};
 
-    private ConsumerIrManager mCIR;
+    //private ConsumerIrManager mCIR;
+
+    private DeviceManager deviceManager;
+    private IRBlasterManager irBlasterManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +37,34 @@ public class PowerCommand extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mCIR = (ConsumerIrManager) getSystemService(Context.CONSUMER_IR_SERVICE);
+        // initialize key fields
+
+        deviceManager          = new MockDeviceManager();
+        ConsumerIrManager mCIR = (ConsumerIrManager) getSystemService(Context.CONSUMER_IR_SERVICE);
+        irBlasterManager       = new IRBlasterManager(mCIR);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
+            private int commandCount = 0;
+
             @Override
             public void onClick(View view) {
+                switch (commandCount % 4) {
+                    case 0:
+                    case 1:
+                        toggleSamsungPower();
+                        break;
+                    case 2:
+                    case 3:
+                        toggleInsigniaPower();
+                        break;
+                    default:
+                        break;
+                }
+                commandCount++;
+                /*
                 if(mCIR.hasIrEmitter()) {
                     System.out.println("we're cooking with gas, baby!");
                     for(int i = 1; i <= 100; ++i) {
@@ -50,17 +76,24 @@ public class PowerCommand extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-            }
+                }
+
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                */
+
+
+
             }
         });
 
+        /*
         System.out.println("checking utility class...");
 
         Log.d("POWER_COMMAND", "we're inside............");
 
-        Map<String, List<Integer>> command_power_samsung = InfraredCodeUtility.translateStandardCommandFormat("0000 006d 0022 0003 00a9 00a8 0015 003f 0015 003f 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 003f 0015 003f 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0040 0015 0015 0015 003f 0015 003f 0015 003f 0015 003f 0015 003f 0015 003f 0015 0702 00a9 00a8 0015 0015 0015 0e6e");
+        Map<String, List<Integer>> command_power_samsung = IRBlasterManager.translateStandardCommandFormat("0000 006d 0022 0003 00a9 00a8 0015 003f 0015 003f 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 003f 0015 003f 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0040 0015 0015 0015 003f 0015 003f 0015 003f 0015 003f 0015 003f 0015 003f 0015 0702 00a9 00a8 0015 0015 0015 0e6e");
 
         List<Integer> durations = command_power_samsung.get("durations");
         String durationsString = String.valueOf(durations.remove(0));
@@ -75,6 +108,7 @@ public class PowerCommand extends AppCompatActivity {
         System.out.println("computed durations: " + durationsString);
 
         System.out.println("... checking complete. hope all went well!");
+        */
     }
 
     @Override
@@ -97,5 +131,20 @@ public class PowerCommand extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // TODO these can certainly be refactored. The whole architecture will probably change
+
+    private void toggleSamsungPower() {
+        issuePowerCommand(DeviceID.SAMSUNG);
+    }
+
+    private void toggleInsigniaPower() {
+        issuePowerCommand(DeviceID.INSIGNIA);
+    }
+
+    private void issuePowerCommand(DeviceID deviceID) {
+        String rawCommand = deviceManager.getRawCommandCode(deviceID, TelevisionCommand.POWER);
+        irBlasterManager.issueCommand(rawCommand);
     }
 }
