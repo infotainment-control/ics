@@ -1,10 +1,9 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 /**
- *
+ *  A class to control use of Devices.
  */
-
-public class MockDeviceManager implements DeviceManager {
+class MockDeviceManager implements DeviceManager {
 
     private CodeProvider mockCodeProvider = new MockCodeProvider();
 

@@ -1,17 +1,16 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ *  Provides hard-coded command codes, suitable for development, debugging, and testing.
  */
-
-public class MockCodeProvider implements CodeProvider {
+class MockCodeProvider implements CodeProvider {
 
     private Map<DeviceID, Map<TelevisionCommand, String>> deviceCodesMap;
 
-    public MockCodeProvider() {
+    MockCodeProvider() {
         deviceCodesMap = new HashMap<>();
 
         // SAMSUNG

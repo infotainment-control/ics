@@ -1,9 +1,8 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 /**
- *
+ *  An interface outlining how Devices are handled.
  */
-
 public interface DeviceManager {
     CodeProvider getCodeProvider();
 

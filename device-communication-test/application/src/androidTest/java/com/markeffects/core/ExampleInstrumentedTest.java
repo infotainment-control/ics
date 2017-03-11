@@ -1,4 +1,4 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

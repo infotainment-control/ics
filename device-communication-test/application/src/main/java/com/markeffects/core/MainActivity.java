@@ -1,4 +1,4 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 import android.content.Context;
 import android.hardware.ConsumerIrManager;
@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 // TODO refactor to be general commanding interface hookup thing
 // TODO also, make a few unit tests (those utility methods in IRBlasterManager, I'm looking at you)
-public class PowerCommand extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private DeviceManager deviceManager;
     private IRBlasterManager irBlasterManager;
@@ -39,8 +39,8 @@ public class PowerCommand extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                //powerCycleMarksTelevisions();
-                changeInsigniaVolume();
+                powerCycleMarksTelevisions();
+                //changeInsigniaVolume();
             }
 
             private void powerCycleMarksTelevisions() {

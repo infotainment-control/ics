@@ -1,11 +1,11 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 /**
- *  An enumeration for dynamic instantiation of device command implementations.
+ *  Dnumeration for dynamic instantiation of device command implementations.
  *
  *  TODO consider items 32, 33 of effective java for more robust design
  */
-public enum TelevisionCommand {
+enum TelevisionCommand {
     POWER      ("power",       "turns device on and off"            ),
     VOLUME_UP  ("volume up",   "raises the device's level of volume"),
     VOLUME_DOWN("volume down", "lowers the device's level of volume");

@@ -1,4 +1,4 @@
-package com.markeffects.samsungoutreach;
+package com.markeffects.core;
 
 import java.util.Map;
 
@@ -13,7 +13,7 @@ import java.util.Map;
  *  TODO consider annotations & item 37 of effective java
  *  TODO comment, brochacho
  */
-public interface CodeProvider {
+interface CodeProvider {
     //String getCode(int deviceID, @Command String command); TODO this be that annotated approach...
 
     // explain yourself
