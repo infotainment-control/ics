@@ -7,14 +7,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
+import java.util.Map;
 
 public class PowerCommand extends AppCompatActivity {
 
     private static final int   SAMSUNG_FREQUENCY = 38028;
     private static final int[] SAMSUNG_POWER_TOGGLE_DURATION = {4495,4368,546,1638,546,1638,546,1638,546,546,546,546,546,546,546,546,546,546,546,1638,546,1638,546,1638,546,546,546,546,546,546,546,546,546,546,546,546,546,1638,546,546,546,546,546,546,546,546,546,546,546,546,546,1664,546,546,546,1638,546,1638,546,1638,546,1638,546,1638,546,1638,546,46644,4394,4368,546,546,546,96044};
+
+    private static final int INSIGNIA_FREQUENCY = -1;
+    private static final int[] INSIGNIA_POWER_TOGGLE_DURATION = {-1,-1};
 
     private ConsumerIrManager mCIR;
 
@@ -28,6 +35,7 @@ public class PowerCommand extends AppCompatActivity {
         mCIR = (ConsumerIrManager) getSystemService(Context.CONSUMER_IR_SERVICE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +55,26 @@ public class PowerCommand extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        System.out.println("checking utility class...");
+
+        Log.d("POWER_COMMAND", "we're inside............");
+
+        Map<String, List<Integer>> command_power_samsung = InfraredCodeUtility.translateStandardCommandFormat("0000 006d 0022 0003 00a9 00a8 0015 003f 0015 003f 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 003f 0015 003f 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 003f 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0015 0040 0015 0015 0015 003f 0015 003f 0015 003f 0015 003f 0015 003f 0015 003f 0015 0702 00a9 00a8 0015 0015 0015 0e6e");
+
+        List<Integer> durations = command_power_samsung.get("durations");
+        String durationsString = String.valueOf(durations.remove(0));
+        for(Integer duration : durations) {
+            durationsString += "," + String.valueOf(duration);
+        }
+
+        System.out.println("expected frequency: " + String.valueOf(SAMSUNG_FREQUENCY));
+        System.out.println("computed frequency: " + String.valueOf(command_power_samsung.get("frequency").get(0)));
+
+        System.out.println("expected durations: " + "4495,4368,546,1638,546,1638,546,1638,546,546,546,546,546,546,546,546,546,546,546,1638,546,1638,546,1638,546,546,546,546,546,546,546,546,546,546,546,546,546,1638,546,546,546,546,546,546,546,546,546,546,546,546,546,1664,546,546,546,1638,546,1638,546,1638,546,1638,546,1638,546,1638,546,46644,4394,4368,546,546,546,96044");
+        System.out.println("computed durations: " + durationsString);
+
+        System.out.println("... checking complete. hope all went well!");
     }
 
     @Override
