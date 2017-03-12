@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tv_manufacturer_array">
+        <item>@string/lg</item>
+        <item>@string/samsung</item>
+        <item>@string/sony</item>
+        <item>@string/vizio</item>
+    </string-array>
+    <string-array name="cable_provider_array">
+        <item>@string/comcast</item>
+        <item>@string/Massillon</item>
+        <item>@string/specrum</item>
+    </string-array>
+</resources>
