@@ -5,5 +5,6 @@ package com.markeffects.core;
  */
 public enum DeviceID {
     SAMSUNG,
-    INSIGNIA
+    INSIGNIA,
+    MOTOROLA
 }

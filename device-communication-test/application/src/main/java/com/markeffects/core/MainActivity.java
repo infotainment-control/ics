@@ -36,11 +36,11 @@ public class MainActivity extends AppCompatActivity {
             private int powerCommandsIssued  = 0;
             private int volumeCommandsIssued = 0;
 
-
             @Override
             public void onClick(View view) {
-                powerCycleMarksTelevisions();
+                //powerCycleMarksTelevisions();
                 //changeInsigniaVolume();
+                toggleCableBoxPower();
             }
 
             private void powerCycleMarksTelevisions() {
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     // TODO these can certainly be refactored. The whole architecture will probably change
 
     private void toggleSamsungPower() {
@@ -103,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void raiseInsigniaVolume() {
         issueVolumeUpCommand(DeviceID.INSIGNIA);
+    }
+
+    private void toggleCableBoxPower() {
+        issuePowerCommand(DeviceID.MOTOROLA);
     }
 
 

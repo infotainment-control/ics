@@ -34,14 +34,14 @@ class IRBlasterManager {
         // split the codes
         List<String> hexCodes = new ArrayList<>(Arrays.asList(hexCodeString.split(" ")));
 
-        // the 1st, 2nd, 3rd and 4th codes are not part of the pulse sequence
-        //     1st is a dummy  code
+        // the 1st, 2nd, 3rd and 4th words are not part of the pulse sequence
+        //     1st is a code to indicate if the pulse sequence was learned or given from the manufacturer
         //     2nd is the freq code
         //     3rd is the seq1 code
         //     4th is the seq2 code
         List<String> hexPulses = hexCodes.subList(4, hexCodes.size());
 
-        // frequency is the 2nd element in the code string
+        // frequency is the 2nd word in the code string
         int frequency = Integer.parseInt(hexCodes.get(1), 16);
         frequency = (int) (1000000 / (frequency * 0.241246));
 
