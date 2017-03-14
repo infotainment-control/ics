@@ -13,6 +13,9 @@
     <string name="vizio">Vizio</string>
     <string name="lg">LG</string>
     <string name="sony">Sony</string>
+    <string name="comcast">Comcast</string>
+    <string name="specrum">Spectrum</string>
+    <string name="Massillon">Massillon</string>
 </resources>
 
 
