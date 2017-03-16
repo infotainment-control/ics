@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/add_television_header" />
+            android:id="@+id/add_cable_box_header" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,21 +67,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp">
                 <TextView
-                    android:id="@+id/provider_input_label"
+                    android:id="@+id/manufacturer_input_label"
                     android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Provider"
+                    android:text="Manufacturer"
                     android:paddingLeft="10dp"/>
 
                 <Spinner
-                    android:id="@+id/provider_input"
-                    android:layout_width="280dp"
+                    android:id="@+id/manufacturer_input"
+                    android:layout_width="230dp"
                     android:layout_height="50dp"
-                    android:entries="@array/service_provider_array"
-                    android:prompt="Provider"
-                    android:layout_alignBaseline="@+id/provider_input_label"
-                    android:layout_alignBottom="@+id/provider_input_label"
+                    android:entries="@array/cable_manufacturer_array"
+                    android:layout_alignBaseline="@+id/manufacturer_input_label"
+                    android:layout_alignBottom="@+id/manufacturer_input_label"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
             </RelativeLayout>

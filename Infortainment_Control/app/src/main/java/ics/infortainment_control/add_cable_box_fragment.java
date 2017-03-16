@@ -18,7 +18,7 @@ public class add_cable_box_fragment extends Fragment{
     Button power;
     Button yes;
     Button no;
-    Spinner provider_input;
+    Spinner manufacturer_input;
     String manufacturer;
 
 
@@ -29,14 +29,14 @@ public class add_cable_box_fragment extends Fragment{
         power = (Button) v.findViewById(R.id.power_btn);
         yes = (Button) v.findViewById(R.id.yes_btn);
         no = (Button) v.findViewById(R.id.no_btn);
-        provider_input = (Spinner) v.findViewById(R.id.provider_input);
+        manufacturer_input = (Spinner) v.findViewById(R.id.manufacturer_input);
 
 
         // event listeners for power and source buttons
         power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                manufacturer = provider_input.getSelectedItem().toString(); // manufacturer selected
+                manufacturer = manufacturer_input.getSelectedItem().toString(); // manufacturer selected
                 // now fire off IR power command using selected manufacturer's codes
 
             }

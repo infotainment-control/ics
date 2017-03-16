@@ -6,16 +6,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.19"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:weightSum="1">
 
         <Button
             android:id="@+id/power_btn"
-
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/button_round_red"
             android:shadowColor="#A8A8A8"
@@ -28,9 +26,8 @@
 
         <Button
             android:id="@+id/source_btn"
-
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/button_round_white"
@@ -42,29 +39,358 @@
             android:textColor="#141414"
             android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/power_pressed_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/power_btn"
-            android:layout_alignStart="@+id/power_btn"
-            android:layout_below="@+id/power_btn"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="43dp"
-            android:text="" />
+    </RelativeLayout>
 
-        <TextView
-            android:id="@+id/source_pressed_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/source_btn"
-            android:layout_alignStart="@+id/source_btn"
-            android:layout_below="@+id/source_btn"
-            android:layout_marginLeft="7dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="18dp"
-            android:text="" />
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <LinearLayout
+            android:id="@+id/center_point"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:id="@+id/volume_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/center_point"
+            android:orientation="horizontal"
+            android:paddingRight="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/volume_up_btn"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_round_gray"
+                    android:shadowColor="#A8A8A8"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:text="+"
+                    android:textColor="#FFFFFF"
+                    android:textSize="45sp" />
+
+                <TextView
+                    android:id="@+id/volume_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/volume_up_btn"
+                    android:gravity="right"
+                    android:paddingLeft="10dp"
+                    android:text="Volume"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/volume_down_btn"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/volume_label"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_round_gray"
+                    android:gravity="center"
+                    android:shadowColor="#A8A8A8"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:text="-"
+                    android:textColor="#FFFFFF"
+
+                    android:textSize="55sp" />
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/center_point"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/channel_up_btn"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_round_gray"
+                    android:shadowColor="#A8A8A8"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:text="^"
+                    android:textColor="#FFFFFF"
+                    android:textSize="45sp" />
+
+                <TextView
+                    android:id="@+id/channel_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_below="@id/channel_up_btn"
+                    android:paddingLeft="10dp"
+                    android:text="Channel"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/channel_down_btn"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_below="@id/channel_label"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_round_gray"
+                    android:gravity="center"
+                    android:shadowColor="#A8A8A8"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="5"
+                    android:text="V"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30dp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/menu_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_round_gray"
+            android:gravity="center"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Menu"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/directional_up_btn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_round_white"
+            android:gravity="center"
+            android:layout_toRightOf="@id/menu_btn"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="^"
+            android:textColor="#000000"
+            android:textSize="30dp" />
+
+        <Button
+            android:id="@+id/tools_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_round_gray"
+            android:gravity="center"
+            android:layout_toRightOf="@id/directional_up_btn"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Tools"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/directional_left_btn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_round_white"
+            android:gravity="center"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="L"
+            android:textColor="#000000"
+            android:textSize="30dp" />
+        <Button
+            android:id="@+id/ok_btn"
+            android:text="OK"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_toRightOf="@id/directional_left_btn"
+            />
+        <Button
+            android:id="@+id/directional_right_btn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+
+            android:layout_toRightOf="@id/ok_btn"
+            android:background="@drawable/button_round_white"
+            android:gravity="center"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="R"
+            android:textColor="#000000"
+            android:textSize="30dp" />
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/return_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_round_gray"
+            android:gravity="center"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Return"
+            android:textColor="#FFFFFF"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/directional_down_btn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_round_white"
+            android:gravity="center"
+            android:layout_toRightOf="@id/return_btn"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="V"
+            android:textColor="#000000"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/exit_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_round_gray"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/directional_down_btn"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Exit"
+            android:textColor="#FFFFFF"
+            android:textSize="13dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:paddingTop="30dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/mute_btn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/button_round_white"
+            android:gravity="center"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Mute"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
+        <Button
+            android:id="@+id/numpad_btn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/button_square_gray"
+            android:gravity="center"
+            android:layout_toRightOf="@id/mute_btn"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="123..."
+            android:textColor="#FFFFFF"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/info_btn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@drawable/button_round_white"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/numpad_btn"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Info"
+            android:textColor="#000000"
+            android:textSize="13dp" />
+
 
     </RelativeLayout>
 
