@@ -15,33 +15,151 @@ import android.widget.TextView;
 
 public class tv_fragment extends Fragment {
 
-    Button power;
-    Button source;
-    TextView power_label;
-    TextView source_label;
+    Button _power;
+    Button _source;
+    Button _channel_up;
+    Button _channel_down;
+    Button _volume_up;
+    Button _volume_down;
+    Button _up;
+    Button _down;
+    Button _left;
+    Button _right;
+    Button _ok;
+    Button _return;
+    Button _menu;
+    Button _exit;
+    Button _tools;
+    Button _numpad;
+    Button _mute;
+    Button _info;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // tie display resources to java objects
         View v = inflater.inflate(R.layout.tv_layout,container,false);
-        power = (Button) v.findViewById(R.id.power_btn);
-        source = (Button) v.findViewById(R.id.source_btn);
-        power_label = (TextView) v.findViewById(R.id.power_pressed_label);
-        source_label = (TextView) v.findViewById(R.id.source_pressed_label);
+        _power = (Button) v.findViewById(R.id.power_btn);
+        _source = (Button) v.findViewById(R.id.source_btn);
+        _channel_down = (Button) v.findViewById(R.id.channel_down_btn);
+        _channel_up = (Button) v.findViewById(R.id.channel_up_btn);
+        _volume_down = (Button) v.findViewById(R.id.volume_down_btn);
+        _volume_up = (Button) v.findViewById(R.id.volume_up_btn);
+        _up = (Button) v.findViewById(R.id.directional_up_btn);
+        _down = (Button) v.findViewById(R.id.directional_down_btn);
+        _left = (Button) v.findViewById(R.id.directional_left_btn);
+        _right = (Button) v.findViewById(R.id.directional_right_btn);
+        _ok = (Button) v.findViewById(R.id.ok_btn);
+        _return = (Button) v.findViewById(R.id.return_btn);
+        _tools = (Button) v.findViewById(R.id.tools_btn);
+        _menu = (Button) v.findViewById(R.id.menu_btn);
+        _numpad = (Button) v.findViewById(R.id.numpad_btn);
+        _mute = (Button) v.findViewById(R.id.mute_btn);
+        _info = (Button) v.findViewById(R.id.info_btn);
+        _exit = (Button) v.findViewById(R.id.exit_btn);
+
+
 
 
         // event listeners for power and source buttons
-        power.setOnClickListener(new View.OnClickListener() {
+        _power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                power_label.setText("Power button pressed");
             }
         });
 
-        source.setOnClickListener(new View.OnClickListener() {
+        _source.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                source_label.setText("Source button pressed");
+            }
+        });
+
+        _volume_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _volume_down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _channel_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _channel_down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _left.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _tools.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _mute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+            }
+        });
+
+        _numpad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
             }
         });
 
