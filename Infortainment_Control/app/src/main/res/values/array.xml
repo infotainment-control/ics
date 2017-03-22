@@ -6,4 +6,9 @@
         <item>@string/sony</item>
         <item>@string/vizio</item>
     </string-array>
+    <string-array name="cable_manufacturer_array">
+        <item>@string/comcast</item>
+        <item>@string/massillon</item>
+        <item>@string/spectrum</item>
+    </string-array>
 </resources>
