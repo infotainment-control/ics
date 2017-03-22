@@ -12,6 +12,7 @@ Assume we have at least Android 4.4 kit kat.
 
 
 TV codes are found at http://www.remotecentral.com/cgi-bin/codes/
+and http://irdb.tk/
 
 IR api on android is found at https://developer.android.com/reference/android/hardware/ConsumerIrManager.html
 
