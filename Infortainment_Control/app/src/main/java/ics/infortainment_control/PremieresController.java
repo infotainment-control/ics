@@ -67,8 +67,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
                     // Get Link for more information on specific show
                     Element showLink = show.select("a[href]").first();
-                    String showLinkURL = "http://www.tvtango.com" + showLink.attr("href");
-                    Document subDoc = Jsoup.connect(showLinkURL).get();
+                    Document subDoc = Jsoup.connect("http://www.tvtango.com" + showLink.attr("href")).get();
 
                     // Show Name
                     premiere.add(showLink.text().trim());
@@ -76,6 +75,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                     // Date
                     Element date = subDoc.select(".info a[href]").first();
 
+                    // Date may come from separate element
                     if (date == null)
                         date = subDoc.select("#airdates a[href]").first();
 
@@ -144,25 +144,15 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
             OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             StringBuilder strBuilder = new StringBuilder();
 
-            // Counter for debug purposes
-            int lineCounter = 0;
-
             for (Premiere data : premieres) {
-                String myData = (data.name + ";" + data.channel + ";" + data.date + ";" + data.time + ";" + data.category + ";"
+                strBuilder.append(data.name + ";" + data.channel + ";" + data.date + ";" + data.time + ";" + data.category + ";"
                         + data.genre + ";" + data.type + ";" + data.plot + "\n");
-
-                strBuilder.append(myData);
-                Log.d("WRITE " + lineCounter, myData);
-
-                lineCounter++;
             }
-
-            Log.d("WRITE", strBuilder.toString());
 
             writer.write(strBuilder.toString());
             writer.close();
 
-            Log.d("INFO", "Successfully written " + lineCounter + " lines to " + filename);
+            Log.d("INFO", "Successfully written to " + filename);
         }
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e.toString());
