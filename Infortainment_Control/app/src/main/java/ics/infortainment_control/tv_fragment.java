@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.annotation.Nullable;
@@ -11,6 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
+
+import ics.infortainment_control.commands.CodeProvider;
+import ics.infortainment_control.commands.DeviceID;
+import ics.infortainment_control.commands.DeviceManager;
+import ics.infortainment_control.commands.IRBlasterManager;
+import ics.infortainment_control.commands.MockCodeProvider;
+import ics.infortainment_control.commands.MockDeviceManager;
+import ics.infortainment_control.commands.TelevisionCommand;
 
 /**
  * Created by Jason on 3/5/2017.
@@ -37,6 +46,9 @@ public class tv_fragment extends Fragment {
     Button _mute;
     Button _info;
 
+    public DeviceManager deviceManager;
+    public IRBlasterManager irBlasterManager;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // tie display resources to java objects
@@ -60,13 +72,14 @@ public class tv_fragment extends Fragment {
         _info = (Button) v.findViewById(R.id.info_btn);
         _exit = (Button) v.findViewById(R.id.exit_btn);
 
-
-
-
         // event listeners for power and source buttons
         _power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DeviceID activeDevice = deviceManager.getActiveDevice();
+                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
+                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
+                irBlasterManager.issueCommand(code);
             }
         });
 
