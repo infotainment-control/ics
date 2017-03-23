@@ -31,15 +31,15 @@ public class Premiere {
     }
 
     public Premiere(String pName) {
-        this(pName, "", "", "", "", "", "", "");
+        this(pName, " ", " ", " ", " ", " ", " ", " ");
     }
 
     public static Premiere createPremiere(List<String> data) {
-        if (data.size() == 8)
+        if (data.size() >= 8)
             return new Premiere(data.get(0), data.get(1), data.get(2), data.get(3), data.get(4), data.get(5), data.get(6), data.get(7));
-        else if (data.size() >= 1)
+        else if (data.size() == 1)
             return new Premiere(data.get(0));
         else
-            return null;
+            return new Premiere("");
     }
 }

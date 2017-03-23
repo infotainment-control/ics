@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -25,38 +27,25 @@ import java.util.List;
 public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
     private Context context;
+    private premieres_fragment fragment;
 
-    public PremieresController(Context context) {
+    public PremieresController(premieres_fragment fragment, Context context) {
         this.context = context;
+        this.fragment = fragment;
     }
-
-    // ********************** IMPORTANT. DO NOT DELETE. **********************
-    /*
-        String filename = "premieres-data-" +
-                new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) +
-                ".txt";
-       ***********************************************************************
-    */
-
 
     @Override
     protected List<Premiere> doInBackground(Void... Params) {
-        String filename = "Test04.txt";
+        String filename = "premieres-data-" +
+                new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) +
+                ".txt";
 
-        List<Premiere> premieres = getPremieresData(filename);
+        return getPremieresData(filename);
+    }
 
-        for (Premiere p : premieres) {
-            Log.d("DEBUG", "Premiere Data:\nName: " + p.name +
-                    "\nChannel: " + p.channel +
-                    "\nDate: " + p.date +
-                    "\nTime: " + p.time +
-                    "\nCategory: " + p.category +
-                    "\nGenre: " + p.genre +
-                    "\nType: " + p.genre +
-                    "\nPlot: " + p.plot);
-        }
-
-        return premieres;
+    @Override
+    protected void onPostExecute(List<Premiere> result) {
+        fragment.populateList(result);
     }
 
     // Retrieves list of premieres from file or web scraping if no updated file exists
@@ -85,43 +74,48 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                     premiere.add(showLink.text().trim());
 
                     // Date
-                    premiere.add(subDoc.select(".info a[href]").text().trim());
+                    Element date = subDoc.select(".info a[href]").first();
+
+                    if (date == null)
+                        date = subDoc.select("#airdates a[href]").first();
+
+                    premiere.add(date.text().trim());
 
                     // Premiere Details comes in combo'd string, so we separate by hyphen
                     String[] details = show.select(".premier_details").text().split(" - ");
 
                     if (details.length == 2) {
-                        // Time
+                        // Time and Channel
                         premiere.add(details[0].trim());
-                        // Channel
                         premiere.add(details[1].trim());
-                    }
-                    else {
-                        // Time (No value)
-                        premiere.add("");
-                        // Channel
+                    } else if (details.length == 1) {
+                        // Only channel value
+                        premiere.add(" ");
                         premiere.add(details[0].trim());
+                    } else {
+                        // No Time or Channel value
+                        premiere.add(" ");
+                        premiere.add(" ");
                     }
 
                     // Category
                     String[] category = subDoc.select("li:contains(Category:)").last().text().split(":");
                     premiere.add(category.length >= 2 ? category[1].trim() : "");
+
                     // Genre
                     String[] genre = subDoc.select("li:contains(Genre:)").last().text().split(":");
                     premiere.add(genre.length >= 2 ? genre[1].trim() : "");
+
                     // Type
                     String[] type = subDoc.select("li:contains(Type:)").last().text().split(":");
                     premiere.add(type.length >= 2 ? type[1].trim() : "");
 
-
-
-                    String plot = "";
-
-                    // Plot not guaranteed to exist, so need to try/catch retrival for it
+                    // Plot not guaranteed to exist
+                    String plot = " ";
                     try {
                         plot = subDoc.select("#plot_synopsis p").last().text().trim();
                     } catch (Exception e) {
-                        Log.e("ERROR", "No plot found");
+                        Log.w("WARN", "Plot missing for show");
                     }
 
                     premiere.add(plot);
@@ -154,10 +148,17 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
             int lineCounter = 0;
 
             for (Premiere data : premieres) {
-                strBuilder.append(data.name + ";" + data.channel + ";" + data.date + ";" + data.time + ";" + data.category + ";"
+                String myData = (data.name + ";" + data.channel + ";" + data.date + ";" + data.time + ";" + data.category + ";"
                         + data.genre + ";" + data.type + ";" + data.plot + "\n");
+
+                strBuilder.append(myData);
+                Log.d("WRITE " + lineCounter, myData);
+
                 lineCounter++;
             }
+
+            Log.d("WRITE", strBuilder.toString());
+
             writer.write(strBuilder.toString());
             writer.close();
 
@@ -185,6 +186,8 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                 while ( (receiveString = bufferedReader.readLine()) != null ) {
                     List<String> premiereData = new LinkedList();
                     String[] splitString = receiveString.split(";");
+
+                    Log.d("READ", receiveString);
 
                     for (String str : splitString) {
                         premiereData.add(str);

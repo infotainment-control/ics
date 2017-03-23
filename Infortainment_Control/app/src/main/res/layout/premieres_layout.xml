@@ -61,23 +61,12 @@
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="1">
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="74dp">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <ScrollView
         android:layout_width="match_parent"
