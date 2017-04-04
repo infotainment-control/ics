@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public class cable_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup containter, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.cable_layout,containter,false);
+        View v = inflater.inflate(R.layout.dvd_layout,containter,false);
         return v;
     }
 }

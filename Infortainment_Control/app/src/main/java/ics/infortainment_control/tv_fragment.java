@@ -7,7 +7,6 @@ import android.view.View;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 /**
  * Created by Jason on 3/5/2017.
@@ -51,7 +50,7 @@ public class tv_fragment extends Fragment {
         _ok = (Button) v.findViewById(R.id.ok_btn);
         _return = (Button) v.findViewById(R.id.return_btn);
         _tools = (Button) v.findViewById(R.id.tools_btn);
-        _menu = (Button) v.findViewById(R.id.menu_btn);
+        _menu = (Button) v.findViewById(R.id.topmenu_btn);
         _numpad = (Button) v.findViewById(R.id.numpad_btn);
         _mute = (Button) v.findViewById(R.id.mute_btn);
         _info = (Button) v.findViewById(R.id.info_btn);
