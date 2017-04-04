@@ -180,7 +180,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/menu_btn"
+            android:id="@+id/topmenu_btn"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@drawable/button_round_gray"
@@ -199,7 +199,7 @@
             android:layout_height="55dp"
             android:background="@drawable/button_round_white"
             android:gravity="center"
-            android:layout_toRightOf="@id/menu_btn"
+            android:layout_toRightOf="@id/topmenu_btn"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:shadowColor="#A8A8A8"
