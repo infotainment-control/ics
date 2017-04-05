@@ -1,12 +1,16 @@
 package ics.infortainment_control;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentActivity;
 
 /**
  * Created by Jason on 3/5/2017.
@@ -159,6 +163,11 @@ public class tv_fragment extends Fragment {
         _numpad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
+                /*
+                DialogFragment numpad = new numpad_fragment();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+*/
+                //numpad.show(fm, "numpad");
             }
         });
 
