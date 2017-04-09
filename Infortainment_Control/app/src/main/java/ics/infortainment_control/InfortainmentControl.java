@@ -34,6 +34,8 @@ public class InfortainmentControl extends ActionBarActivity {
         ConsumerIrManager mCIR = (ConsumerIrManager) getSystemService(Context.CONSUMER_IR_SERVICE);
         irBlasterManager       = new IRBlasterManager(mCIR);
 
+        issueHardCommand();
+
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
 
@@ -76,6 +78,10 @@ public class InfortainmentControl extends ActionBarActivity {
         mBottomBar.mapColorForTab(1, "#FF8F00");
         mBottomBar.mapColorForTab(2, "#FFEB3B");
         mBottomBar.mapColorForTab(3, "#616161");
+    }
+
+    public void issueHardCommand() {
+        irBlasterManager.issueCommand("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0679 015B 0057 0016 0E6C");
     }
 
 }
