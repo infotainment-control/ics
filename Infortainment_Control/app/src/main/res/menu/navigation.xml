@@ -7,9 +7,9 @@
         android:title="@string/tv" />
 
     <item
-        android:id="@+id/navigation_cable"
+        android:id="@+id/navigation_dvd"
         android:icon="@drawable/ic_router_black_24px"
-        android:title="@string/cable" />
+        android:title="DVD" />
 
     <item
         android:id="@+id/navigation_premieres"

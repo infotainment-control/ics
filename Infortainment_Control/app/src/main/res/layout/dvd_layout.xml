@@ -12,18 +12,49 @@
 
         <Button
             android:id="@+id/power_btn"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="10dp"
             android:background="@drawable/button_round_red"
+            android:drawableTop="@drawable/ic_power_settings_new_black_24px"
+            android:paddingTop="18sp"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
-            android:text="Power"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+        <LinearLayout
+            android:id="@+id/center_point"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" />
+        <LinearLayout
+            android:id="@+id/volume_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/center_point"
+            android:orientation="horizontal"
+            android:paddingRight="15dp">
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/right_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@+id/center_point"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+        </LinearLayout>
     </RelativeLayout>
 
 
@@ -34,13 +65,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/topmenu_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/button_round_gray"
                 android:gravity="center"
                 android:shadowColor="#A8A8A8"
@@ -49,13 +80,15 @@
                 android:shadowRadius="5"
                 android:text="Top Menu"
                 android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+                android:textSize="10dp" />
 
             <Button
                 android:id="@+id/directional_up_btn"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@drawable/button_round_white"
+                android:drawableTop="@drawable/ic_keyboard_arrow_up_black_24px"
+                android:paddingTop="12sp"
                 android:gravity="center"
                 android:layout_toRightOf="@id/topmenu_btn"
                 android:layout_marginLeft="50dp"
@@ -64,14 +97,13 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="^"
                 android:textColor="#000000"
                 android:textSize="30dp" />
 
             <Button
                 android:id="@+id/menu_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_toRightOf="@id/directional_up_btn"
                 android:background="@drawable/button_round_gray"
                 android:gravity="center"
@@ -81,26 +113,27 @@
                 android:shadowRadius="5"
                 android:text="Menu"
                 android:textColor="#FFFFFF"
-                android:textSize="13dp" />
+                android:textSize="11dp" />
 
 
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/directional_left_btn"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@drawable/button_round_white"
+                android:drawableTop="@drawable/ic_keyboard_arrow_left_black_24px"
+                android:paddingTop="14sp"
                 android:gravity="center"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="L"
                 android:textColor="#000000"
                 android:textSize="30dp" />
             <Button
@@ -108,8 +141,8 @@
                 android:text="OK"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
@@ -123,17 +156,17 @@
                 />
             <Button
                 android:id="@+id/directional_right_btn"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_toRightOf="@id/ok_btn"
                 android:background="@drawable/button_round_white"
+                android:drawableTop="@drawable/ic_keyboard_arrow_right_black_24px"
+                android:paddingTop="14sp"
                 android:gravity="center"
                 android:shadowColor="#A8A8A8"
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="R"
                 android:textColor="#000000"
                 android:textSize="30dp" />
 
@@ -141,13 +174,13 @@
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/return_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_round_gray"
                 android:gravity="center"
@@ -161,9 +194,11 @@
 
             <Button
                 android:id="@+id/directional_down_btn"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:background="@drawable/button_round_white"
+                android:drawableTop="@drawable/ic_keyboard_arrow_down_black_24px"
+                android:paddingTop="17sp"
                 android:gravity="center"
                 android:layout_toRightOf="@id/return_btn"
                 android:layout_marginLeft="50dp"
@@ -172,14 +207,13 @@
                 android:shadowDx="0"
                 android:shadowDy="0"
                 android:shadowRadius="5"
-                android:text="V"
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
             <Button
                 android:id="@+id/display_btn"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/directional_down_btn"
                 android:background="@drawable/button_round_gray"
@@ -202,21 +236,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingTop="20dp"
+        android:layout_height="75dp"
+        android:paddingTop="15dp"
         android:gravity="center">
         <Button
             android:id="@+id/play_btn"
-            android:text="Play"
             android:textColor="#FFFFFF"
             android:textSize="25sp"
-            android:layout_width="75dp"
-            android:layout_height="45dp"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="@drawable/button_square_black"
+            android:drawableTop="@drawable/ic_play_pause"
+            android:paddingTop="9sp"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -224,17 +259,18 @@
             />
         <Button
             android:id="@+id/prev_btn"
-            android:text="Prev"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:layout_width="65dp"
-            android:layout_height="35dp"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
             android:layout_marginTop="9dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="35dp"
             android:layout_toLeftOf="@id/play_btn"
             android:background="@drawable/button_square_black"
+            android:drawableTop="@drawable/ic_skip_previous_black_24px"
+            android:paddingTop="3sp"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -242,17 +278,18 @@
             />
         <Button
             android:id="@+id/next_btn"
-            android:text="Next"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
-            android:layout_width="65dp"
-            android:layout_height="35dp"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
             android:layout_marginTop="9dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@id/play_btn"
             android:background="@drawable/button_square_black"
+            android:drawableTop="@drawable/ic_skip_next_black_24px"
+            android:paddingTop="3sp"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
@@ -264,87 +301,91 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:gravity="center">
-    <Button
-        android:id="@+id/stop_btn"
-        android:text="Stop"
-        android:textColor="#FFFFFF"
-        android:textSize="17sp"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/button_square_black"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        />
-    <Button
-        android:id="@+id/rewind_btn"
-        android:text="Rewind"
-        android:textColor="#FFFFFF"
-        android:textSize="14sp"
-        android:layout_width="65dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="45dp"
-        android:layout_toLeftOf="@id/stop_btn"
-        android:background="@drawable/button_square_black"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        />
-    <Button
-        android:id="@+id/fastforward_button"
-        android:text="FF"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:layout_width="65dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="5dp"
-        android:layout_toRightOf="@id/stop_btn"
-        android:background="@drawable/button_square_black"
-        android:shadowColor="#A8A8A8"
-        android:shadowDx="0"
-        android:shadowDy="0"
-        android:shadowRadius="5"
-        />
+        <Button
+            android:id="@+id/stop_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="17sp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/button_square_black"
+            android:drawableTop="@drawable/ic_stop_white_24px"
+            android:paddingTop="10sp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/rewind_btn"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="45dp"
+            android:layout_toLeftOf="@id/stop_btn"
+            android:background="@drawable/button_square_black"
+            android:drawableTop="@drawable/ic_rewind"
+            android:paddingTop="2sp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+
+        <Button
+            android:id="@+id/fastforward_btn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="11dp"
+            android:layout_toRightOf="@id/stop_btn"
+            android:background="@drawable/button_square_black"
+            android:drawableTop="@drawable/ic_fast_forward"
+            android:paddingTop="2sp"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
     </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="95dp"
-        android:paddingTop="30dp"
+        android:paddingTop="15dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/mute_btn"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/button_round_white"
+            android:drawableTop="@drawable/ic_volume_off_black_24px"
+            android:paddingTop="13sp"
             android:gravity="center"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
-            android:text="Mute"
             android:textColor="#000000"
             android:textSize="13dp" />
 
         <Button
             android:id="@+id/numpad_btn"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:background="@drawable/button_square_gray"
             android:gravity="center"
             android:layout_toRightOf="@id/mute_btn"
@@ -354,14 +395,14 @@
             android:shadowDx="0"
             android:shadowDy="0"
             android:shadowRadius="5"
-            android:text="123..."
+            android:text="1  2  3\n4  5  6\n7  8  9"
             android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            android:textSize="14dp" />
 
         <Button
             android:id="@+id/audio_btn"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:background="@drawable/button_round_white"
             android:gravity="center"
             android:layout_marginTop="2dp"

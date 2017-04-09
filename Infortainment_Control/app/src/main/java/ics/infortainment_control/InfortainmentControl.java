@@ -17,6 +17,7 @@ public class InfortainmentControl extends ActionBarActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //getSupportActionBar().hide();
 
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
@@ -31,8 +32,8 @@ public class InfortainmentControl extends ActionBarActivity {
                     tv_fragment f = new tv_fragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,f).commit();
                 }
-                else if(menuItemId == R.id.navigation_cable) {
-                    cable_fragment f = new cable_fragment();
+                else if(menuItemId == R.id.navigation_dvd) {
+                    dvd_fragment f = new dvd_fragment();
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,f).commit();
                 }
                 else if(menuItemId == R.id.navigation_premieres) {

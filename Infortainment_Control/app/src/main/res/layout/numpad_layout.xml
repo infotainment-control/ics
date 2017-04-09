@@ -2,46 +2,189 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
         android:gravity="center">
+        <Button
+            android:id="@+id/one"
+            android:text="1"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/two"
+            android:text="2"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/one"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/three"
+            android:text="3"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/two"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:columnCount="3"
-            android:orientation="horizontal"
-            android:gravity="center">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingTop="0dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/four"
+            android:text="4"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/five"
+            android:text="5"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/four"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/six"
+            android:text="6"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/five"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
 
-            <Button android:text="1" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/seven"
+            android:text="7"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/eight"
+            android:text="8"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/seven"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+        <Button
+            android:id="@+id/nine"
+            android:text="9"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/eight"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
 
-            <Button android:text="2" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/zero"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_square_gray"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
 
-            <Button android:text="3" />
-
-            <Button android:text="4" />
-
-            <Button android:text="5" />
-
-            <Button android:text="6" />
-
-            <Button android:text="7" />
-
-            <Button android:text="8" />
-
-            <Button android:text="9" />
-
-            <Button android:text="0"
-                android:layout_column="2"/>
-
-            <Button
-                android:layout_column="1"
-                android:text="Return" />
-        </GridLayout>
-
-    </LinearLayout>
-
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center">
+        <Button
+            android:id="@+id/return_btn"
+            android:text="return"
+            android:textColor="#9E9E9E"
+            android:textSize="20sp"
+            android:layout_width="315dp"
+            android:layout_height="45dp"
+            android:background="@drawable/button_square_black_border"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            />
+    </RelativeLayout>
 </LinearLayout>
