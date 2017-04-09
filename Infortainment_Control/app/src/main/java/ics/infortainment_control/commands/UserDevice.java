@@ -1,8 +1,7 @@
 package ics.infortainment_control.commands;
 
-/**
- * Created by mark on 4/9/17.
- */
+public class UserDevice<C extends Command> {
 
-public class UserDevice extends Device {
+    private String name;
+    private Device<C> device;
 }

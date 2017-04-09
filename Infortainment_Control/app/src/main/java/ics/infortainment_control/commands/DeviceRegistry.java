@@ -18,9 +18,11 @@ public interface DeviceRegistry {
      */
     boolean removeDevice(String deviceID);
 
-    boolean removeDevice(Device device);
+    // TODO seems odd for clients to use Devices directly with the registry, rather than use them by their handle (their ID)
 
-    boolean isInRegistry(Device device);
+//    boolean removeDevice(Device device);
+
+//    boolean isInRegistry(Device device);
 
     boolean isInRegistry(String deviceID);
 

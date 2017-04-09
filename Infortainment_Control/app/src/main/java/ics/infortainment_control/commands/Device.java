@@ -33,7 +33,7 @@ public class Device <C extends Command> {
     boolean handleCommand(C command) {
         if (commands.containsKey(command)) {
             String prontoHex = commands.get(command);
-            // TODO pass the prontoHex to the singleton IRBlasterManager...
+            return true;// TODO pass the prontoHex to the singleton IRBlasterManager...
         } else {
             System.err.printf("command '%s' not found for device %s%n", command, id);
             return false;

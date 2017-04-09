@@ -1,5 +1,6 @@
 package ics.infortainment_control;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class InfortainmentControl extends ActionBarActivity {
 
     // exposed globally via getAppContext() for the IRBlasterManager to have access to the Context.CONSUMER_IR_SERVICE
     // note: this class must have called onCreate() before other classes attempt to make use of the IRBlasterManager
+    @SuppressLint("StaticFieldLeak")
     private static Context context = null;
 
     private TextView mTextMessage;
@@ -34,10 +36,6 @@ public class InfortainmentControl extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
-
-//        deviceManager          = new MockDeviceManager();
-//        ConsumerIrManager mCIR = (ConsumerIrManager) getSystemService(Context.CONSUMER_IR_SERVICE);
-//        irBlasterManager       = new IRBlasterManager(mCIR);
 
         issueHardCommand();
 
@@ -87,6 +85,7 @@ public class InfortainmentControl extends ActionBarActivity {
 
     public void issueHardCommand() {
 //        irBlasterManager.issueCommand("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0679 015B 0057 0016 0E6C");
+        IRBlasterManager.getInstance().issueCommand("0000 006C 0022 0002 015B 00AD 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0679 015B 0057 0016 0E6C");
     }
 
     public static Context getAppContext() {
