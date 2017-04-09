@@ -9,16 +9,16 @@ import ics.infortainment_control.commands.DeviceRegistry;
 
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
-    private Map<String, Device> roster;
+    private Map<String, Device> registry;
 
     public SimpleDeviceRegistry() {
-        roster = new HashMap<>();
+        registry = new HashMap<>();
     }
 
     @Override
     public Device registerDevice(String deviceID) {
-        if (roster.containsKey(deviceID)) {
-            return roster.get(deviceID);
+        if (registry.containsKey(deviceID)) {
+            return registry.get(deviceID);
         }
 
         // TODO device creation requires code provision
@@ -37,18 +37,19 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         return false;
     }
 
-    @Override
-    public boolean isInRegistry(Device device) {
-        return false;
-    }
+    // TODO iffy that this might exist, hmm?
+//    @Override
+//    public boolean isInRegistry(Device device) {
+//        return registry.containsValue(device);
+//    }
 
     @Override
     public boolean isInRegistry(String deviceID) {
-        return false;
+        return registry.containsKey(deviceID);
     }
 
     @Override
     public Device getDevice(String deviceID) {
-        return null;
+        return registry.get(deviceID);
     }
 }

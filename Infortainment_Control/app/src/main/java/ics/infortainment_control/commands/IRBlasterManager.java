@@ -32,9 +32,6 @@ public class IRBlasterManager {
     private static ConsumerIrManager irManager = null;
 
     private IRBlasterManager() {}
-//        Context context = InfortainmentControl.getAppContext();
-//        irManager = (ConsumerIrManager) context.getSystemService(Context.CONSUMER_IR_SERVICE);
-//    }
 
     public static IRBlasterManager getInstance() {
         if (irManager == null) {
@@ -47,10 +44,6 @@ public class IRBlasterManager {
 
         return INSTANCE;
     }
-
-//    public IRBlasterManager(ConsumerIrManager irManager) {
-//        this.irManager = irManager;
-//    }
 
     private static final String TAG = "[IRBlasterManager]";
 
