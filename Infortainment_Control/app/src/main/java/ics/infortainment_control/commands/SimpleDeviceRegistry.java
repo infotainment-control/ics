@@ -1,4 +1,4 @@
-package ics.infortainment_control;
+package ics.infortainment_control.commands;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +16,19 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     }
 
     @Override
-    public Device registerDevice(DeviceID deviceID) {
-        Device registeredDevice = roster.get(D)
+    public Device registerDevice(String deviceID) {
+        if (roster.containsKey(deviceID)) {
+            return roster.get(deviceID);
+        }
+
+        // TODO device creation requires code provision
+        Device registeredDevice = new Device(deviceID);
+
+        return registeredDevice;
     }
 
     @Override
-    public boolean removeDevice(DeviceID deviceID) {
+    public boolean removeDevice(String deviceID) {
         return false;
     }
 
@@ -36,12 +43,12 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     }
 
     @Override
-    public boolean isInRegistry(DeviceID deviceID) {
+    public boolean isInRegistry(String deviceID) {
         return false;
     }
 
     @Override
-    public Device getDevice(DeviceID deviceID) {
+    public Device getDevice(String deviceID) {
         return null;
     }
 }
