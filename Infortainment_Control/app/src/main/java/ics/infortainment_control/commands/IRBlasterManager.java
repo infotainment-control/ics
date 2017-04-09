@@ -1,11 +1,14 @@
 package ics.infortainment_control.commands;
 
+import android.content.Context;
 import android.hardware.ConsumerIrManager;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import ics.infortainment_control.InfortainmentControl;
 
 /**
  *  Wraps the ConsumerIrManager class, converting the standard infrared
@@ -24,13 +27,32 @@ public class IRBlasterManager {
     //    A) if the device has an infrared blaster (if not, it disables the command-issuing module of the app)
     //    B) the device's IR Blaster frequency range and store it in the user table
 
-    private static final String TAG = "[IRBlasterManager]";
 
-    private final ConsumerIrManager irManager;
+    private static final IRBlasterManager INSTANCE = new IRBlasterManager();
+    private static ConsumerIrManager irManager = null;
 
-    public IRBlasterManager(ConsumerIrManager irManager) {
-        this.irManager = irManager;
+    private IRBlasterManager() {}
+//        Context context = InfortainmentControl.getAppContext();
+//        irManager = (ConsumerIrManager) context.getSystemService(Context.CONSUMER_IR_SERVICE);
+//    }
+
+    public static IRBlasterManager getInstance() {
+        if (irManager == null) {
+            Context context = InfortainmentControl.getAppContext();
+            if (context == null) {
+                throw new RuntimeException("ERROR - attempting to invoke IRBlasterManager before application has initialized");
+            }
+            irManager = (ConsumerIrManager) context.getSystemService(Context.CONSUMER_IR_SERVICE);
+        }
+
+        return INSTANCE;
     }
+
+//    public IRBlasterManager(ConsumerIrManager irManager) {
+//        this.irManager = irManager;
+//    }
+
+    private static final String TAG = "[IRBlasterManager]";
 
     public void issueCommand(String hexCodeString) {
 
