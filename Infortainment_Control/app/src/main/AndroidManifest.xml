@@ -3,6 +3,8 @@
     package="ics.infortainment_control">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.TRANSMIT_IR" android:required="false" />
+    <uses-feature android:name="android.hardware.consumerir" />
 
     <application
         android:allowBackup="true"

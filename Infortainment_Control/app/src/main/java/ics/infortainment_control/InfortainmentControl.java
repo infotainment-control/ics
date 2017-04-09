@@ -1,5 +1,7 @@
 package ics.infortainment_control;
 
+import android.content.Context;
+import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
@@ -7,9 +9,19 @@ import android.widget.TextView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
+import ics.infortainment_control.commands.DeviceID;
+import ics.infortainment_control.commands.DeviceManager;
+import ics.infortainment_control.commands.IRBlasterManager;
+import ics.infortainment_control.commands.MockDeviceManager;
+
 public class InfortainmentControl extends ActionBarActivity {
 
     private TextView mTextMessage;
+
+    private DeviceManager deviceManager;
+    private IRBlasterManager irBlasterManager;
+
+    private DeviceID currentDevice;
 
     BottomBar mBottomBar;
     @Override
@@ -19,8 +31,18 @@ public class InfortainmentControl extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         //getSupportActionBar().hide();
 
+        deviceManager          = new MockDeviceManager();
+        ConsumerIrManager mCIR = (ConsumerIrManager) getSystemService(Context.CONSUMER_IR_SERVICE);
+        irBlasterManager       = new IRBlasterManager(mCIR);
+
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
+
+        // todo delegate to lookups, registry service
+        deviceManager.setActiveDevice(DeviceID.INSIGNIA);
+        f.irBlasterManager = irBlasterManager;
+        f.deviceManager    = deviceManager;
+
         getSupportFragmentManager().beginTransaction().replace(R.id.frame,f).commit();
 
         // event listener for tab clicks
@@ -30,7 +52,9 @@ public class InfortainmentControl extends ActionBarActivity {
             public void onMenuItemSelected(@IdRes int menuItemId) {
                 if(menuItemId == R.id.navigation_tv) {
                     tv_fragment f = new tv_fragment();
+
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,f).commit();
+
                 }
                 else if(menuItemId == R.id.navigation_dvd) {
                     dvd_fragment f = new dvd_fragment();
