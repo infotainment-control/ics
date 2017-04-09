@@ -1,6 +1,6 @@
 package ics.infortainment_control;
 
-import android.app.DialogFragment;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,9 +10,7 @@ import android.view.View;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentActivity;
-
+import android.widget.Toast;
 import ics.infortainment_control.commands.CodeProvider;
 import ics.infortainment_control.commands.DeviceID;
 import ics.infortainment_control.commands.DeviceManager;
@@ -66,7 +64,7 @@ public class tv_fragment extends Fragment {
         _ok = (Button) v.findViewById(R.id.ok_btn);
         _return = (Button) v.findViewById(R.id.return_btn);
         _tools = (Button) v.findViewById(R.id.tools_btn);
-        _menu = (Button) v.findViewById(R.id.topmenu_btn);
+        _menu = (Button) v.findViewById(R.id.menu_btn);
         _numpad = (Button) v.findViewById(R.id.numpad_btn);
         _mute = (Button) v.findViewById(R.id.mute_btn);
         _info = (Button) v.findViewById(R.id.info_btn);
@@ -176,14 +174,118 @@ public class tv_fragment extends Fragment {
         _numpad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                /*
-                DialogFragment numpad = new numpad_fragment();
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-*/
-                //numpad.show(fm, "numpad");
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(tv_fragment.this.getContext());
+                View dialogView = getActivity().getLayoutInflater().inflate(R.layout.numpad_layout, null);
+                dialogBuilder.setView(dialogView);
+                AlertDialog numpadDialog = dialogBuilder.create();
+
+                Button one;
+                Button two;
+                Button three;
+                Button four;
+                Button five;
+                Button six;
+                Button seven;
+                Button eight;
+                Button nine;
+                Button zero;
+                Button return_btn;
+
+                one = (Button) dialogView.findViewById(R.id.one);
+                two = (Button) dialogView.findViewById(R.id.two);
+                three = (Button) dialogView.findViewById(R.id.three);
+                four = (Button) dialogView.findViewById(R.id.four);
+                five = (Button) dialogView.findViewById(R.id.five);
+                six = (Button) dialogView.findViewById(R.id.six);
+                seven= (Button) dialogView.findViewById(R.id.seven);
+                eight= (Button) dialogView.findViewById(R.id.eight);
+                nine= (Button) dialogView.findViewById(R.id.nine);
+                zero = (Button) dialogView.findViewById(R.id.zero);
+                return_btn = (Button) dialogView.findViewById(R.id.return_btn);
+
+                one.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view){
+
+                       }
+                   }
+                );
+                two.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view){
+
+                       }
+                   }
+                );
+                three.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view){
+
+                         }
+                     }
+                );
+                four.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view){
+
+                        }
+                    }
+                );
+                five.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view){
+
+                        }
+                    }
+                );
+                six.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View view){
+
+                       }
+                   }
+                );
+                seven.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view){
+
+                         }
+                     }
+                );
+                eight.setOnClickListener(new View.OnClickListener() {
+                         @Override
+                         public void onClick(View view){
+
+                         }
+                     }
+                );
+                nine.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view){
+
+                        }
+                    }
+                );
+                zero.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view){
+
+                        }
+                    }
+                );
+                return_btn.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view){
+                      Toast.makeText(tv_fragment.this.getContext(), "Success", Toast.LENGTH_SHORT).show();
+                      AlertDialog numpadDialog = new AlertDialog.Builder(tv_fragment.this.getContext()).create();
+                      numpadDialog.cancel();
+                  }
+              }
+                );
+
+                numpadDialog.show();
             }
         });
-
 
         return v;
     }
