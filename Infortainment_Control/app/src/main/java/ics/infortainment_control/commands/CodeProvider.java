@@ -1,6 +1,7 @@
 package ics.infortainment_control.commands;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  *  An interface that furnishes Devices with the codes for their commands.
@@ -13,17 +14,17 @@ import java.util.Map;
  *  TODO consider annotations & item 37 of effective java
  */
 public interface CodeProvider {
-    //String getCode(int deviceID, @Command String command); TODO this be that annotated approach...
 
-    // explain yourself
-    String getCode(DeviceID deviceID, TelevisionCommand command);
+    <C extends Command> String getCode(String deviceID, C command);
 
-    // and again, explain
-    Map<TelevisionCommand, String> getCodes(DeviceID deviceID);
+    Map<TelevisionCommand, String> getCodes(String deviceID);
 
-    // TODO provide all device IDs given a brand ID
+    Set<String> getAllDeviceIDs();
 
-    // TODO provide all power-command,device-ID pairs for a given brand ID
+    Set<String> getAllDeviceIDsForBrand(String brand);
+
+    Map<String, String> getAllPowerCommandsForBrand(String brand);
+    // TODO the above, getAllPowerCommandsForBrand(), will look something like...
     // for each deviceID in getAllDeviceIDs(brandID),
     //   map.put(deviceID, getCode(deviceID, TelevisionCommand.POWER)
     // return map

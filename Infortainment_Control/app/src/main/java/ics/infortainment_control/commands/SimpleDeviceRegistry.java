@@ -28,20 +28,9 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     }
 
     @Override
-    public boolean removeDevice(String deviceID) {
-        return false;
+    public Device removeDevice(String deviceID) {
+        return registry.remove(deviceID);
     }
-
-    @Override
-    public boolean removeDevice(Device device) {
-        return false;
-    }
-
-    // TODO iffy that this might exist, hmm?
-//    @Override
-//    public boolean isInRegistry(Device device) {
-//        return registry.containsValue(device);
-//    }
 
     @Override
     public boolean isInRegistry(String deviceID) {

@@ -14,15 +14,9 @@ public interface DeviceRegistry {
     /**
      * Removes a device from the registry
      * @param deviceID
-     * @return
+     * @return the removed Device (for checking if it was the primary device of that type)
      */
-    boolean removeDevice(String deviceID);
-
-    // TODO seems odd for clients to use Devices directly with the registry, rather than use them by their handle (their ID)
-
-//    boolean removeDevice(Device device);
-
-//    boolean isInRegistry(Device device);
+    Device removeDevice(String deviceID);
 
     boolean isInRegistry(String deviceID);
 
