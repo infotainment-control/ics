@@ -1,4 +1,4 @@
-package ics.infortainment_control.commands;
+package ics.infortainment_control.devices;
 
 
 public interface DeviceRegistry {

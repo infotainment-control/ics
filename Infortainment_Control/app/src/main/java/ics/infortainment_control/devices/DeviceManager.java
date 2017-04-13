@@ -1,8 +1,12 @@
-package ics.infortainment_control.commands;
+package ics.infortainment_control.devices;
+
+import ics.infortainment_control.commands.CodeProvider;
+import ics.infortainment_control.commands.TelevisionCommand;
 
 /**
  *  An interface outlining how Devices are handled.
  */
+@Deprecated //TODO modify it to complement DeviceRegistry
 public interface DeviceManager {
     CodeProvider getCodeProvider();
 

@@ -9,6 +9,6 @@ public interface Command {
     // TODO design the logic here to sync this up.
     //void registerToButton();
 
-
+    // TODO should this be generic? IE a method that returns the device type?
 
 }
