@@ -6,18 +6,16 @@ import ics.infortainment_control.commands.TelevisionCommand;
 /**
  *  An interface outlining how Devices are handled.
  */
-@Deprecated //TODO modify it to complement DeviceRegistry
+//TODO modify responsibilities to complement DeviceRegistry
 public interface DeviceManager {
+
+    // TODO consider if this ought to, or if registry ought to, or if a device factory ought to provision codes
     CodeProvider getCodeProvider();
 
-    void registerDevice(DeviceID deviceID);
-    void removeDevice(DeviceID deviceID);
 
-    DeviceID getActiveDevice();
-    DeviceID setActiveDevice(DeviceID deviceID);
+    DeviceRegistry getDeviceRegistry();
 
-    // TODO figure out what should be issuing commands... and clean up this spike
-    // TODO also, this dude should definitely throw exceptions for unsupported commands, at least given the looooose, dynamic architecture right now...
-    String getRawCommandCode(DeviceID deviceID, TelevisionCommand command);
+    String getActiveDevice();
+    String setActiveDevice(String deviceID);
 
 }

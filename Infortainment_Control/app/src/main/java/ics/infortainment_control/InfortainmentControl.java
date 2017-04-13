@@ -5,12 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.TextView;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
-import ics.infortainment_control.devices.DeviceID;
-import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.commands.IRBlasterManager;
 
 public class InfortainmentControl extends ActionBarActivity {
@@ -19,13 +16,6 @@ public class InfortainmentControl extends ActionBarActivity {
     // note: this class must have called onCreate() before other classes attempt to make use of the IRBlasterManager
     @SuppressLint("StaticFieldLeak")
     private static Context context = null;
-
-    private TextView mTextMessage;
-
-    private DeviceManager deviceManager;
-    private IRBlasterManager irBlasterManager;
-
-    private DeviceID currentDevice;
 
     BottomBar mBottomBar;
     @Override
