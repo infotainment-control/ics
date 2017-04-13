@@ -2,17 +2,14 @@ package ics.infortainment_control;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import ics.infortainment_control.devices.DeviceID;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.commands.IRBlasterManager;
-import ics.infortainment_control.commands.TelevisionCommand;
 
 /**
  * Created by Jason on 3/5/2017.
@@ -69,10 +66,10 @@ public class tv_fragment extends Fragment {
         _power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DeviceID activeDevice = deviceManager.getActiveDevice();
-                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
-                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
-                irBlasterManager.issueCommand(code);
+//                DeviceID activeDevice = deviceManager.getActiveDevice();
+//                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
+//                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
+//                irBlasterManager.issueCommand(code);
             }
         });
 
