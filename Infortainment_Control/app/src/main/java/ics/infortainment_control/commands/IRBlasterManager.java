@@ -47,6 +47,7 @@ public class IRBlasterManager {
 
     private static final String TAG = "[IRBlasterManager]";
 
+    // TODO consider, perhaps not here, but at command registry, validating issuability of commands
     public void issueCommand(String hexCodeString) {
 
         Log.d(TAG, "Issuing Infrared Command...");

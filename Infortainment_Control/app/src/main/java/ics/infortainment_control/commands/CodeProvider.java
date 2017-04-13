@@ -17,12 +17,23 @@ public interface CodeProvider {
 
     <C extends Command> String getCode(String deviceID, C command);
 
-    Map<TelevisionCommand, String> getCodes(String deviceID);
+    <C extends Command> Map<C, String> getCodes(String deviceID);
 
     Set<String> getAllDeviceIDs();
 
     Set<String> getAllDeviceIDsForBrand(String brand);
 
+    /**
+     * Allows for setup of an unknown device of a known brand. The power command for each device manufatured
+     * by the brand will be offered to the user, and if the user discovers it works, it will be a candidate
+     * deviceID (a possibly accurate mapping of their physical device to an entry in the device database)
+     *
+     * Further interfacing with the deviceID's related commands will test the mapping's accuracy. Some brands
+     * share power codes between devices, but do not share all other commands' codes.
+     *
+     * @param brand The company responsible for manufacturing the device
+     * @return a map of deviceID -> Power type of command TODO note the difficulty in type hierarchy here...
+     */
     Map<String, String> getAllPowerCommandsForBrand(String brand);
     // TODO the above, getAllPowerCommandsForBrand(), will look something like...
     // for each deviceID in getAllDeviceIDs(brandID),
