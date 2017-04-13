@@ -1,7 +1,9 @@
-package ics.infortainment_control.commands;
+package ics.infortainment_control.devices;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import ics.infortainment_control.commands.Command;
 
 public class Device <C extends Command> {
 

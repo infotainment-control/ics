@@ -1,8 +1,16 @@
-package ics.infortainment_control.commands;
+package ics.infortainment_control.devices;
+
+import ics.infortainment_control.commands.CodeProvider;
+import ics.infortainment_control.commands.MockCodeProvider;
+import ics.infortainment_control.commands.TelevisionCommand;
+import ics.infortainment_control.devices.DeviceID;
+import ics.infortainment_control.devices.DeviceManager;
 
 /**
  *  A class to control use of Devices.
  */
+// TODO this is redundant
+@Deprecated
 public class MockDeviceManager implements DeviceManager {
 
     private CodeProvider mockCodeProvider = new MockCodeProvider();
@@ -39,6 +47,7 @@ public class MockDeviceManager implements DeviceManager {
 
     @Override
     public String getRawCommandCode(DeviceID deviceID, TelevisionCommand command) {
-        return mockCodeProvider.getCode(deviceID, command);
+        //return mockCodeProvider.getCode(deviceID, command);
+        throw new RuntimeException("whoops");
     }
 }

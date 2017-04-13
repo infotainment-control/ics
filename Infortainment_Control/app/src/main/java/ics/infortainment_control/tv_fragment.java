@@ -3,7 +3,6 @@ package ics.infortainment_control;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +13,10 @@ import android.widget.Toast;
 import ics.infortainment_control.commands.CodeProvider;
 import ics.infortainment_control.commands.DeviceID;
 import ics.infortainment_control.commands.DeviceManager;
+
+import ics.infortainment_control.devices.DeviceID;
+import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.commands.IRBlasterManager;
-import ics.infortainment_control.commands.MockCodeProvider;
-import ics.infortainment_control.commands.MockDeviceManager;
 import ics.infortainment_control.commands.TelevisionCommand;
 
 /**

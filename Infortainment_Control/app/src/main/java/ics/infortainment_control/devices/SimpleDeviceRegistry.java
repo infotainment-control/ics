@@ -1,11 +1,10 @@
-package ics.infortainment_control.commands;
+package ics.infortainment_control.devices;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import ics.infortainment_control.commands.Device;
-import ics.infortainment_control.commands.DeviceID;
-import ics.infortainment_control.commands.DeviceRegistry;
+import ics.infortainment_control.devices.Device;
+import ics.infortainment_control.devices.DeviceRegistry;
 
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
