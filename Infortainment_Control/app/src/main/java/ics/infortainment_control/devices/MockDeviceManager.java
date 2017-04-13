@@ -1,10 +1,8 @@
 package ics.infortainment_control.devices;
 
 import ics.infortainment_control.commands.CodeProvider;
-import ics.infortainment_control.commands.MockCodeProvider;
+import ics.infortainment_control.commands.SimpleCodeProvider;
 import ics.infortainment_control.commands.TelevisionCommand;
-import ics.infortainment_control.devices.DeviceID;
-import ics.infortainment_control.devices.DeviceManager;
 
 /**
  *  A class to control use of Devices.
@@ -13,7 +11,7 @@ import ics.infortainment_control.devices.DeviceManager;
 @Deprecated
 public class MockDeviceManager implements DeviceManager {
 
-    private CodeProvider mockCodeProvider = new MockCodeProvider();
+    private CodeProvider mockCodeProvider = new SimpleCodeProvider();
 
     private DeviceID currentDevice;
 
