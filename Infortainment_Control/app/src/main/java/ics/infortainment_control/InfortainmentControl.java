@@ -22,13 +22,12 @@ public class InfortainmentControl extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
-        //getSupportActionBar().hide();
         
         setContentView(R.layout.activity_main);
         context = getApplicationContext();
 
-        issueHardCommand();
+        // hook to aid development, especially determining device infrared codes
+        if(false) issueHardCommand();
 
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
@@ -69,8 +68,12 @@ public class InfortainmentControl extends ActionBarActivity {
         mBottomBar.mapColorForTab(3, "#616161");
     }
 
+    public static Context getAppContext() {
+        return context;
+    }
+
     public void issueHardCommand() {
-        for(int i = 0; i < 15; ++i) {
+        for(int i = 0; i < 3; ++i) {
             IRBlasterManager.getInstance().issueCommand("0000 006C 0022 0003 00AD 00AD 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0041 0016 06A4 00AD 00AD 0016 0041 0016 0E6C");
             // ^open/close for an LG dvd player
 
@@ -92,7 +95,7 @@ public class InfortainmentControl extends ActionBarActivity {
             IRBlasterManager.getInstance().issueCommand(brp_a);
             // ^power for a sony dvd player
             try {
-                Thread.sleep(10000);
+                Thread.sleep(6000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -100,7 +103,6 @@ public class InfortainmentControl extends ActionBarActivity {
 
         for(int i = 0; i < 5; ++i) {
             IRBlasterManager.getInstance().issueCommand("0000 006C 0000 0022 00AD 00AD 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 06FB");
-
         // ^power ?
 
             try {
@@ -145,8 +147,5 @@ public class InfortainmentControl extends ActionBarActivity {
         // ^ enter
     }
 
-    public static Context getAppContext() {
-        return context;
-    }
 
 }
