@@ -27,7 +27,9 @@ public class InfortainmentControl extends ActionBarActivity {
         context = getApplicationContext();
 
         // hook to aid development, especially determining device infrared codes
-        if(false) issueHardCommand();
+        if (false) {
+          issueHardCommand();
+        }
 
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
@@ -103,7 +105,7 @@ public class InfortainmentControl extends ActionBarActivity {
 
         for(int i = 0; i < 5; ++i) {
             IRBlasterManager.getInstance().issueCommand("0000 006C 0000 0022 00AD 00AD 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 0041 0016 06FB");
-        // ^power ?
+            // ^power ?
 
             try {
                 Thread.sleep(1000);
@@ -146,6 +148,5 @@ public class InfortainmentControl extends ActionBarActivity {
         IRBlasterManager.getInstance().issueCommand("0000 006C 0000 0022 00AD 00AD 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 06FB");
         // ^ enter
     }
-
-
 }
+

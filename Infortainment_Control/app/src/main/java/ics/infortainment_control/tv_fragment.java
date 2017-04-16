@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import ics.infortainment_control.devices.DeviceManager;
+import ics.infortainment_control.commands.IRBlasterManager;
+
 /**
  * Created by Jason on 3/5/2017.
  */
@@ -35,6 +38,9 @@ public class tv_fragment extends Fragment {
     Button _mute;
     Button _info;
 
+    public DeviceManager deviceManager;
+    public IRBlasterManager irBlasterManager;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // tie display resources to java objects
@@ -58,9 +64,14 @@ public class tv_fragment extends Fragment {
         _info = (Button) v.findViewById(R.id.info_btn);
         _exit = (Button) v.findViewById(R.id.exit_btn);
 
+        // event listeners for power and source buttons
         _power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                DeviceID activeDevice = deviceManager.getActiveDevice();
+//                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
+//                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
+//                irBlasterManager.issueCommand(code);
             }
         });
 
