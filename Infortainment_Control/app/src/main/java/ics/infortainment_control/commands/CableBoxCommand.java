@@ -1,24 +1,20 @@
 package ics.infortainment_control.commands;
 
 /**
- *  Enumeration for dynamic instantiation of TV device command implementations.
+ *  Enumeration for dynamic instantiation of CableBox device command implementations.
  */
-public enum TelevisionCommand implements Command {
+public enum CableBoxCommand implements Command {
 
-    POWER       ("power",        "turns the TV on and off"                          ),
-    VOLUME_UP   ("volume up",    "raises the TV's level of volume"                  ),
-    VOLUME_DOWN ("volume down",  "lowers the TV's level of volume"                  ),
-    CHANNEL_UP  ("channel up",   "increments the TV channel tuned in to"            ),
-    CHANNEL_DOWN("channel down", "decrements the TV channel tuned in to"            ),
-    SOURCE      ("source",       "changes the input source of the TV"               ),
-    MENU        ("menu",         "opens the TV's settings menu"                     ),
+    POWER       ("power",        "turns the CB on and off"                          ),
+    CHANNEL_UP  ("channel up",   "increments the CB channel tuned in to"            ),
+    CHANNEL_DOWN("channel down", "decrements the CB channel tuned in to"            ),
+    MENU        ("menu",         "opens the CB's settings menu"                     ),
     UP          ("up",           "selects an option above the current selection"    ),
     DOWN        ("down",         "selects an option below the current selection"    ),
     LEFT        ("left",         "selects an option left of the current selection"  ),
     RIGHT       ("right",        "selects an option right of the current selection" ),
     ENTER       ("enter",        "affirms a selected option"                        ),
     EXIT        ("exit",         "cancels a selection or returns to a previous menu"),
-    MUTE        ("mute",         "silences and unsilences the TV"                   ),
     INFO        ("info",         "displays additional information"                  ),
     ZERO        ("0",            "the digit 0"                                      ),
     ONE         ("1",            "the digit 1"                                      ),
@@ -35,7 +31,7 @@ public enum TelevisionCommand implements Command {
     private final String description;
 
     // TODO these are all the same, so perhaps there ought to be 1 abstract parent class/enum?
-    TelevisionCommand(String simpleName, String description) {
+    CableBoxCommand(String simpleName, String description) {
         this.simpleName  = simpleName;
         this.description = description;
     }
