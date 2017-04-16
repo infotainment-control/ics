@@ -6,11 +6,10 @@ import java.util.Map;
 import ics.infortainment_control.commands.CodeProvider;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.SimpleCodeProvider;
-import ics.infortainment_control.devices.Device;
-import ics.infortainment_control.devices.DeviceRegistry;
 
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
+    // maps deviceID to Device object
     private Map<String, Device> registry;
 
     private CodeProvider codeProvider;
@@ -52,6 +51,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         Device device = new Device(deviceID);
 
         Map<Command, String> commands = codeProvider.getCodes(deviceID);
+
         // TODO type issue :)
         device.setCommands(commands);
 

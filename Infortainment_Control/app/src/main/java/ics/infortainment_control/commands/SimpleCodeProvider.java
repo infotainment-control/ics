@@ -1,6 +1,7 @@
 package ics.infortainment_control.commands;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -131,19 +132,30 @@ public class SimpleCodeProvider implements CodeProvider {
         return commandCode;
     }
 
+    // TODO this is where I've screwed up generics, yeppers
     @Override
     public <C extends Command> Map<C, String> getCodes(String deviceID) {
-        return null;
+        // TODO or have I??
+        return (Map<C, String>) deviceCodesMap.get(deviceID);
     }
 
     @Override
     public Set<String> getAllDeviceIDs() {
-        return null;
+        return deviceCodesMap.keySet();
     }
 
     @Override
     public Set<String> getAllDeviceIDsForBrand(String brand) {
-        return null;
+
+        Set<String> allDeviceIDs = deviceCodesMap.keySet();
+        Set<String> brandDeviceIDs = new HashSet<>();
+
+        for(String deviceID : allDeviceIDs) {
+            if (brand.equals(Device.getBrandFromID(deviceID))) {
+                brandDeviceIDs.add(deviceID);
+            }
+        }
+        return brandDeviceIDs;
     }
 
     @Override
