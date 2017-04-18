@@ -7,40 +7,71 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static ics.infortainment_control.constants.FIRST_COLUMN;
+import static ics.infortainment_control.constants.FOURTH_COLUMN;
+import static ics.infortainment_control.constants.SECOND_COLUMN;
+import static ics.infortainment_control.constants.THIRD_COLUMN;
 
 /**
  * Created by Jason on 3/5/2017.
  */
 
 public class premieres_fragment extends Fragment {
-    TableLayout table;
+    protected ArrayList<HashMap<String, String>> list;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.premieres_layout,container,false);
-
-        // reference the table layout
-        table = (TableLayout) v.findViewById(R.id.premieres_table);
+        list=new ArrayList<HashMap<String,String>>();
 
         PremieresController premieres = new PremieresController(this, getContext());
         premieres.execute();
+        // fetch the listview from layout
+        ListView listView= (ListView) v.findViewById(R.id.listView1);
+
+        // list view adapter. needed to abstract the process of adding items from the arraylist (list) to the ListView
+        ListViewAdapter adapter =new ListViewAdapter(this.getActivity(), list); // <---- right here is where it's failing. the list is empty here (because populateList isn't populating it)
+        listView.setAdapter(adapter);
+
+        // onclick listener which will be used to display a dialog of additional information for shows
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+            {
+                int pos=position+1;
+                Toast.makeText(premieres_fragment.this.getContext(), Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();
+            }
+
+        });
 
         return v;
     }
 
     public void populateList(List<Premiere> premieres) {
-        // make the pixel widths device independent
-        float ninety_pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 65, getResources().getDisplayMetrics());
-        float two_hundred_four_pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 65, getResources().getDisplayMetrics());
-
         // for loop would start here
         for (Premiere premiere : premieres) {
+            HashMap<String, String> temp = new HashMap<String, String>();
+            temp.put(FIRST_COLUMN, premiere.name);
+            temp.put(SECOND_COLUMN, premiere.channel);
+            temp.put(THIRD_COLUMN, premiere.date);
+            temp.put(FOURTH_COLUMN, premiere.time);
+            list.add(temp);
+        }
+
             // parse data from data structure to populate name, date, and time for each premiere in the database
             // create new rows
+            /*
             TableRow newRow = new TableRow(getActivity());
             TextView name = new TextView(getActivity());
             TextView date = new TextView(getActivity());
@@ -78,6 +109,6 @@ public class premieres_fragment extends Fragment {
 
             // add the row to the table layout
             table.addView(newRow);
-        }
+        } */
     }
 }

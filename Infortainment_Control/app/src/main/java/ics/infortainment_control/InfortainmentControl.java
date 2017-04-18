@@ -43,9 +43,7 @@ public class InfortainmentControl extends ActionBarActivity {
             public void onMenuItemSelected(@IdRes int menuItemId) {
                 if(menuItemId == R.id.navigation_tv) {
                     tv_fragment f = new tv_fragment();
-
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame,f).commit();
-
                 }
                 else if(menuItemId == R.id.navigation_dvd) {
                     dvd_fragment f = new dvd_fragment();
@@ -68,6 +66,12 @@ public class InfortainmentControl extends ActionBarActivity {
         mBottomBar.mapColorForTab(1, "#FF8F00");
         mBottomBar.mapColorForTab(2, "#FFEB3B");
         mBottomBar.mapColorForTab(3, "#616161");
+
+        /*
+        mBottomBar.mapColorForTab(0, "#A5D6A7");
+        mBottomBar.mapColorForTab(1, "#66BB6A");
+        mBottomBar.mapColorForTab(2, "#43A047");
+        mBottomBar.mapColorForTab(3, "#2E7D32");*/
     }
 
     public static Context getAppContext() {
