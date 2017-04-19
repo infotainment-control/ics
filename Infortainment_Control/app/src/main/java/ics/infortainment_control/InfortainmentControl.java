@@ -62,16 +62,17 @@ public class InfortainmentControl extends ActionBarActivity {
         });
 
         // sets the color for each tab
+        /*
         mBottomBar.mapColorForTab(0, "#000000");
         mBottomBar.mapColorForTab(1, "#FF8F00");
         mBottomBar.mapColorForTab(2, "#FFEB3B");
-        mBottomBar.mapColorForTab(3, "#616161");
+        mBottomBar.mapColorForTab(3, "#616161");*/
 
-        /*
-        mBottomBar.mapColorForTab(0, "#A5D6A7");
-        mBottomBar.mapColorForTab(1, "#66BB6A");
-        mBottomBar.mapColorForTab(2, "#43A047");
-        mBottomBar.mapColorForTab(3, "#2E7D32");*/
+
+        mBottomBar.mapColorForTab(0, "#90A4AE");
+        mBottomBar.mapColorForTab(1, "#607D8B");
+        mBottomBar.mapColorForTab(2, "#455A64");
+        mBottomBar.mapColorForTab(3, "#263238");
     }
 
     public static Context getAppContext() {
