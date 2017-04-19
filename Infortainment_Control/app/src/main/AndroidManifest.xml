@@ -15,7 +15,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
             android:name=".InfortainmentControl"
-            android:label="Infortainment Control"
+            android:label="Infotainment Control"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
