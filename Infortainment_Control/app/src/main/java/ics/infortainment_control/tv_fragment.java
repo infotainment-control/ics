@@ -171,7 +171,7 @@ public class tv_fragment extends Fragment {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(tv_fragment.this.getContext());
                 View dialogView = getActivity().getLayoutInflater().inflate(R.layout.numpad_layout, null);
                 dialogBuilder.setView(dialogView);
-                AlertDialog numpadDialog = dialogBuilder.create();
+                final AlertDialog numpadDialog = dialogBuilder.create();
 
                 Button one;
                 Button two;
@@ -268,13 +268,13 @@ public class tv_fragment extends Fragment {
                     }
                 );
                 return_btn.setOnClickListener(new View.OnClickListener() {
-                      @Override
-                      public void onClick(View view){
-                      Toast.makeText(tv_fragment.this.getContext(), "Success", Toast.LENGTH_SHORT).show();
-                      AlertDialog numpadDialog = new AlertDialog.Builder(tv_fragment.this.getContext()).create();
-                      numpadDialog.cancel();
-                  }
-              }
+                          @Override
+                          public void onClick(View view) {
+                              //Toast.makeText(tv_fragment.this.getContext(), "Success", Toast.LENGTH_SHORT).show();
+                              //AlertDialog numpadDialog = new AlertDialog.Builder(tv_fragment.this.getContext()).create();
+                              numpadDialog.dismiss();
+                          }
+                      }
                 );
 
                 numpadDialog.show();

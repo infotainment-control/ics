@@ -16,7 +16,6 @@ public class numpad_fragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.numpad_layout, null));
-        builder.setTitle("Enter Channel Number");
         return builder.create();
     }
 }
