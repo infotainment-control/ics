@@ -29,15 +29,31 @@ import static ics.infortainment_control.constants.THIRD_COLUMN;
 
 public class premieres_fragment extends Fragment {
     protected ArrayList<HashMap<String, String>> list;
+    protected ListView listView;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.premieres_layout,container,false);
-        list=new ArrayList<HashMap<String,String>>();
+        list = new ArrayList<HashMap<String,String>>();
 
         PremieresController premieres = new PremieresController(this, getContext());
         premieres.execute();
+
         // fetch the listview from layout
-        ListView listView= (ListView) v.findViewById(R.id.listView1);
+        listView = (ListView) v.findViewById(R.id.listView1);
+
+        return v;
+    }
+
+    public void populateList(List<Premiere> premieres) {
+        // for loop would start here
+        for (Premiere premiere : premieres) {
+            HashMap<String, String> temp = new HashMap<String, String>();
+            temp.put(FIRST_COLUMN, premiere.name);
+            temp.put(SECOND_COLUMN, premiere.channel);
+            temp.put(THIRD_COLUMN, premiere.date);
+            temp.put(FOURTH_COLUMN, premiere.time);
+            list.add(temp);
+        }
 
         // list view adapter. needed to abstract the process of adding items from the arraylist (list) to the ListView
         ListViewAdapter adapter =new ListViewAdapter(this.getActivity(), list); // <---- right here is where it's failing. the list is empty here (because populateList isn't populating it)
@@ -54,20 +70,6 @@ public class premieres_fragment extends Fragment {
             }
 
         });
-
-        return v;
-    }
-
-    public void populateList(List<Premiere> premieres) {
-        // for loop would start here
-        for (Premiere premiere : premieres) {
-            HashMap<String, String> temp = new HashMap<String, String>();
-            temp.put(FIRST_COLUMN, premiere.name);
-            temp.put(SECOND_COLUMN, premiere.channel);
-            temp.put(THIRD_COLUMN, premiere.date);
-            temp.put(FOURTH_COLUMN, premiere.time);
-            list.add(temp);
-        }
 
             // parse data from data structure to populate name, date, and time for each premiere in the database
             // create new rows
