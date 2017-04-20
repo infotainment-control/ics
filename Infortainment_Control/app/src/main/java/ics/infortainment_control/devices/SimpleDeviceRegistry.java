@@ -42,6 +42,9 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         return registry.containsKey(deviceID);
     }
 
+    // TODO there are messy interface considerations here: shouldn't that be willing to register it if it isn't in there?
+    //      and why is that implementation *specific* to the SimpleDeviceRegistry? There is more similarity here that's being
+    //      tossed aside yet...
     @Override
     public Device getDevice(String deviceID) {
         return registry.get(deviceID);

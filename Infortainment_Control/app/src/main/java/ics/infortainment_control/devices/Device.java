@@ -6,9 +6,10 @@ import java.util.Map;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.IRBlasterManager;
 
-public class Device{//<C extends Command> {
+public class Device {
 
     private String id;
+    private DeviceType type;
 
     private Map<Command, String> commands;
 
@@ -31,7 +32,7 @@ public class Device{//<C extends Command> {
         this.id = id;
 
         // TODO wouldn't be necessary if the InfortainmentControl main application published
-        // the instantiation of the IRBlasterManager singleton to all interested parties
+        // the instantiation of the IRBlasterManager singleton to all interested parties. Static blocks are tough to coordinate.
         if (irBlasterManager == null) {
             irBlasterManager = IRBlasterManager.getInstance();
         }
@@ -39,17 +40,22 @@ public class Device{//<C extends Command> {
         commands = new HashMap<>();
     }
 
-
     public boolean handleCommand(Command command) {
-        if (! commands.containsKey(command)) {
+        if (! knowsCommand(command)) {
             System.err.printf("command '%s' not found for device %s%n", command, id);
-            return false;
+            // TODO check your aggression? Maybe? This is like, shoot yourself in the foot for the demo
+            //        (disabling it for now... make this return void and re-enable it post-school)
+            //throw new RuntimeException(String.format("command '%s' not found for device %s%n", command, id));
         }
 
         String prontoHex = commands.get(command);
         irBlasterManager.issueCommand(prontoHex);
         return true;
 
+    }
+
+    public boolean knowsCommand(Command command) {
+        return commands.containsKey(command);
     }
 
     public String getID() {

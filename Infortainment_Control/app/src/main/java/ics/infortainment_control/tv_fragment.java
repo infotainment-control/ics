@@ -8,7 +8,6 @@ import android.view.View;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +16,9 @@ import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.devices.Device;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.commands.IRBlasterManager;
+import ics.infortainment_control.devices.DeviceRegistry;
+import ics.infortainment_control.devices.DeviceRegistryProvider;
+import ics.infortainment_control.devices.SimpleDeviceRegistryProvider;
 
 /**
  * Created by Jason on 3/5/2017.
@@ -60,10 +62,9 @@ public class tv_fragment extends Fragment {
     Button return_btn;
 
 
-    // TODO if Buttons can be persistent (or Views!!), then this can be purposeful;
+    // TODO if Buttons can be (or are!) persistent (or Views!!), then this can be purposeful;
     //      otherwise, delegating Command lookup to this is an indirection that saves nothing
-
-    // TODO how to realize an enforcement strategy that Commands be of the DeviceType.TELEVISION subset?
+    // TODO also: how to realize an enforcement strategy that Commands be of the DeviceType.TELEVISION subset?
     Map<Button, Command> commandAssociations;
 
     // TODO define retrieval of this and set it up in onCreateView,
@@ -73,10 +74,17 @@ public class tv_fragment extends Fragment {
     public DeviceManager deviceManager;
     public IRBlasterManager irBlasterManager;
 
+    // TODO gray out the buttons that cannot be used because their commands are missing?
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         // TODO define appropriately delegated retrieval
-        activeTVDevice = new Device("1");
+        DeviceRegistryProvider registryProvider_SHOULD_NOT_BE_HERE = new SimpleDeviceRegistryProvider();
+        DeviceRegistry registry_SHOULD_NOT_BE_HERE = registryProvider_SHOULD_NOT_BE_HERE.getDeviceRegistry();
+
+        String insigniaID = Device.createDeviceID("Insignia", "NS-32D312NA15|CUSTOM_SEARCH");
+        Device insigniaTV = registry_SHOULD_NOT_BE_HERE.registerDevice(insigniaID);
+
+        activeTVDevice = insigniaTV;
 
         // the map that links Buttons to the appropriate Command terms so the active TV Device may be delegated to
         // when handling the button press (which will issue its IR pronto hex code string to the IRBlasterManager)
@@ -232,18 +240,20 @@ public class tv_fragment extends Fragment {
 
 
         // event listeners for power and source buttons
-        _power.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                DeviceID activeDevice = deviceManager.getActiveDevice();
-//                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
-//                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
-//                irBlasterManager.issueCommand(code);
-
-
-
-            }
-        });
+//        _power.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                DeviceID activeDevice = deviceManager.getActiveDevice();
+////                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
+////                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
+////                irBlasterManager.issueCommand(code);
+//
+//
+//
+//            }
+//        });
+        System.out.println("...");
+        delegateButtonOnClickListener(_power, activeTVDevice);
 
         _source.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -383,22 +393,26 @@ public class tv_fragment extends Fragment {
     }
 
     private void delegateButtonOnClickListener(Button button, final Device device) {
-
         // ensure the button has been registered with a Command
         if (commandAssociations.containsKey(button)) {
-
             final Command commandToBeIssued = commandAssociations.get(button);
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    device.handleCommand(commandToBeIssued);
-                }
-            });
+            if (! device.knowsCommand(commandToBeIssued)) {
+                // TODO [developer guts]
+                button.setEnabled(false);
+            } else {
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        device.handleCommand(commandToBeIssued);
+                    }
+                });
+            }
         }
 
         else {
             throw new RuntimeException(
+                    // TODO [developer guts]
                     "DEVELOPER ERROR - trying to issue a command from a button not associated with a Command"
             );
         }
