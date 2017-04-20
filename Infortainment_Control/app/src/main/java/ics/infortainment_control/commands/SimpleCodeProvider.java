@@ -82,7 +82,7 @@ public class SimpleCodeProvider implements CodeProvider {
         /**
          *  LG
          */
-        String lgID = Device.createDeviceID("LG", "DVD_PLAYER");
+        String lgID = Device.createDeviceID("LG", "LG_DP132");
         Map<Command, String> lgDVDCodes = new HashMap<>();
 
         lgDVDCodes.put( Command.ZERO,     "0000 006C 0022 0003 00AD 00AD 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0041 0016 0016 0016 0041 0016 06A4 00AD 00AD 0016 0041 0016 0E6C");
@@ -118,10 +118,8 @@ public class SimpleCodeProvider implements CodeProvider {
         return allCommandsForDevice.get(command);
     }
 
-    // TODO this is where I've screwed up generics, yeppers
     @Override
     public Map<Command, String> getCodes(String deviceID) {
-        // TODO or have I??
         return deviceCodesMap.get(deviceID);
     }
 

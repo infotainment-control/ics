@@ -52,7 +52,6 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
 
         Map<Command, String> commands = codeProvider.getCodes(deviceID);
 
-        // TODO type issue :)
         device.setCommands(commands);
 
         return device;

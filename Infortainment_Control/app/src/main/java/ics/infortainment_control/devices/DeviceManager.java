@@ -8,13 +8,13 @@ import ics.infortainment_control.commands.CodeProvider;
 //TODO modify responsibilities to complement DeviceRegistry
 public interface DeviceManager {
 
-    // TODO consider if this ought to, or if registry ought to, or if a device factory ought to provision codes
-    CodeProvider getCodeProvider();
-
-
     DeviceRegistry getDeviceRegistry();
 
-    String getActiveDevice();
-    String setActiveDevice(String deviceID);
+    Device getActiveDevice();
+
+    void setActiveDevice(String deviceID);
+
+    void setActiveDevice(Device device);
+
 
 }

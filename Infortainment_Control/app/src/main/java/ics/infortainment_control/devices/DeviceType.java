@@ -16,7 +16,9 @@ import ics.infortainment_control.commands.Command;
 public enum DeviceType {
     TELEVISION,
     CABLE_BOX,
-    DVD_PLAYER;
+    DVD_PLAYER,
+    // note: UNKNOWN devices, what
+    UNKNOWN;
 
     private EnumSet<Command> commandSet;
 
@@ -133,6 +135,10 @@ public enum DeviceType {
                 Command.VOLUME_DOWN,
                 Command.VOLUME_UP,
                 Command.ZERO
+        );
+
+        UNKNOWN.commandSet = EnumSet.of(
+                Command.POWER
         );
     }
 }
