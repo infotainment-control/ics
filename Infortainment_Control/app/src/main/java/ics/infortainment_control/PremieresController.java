@@ -70,7 +70,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
     // Retrieves list of premieres from file or web scraping if no updated file exists
 
     private List<Premiere> getPremieresData(String filename) {
-        List<Premiere> premiereData = readPremieres(filename, context);
+        List<Premiere> premiereData = readPremieres();
         if (premiereData.isEmpty()) {
             Log.d("INFO", "No data found in cache. Scraping new data");
             // Get new data
@@ -91,7 +91,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
     }
     // Returns list of premieres from text file
 
-    private void insertPremieres(String filename, Context context) {
+/*    private void insertPremieres(String filename, Context context) {
         List<Premiere> ret = new LinkedList();
         Log.d("INFO", "Attempting to retrieve premieres from file");
 
@@ -104,54 +104,13 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                 while ((receiveString = bufferedReader.readLine()) != null) {
                     List<String> premiereData = new LinkedList();
                     String[] splitString = receiveString.split(";");
-//                    Log.d("READ", receiveString);
-                    //Constructor making new tables
-                    PremiereRepo premiereRepo = new PremiereRepo();
-                    ChannelRepo channelRepo = new ChannelRepo();
-                    TimeZoneRepo timeZoneRepo = new TimeZoneRepo();
-                    ServiceProviderRepo serviceProviderRepo = new ServiceProviderRepo();
-
-                    //Constructor cont. cleaning out the db of old material
-                    serviceProviderRepo.delete();
-                    timeZoneRepo.delete();
-                    channelRepo.delete();
-                    premiereRepo.delete();
-
-                    Channel channel = new Channel();
-                    TimeZone timeZone = new TimeZone();
-                    PremiereDB premiere = new PremiereDB();
-                    ServiceProvider serviceProvider = new ServiceProvider();
-                    //Using this to generate a working Primary Key for the table fields
-                    Integer i = 1111;
 
                     for (String str : splitString) {
-                        //Setting Primary Key fields in the database
-                        channel.setChannelId(i.toString());
-                        timeZone.setTimeZoneId(i.toString());
-                        premiere.setPremiereId(i.toString());
-                        serviceProvider.setPremiereId(i.toString());
-                        serviceProvider.setChannelId(i.toString());
-                        //Entering in the important data into the proper table and column names
-                        premiere.setPremiereTitle(str);
-                        serviceProvider.setChannelNumber(str);
-                        timeZone.setTimeZone(str);
-                        timeZone.setAirTime(str);
-                        premiere.setPremiereCategory(str);
-                        premiere.setPremiereGenre(str);
-                        premiere.setPremiereType(str);
-                        premiere.setPremiereInfo(str);
-                        //Inserting it into the database
-                        serviceProviderRepo.insert(serviceProvider);
-                        premiereRepo.insert(premiere);
-                        channelRepo.insert(channel);
-                        timeZoneRepo.insert(timeZone);
-                        //Indexing Primary Key to the next increment.
-                        i++;
-
+                         premiereData.add(str);
                     }
+                        ret.add(Premiere.createPremiere(premiereData));
                 }
                 inputStream.close();
-//                Log.d("INFO", "Retrieved " + ret.size() + " premieres from " + filename);
             }
             }
         catch (FileNotFoundException e) {
@@ -161,8 +120,9 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
             Log.e("login activity", "Can not read file: " + e.toString());
         }
 
-    }
-    private void readPremieres() {
+    }*/
+
+    private List<Premiere> readPremieres() {
         //Creating a list to index off of from the Database
         ServiceProviderRepo serviceProviderRepo = new ServiceProviderRepo();
         List<PremiereList> premiereLists = serviceProviderRepo.getServiceProvider();
@@ -196,6 +156,14 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
         }
         Log.d(TAG,"=============================================================");
+
+        List<Premiere> premieres = new LinkedList<>();
+
+        for (PremiereList list : premiereLists) {
+            premieres.add(new Premiere(list.getPremiereTitle(), list.getTimeZoneId(), list.getAirTime(), list.getChannelName(), list.getPremiereCategory(), list.getPremiereGenre(), list.getPremiereType(), list.getPremiereInfo()));
+        }
+
+        return premieres;
     }
 
 }
