@@ -44,8 +44,10 @@ import ics.infortainment_control.devices.Model.PremiereList;
  * This class exists to kick start the
 
  */
+
 public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
+    public static final String TAG = PremieresController.class.getSimpleName();
     private Context context;
     private premieres_fragment fragment;
     private static final int NUMBER_OF_TASKS = 3;
@@ -92,6 +94,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
     private void insertPremieres(String filename, Context context) {
         List<Premiere> ret = new LinkedList();
         Log.d("INFO", "Attempting to retrieve premieres from file");
+
         try {
             InputStream inputStream = context.openFileInput(filename);
             if (inputStream != null) {
@@ -144,9 +147,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
                         i++;
 
-                        premiereData.add(str);
                     }
-                    ret.add(Premiere.createPremiere(premiereData));
                 }
                 inputStream.close();
 //                Log.d("INFO", "Retrieved " + ret.size() + " premieres from " + filename);
@@ -160,34 +161,40 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
         }
 
     }
-    private List<Premiere> readPremieres(String filename, Context context) {
-        List<Premiere> ret = new LinkedList();
-        Log.d("INFO", "Attempting to retrieve premieres from file");
-        try {
-            InputStream inputStream = context.openFileInput(filename);
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String receiveString = "";
-                while ( (receiveString = bufferedReader.readLine()) != null ) {
-                    List<String> premiereData = new LinkedList();
-                    String[] splitString = receiveString.split(";");
-                    Log.d("READ", receiveString);
-                    for (String str : splitString) {
-                        premiereData.add(str);
-                    }
-                    ret.add(Premiere.createPremiere(premiereData));
-                }
-                inputStream.close();
-//                Log.d("INFO", "Retrieved " + ret.size() + " premieres from " + filename);
-            }
-        }
-        catch (FileNotFoundException e) {
-            Log.e("login activity", "File not found: " + e.toString());
-        } catch (IOException e) {
+    private void readPremieres() {
 
-            Log.e("login activity", "Can not read file: " + e.toString());
+        ServiceProviderRepo serviceProviderRepo = new ServiceProviderRepo();
+        List<PremiereList> premiereLists = serviceProviderRepo.getServiceProvider();
+
+        Log.d(TAG, String.format("%-35s", "PremiereDB ID") +
+                String.format("%-35s", "PremiereDB Title") +
+                String.format("%-35s", "PremiereDB Genre") +
+                String.format("%-35s", "PremiereDB Category") +
+                String.format("%-35s", "PremiereDB Information") +
+                String.format("%-35s", "Channel") +
+                String.format("%-35s", "Channel Name") +
+                String.format("%-35s", "Channel Number") +
+                String.format("%-35s", "TimeZone") +
+                String.format("%-105s", "TimeZone Name")
+        );
+
+        Log.d(TAG,"=============================================================");
+        for (int i = 0; i< premiereLists.size(); i++ ){
+            Log.d(TAG, "0000000000".substring( premiereLists.get(i).getPremiereId().length())+ premiereLists.get(i).getPremiereId() +
+                    "                                 " + String.format("%-35s", premiereLists.get(i).getPremiereTitle())+
+                    String.format("%-35s", premiereLists.get(i).getPremiereGenre())+
+                    String.format("%-35s", premiereLists.get(i).getPremiereCategory())+
+                    String.format("%-35s", premiereLists.get(i).getPremiereInfo())+
+                    String.format("%-35s", premiereLists.get(i).getChannelName())+
+                    String.format("%-35s", premiereLists.get(i).getChannelName())+
+                    String.format("%-31s", premiereLists.get(i).getChannelNumber())+
+                    String.format("%-6s", premiereLists.get(i).getAirTime())
+
+            );
+
+
         }
-        return ret;
+        Log.d(TAG,"=============================================================");
     }
+
 }
