@@ -1,6 +1,7 @@
 package ics.infortainment_control;
 
 import android.app.AlertDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -38,7 +39,7 @@ public class premieres_fragment extends Fragment {
         list = new ArrayList<HashMap<String,String>>();
 
         PremieresController premieres = new PremieresController(this, getContext());
-        premieres.execute();
+        premieres.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         // fetch the listview from layout
         listView = (ListView) v.findViewById(R.id.listView1);

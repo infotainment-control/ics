@@ -42,4 +42,9 @@ public class Premiere {
         else
             return new Premiere("");
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder().append(name).append(channel).append(date).append(time).append(category).append(genre).append(type).append(plot).toString();
+    }
 }
