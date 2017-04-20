@@ -13,15 +13,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import ics.infortainment_control.devices.Data.Model.Channel;
-import ics.infortainment_control.devices.Data.Model.PremiereDB;
-import ics.infortainment_control.devices.Data.Model.ServiceProvider;
-import ics.infortainment_control.devices.Data.Model.TimeZone;
-import ics.infortainment_control.devices.Data.Repo.ChannelRepo;
-import ics.infortainment_control.devices.Data.Repo.PremiereRepo;
-import ics.infortainment_control.devices.Data.Repo.ServiceProviderRepo;
-import ics.infortainment_control.devices.Data.Repo.TimeZoneRepo;
-
 /**
  * Created by Hawkaloo on 4/19/2017.
  */
@@ -114,55 +105,11 @@ public class PremiereWorkTracker {
             OutputStreamWriter writer = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
             StringBuilder strBuilder = new StringBuilder();
 
-            //Constructor making new tables
-            PremiereRepo premiereRepo = new PremiereRepo();
-            ChannelRepo channelRepo = new ChannelRepo();
-            TimeZoneRepo timeZoneRepo = new TimeZoneRepo();
-            ServiceProviderRepo serviceProviderRepo = new ServiceProviderRepo();
-
-            //Constructor cont. cleaning out the db of old material
-            serviceProviderRepo.delete();
-            timeZoneRepo.delete();
-            channelRepo.delete();
-            premiereRepo.delete();
-
-            //Using this to generate a working Primary Key for the table fields
-            Channel channel = new Channel();
-            TimeZone timeZone = new TimeZone();
-            PremiereDB premiere = new PremiereDB();
-            ServiceProvider serviceProvider = new ServiceProvider();
-
-            Integer i = 1111;
-
             for (Premiere data : premieres) {
                 strBuilder.append(data.name + ";" + data.channel + ";" + data.date + ";" + data.time + ";" + data.category + ";"
                         + data.genre + ";" + data.type + ";" + data.plot + "\n");
 
-                //Setting Primary Key fields in the database
-                channel.setChannelId(i.toString());
-                timeZone.setTimeZoneId(i.toString());
-                premiere.setPremiereId(i.toString());
-                serviceProvider.setPremiereId(i.toString());
-                serviceProvider.setChannelId(i.toString());
-
-                //Entering in the important data into the proper table and column names
-                premiere.setPremiereTitle(data.name);
-                serviceProvider.setChannelNumber(data.channel);
-                timeZone.setTimeZone(data.date);
-                timeZone.setAirTime(data.time);
-                premiere.setPremiereCategory(data.category);
-                premiere.setPremiereGenre(data.genre);
-                premiere.setPremiereType(data.type);
-                premiere.setPremiereInfo(data.plot);
-
-                //Inserting it into the database
-                serviceProviderRepo.insert(serviceProvider);
-                premiereRepo.insert(premiere);
-                channelRepo.insert(channel);
-                timeZoneRepo.insert(timeZone);
-
-                //Indexing Primary Key to the next increment.
-                i++;
+                String[] premiereData = {data.name, data.channel, data.date, data.time, data.category, data.genre, data.type, data.plot};
             }
 
             writer.write(strBuilder.toString());
