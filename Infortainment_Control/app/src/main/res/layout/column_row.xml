@@ -5,31 +5,35 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_height="wrap_content"
+        android:background="@drawable/listview_cell_light_selector"
+        android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1.1"
+        android:layout_weight="1"
         android:textSize="15sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/network"
-        android:layout_height="wrap_content"
+        android:background="@drawable/listview_cell_dark_selector"
+        android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.6"
         android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/date"
-        android:layout_height="wrap_content"
+        android:background="@drawable/listview_cell_light_selector"
+        android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:textSize="15sp"/>
 
     <TextView
         android:id="@+id/time"
-        android:layout_height="wrap_content"
+        android:background="@drawable/listview_cell_dark_selector"
+        android:layout_height="match_parent"
         android:layout_width="0dp"
-        android:layout_weight="0.35"
+        android:layout_weight="0.7"
         android:textSize="15sp"/>
 
 </LinearLayout>
