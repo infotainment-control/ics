@@ -105,13 +105,13 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                     List<String> premiereData = new LinkedList();
                     String[] splitString = receiveString.split(";");
 //                    Log.d("READ", receiveString);
-
+                    //Constructor making new tables
                     PremiereRepo premiereRepo = new PremiereRepo();
                     ChannelRepo channelRepo = new ChannelRepo();
                     TimeZoneRepo timeZoneRepo = new TimeZoneRepo();
                     ServiceProviderRepo serviceProviderRepo = new ServiceProviderRepo();
 
-
+                    //Constructor cont. cleaning out the db of old material
                     serviceProviderRepo.delete();
                     timeZoneRepo.delete();
                     channelRepo.delete();
@@ -121,16 +121,17 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                     TimeZone timeZone = new TimeZone();
                     PremiereDB premiere = new PremiereDB();
                     ServiceProvider serviceProvider = new ServiceProvider();
-
+                    //Using this to generate a working Primary Key for the table fields
                     Integer i = 1111;
 
                     for (String str : splitString) {
-
+                        //Setting Primary Key fields in the database
                         channel.setChannelId(i.toString());
                         timeZone.setTimeZoneId(i.toString());
                         premiere.setPremiereId(i.toString());
                         serviceProvider.setPremiereId(i.toString());
                         serviceProvider.setChannelId(i.toString());
+                        //Entering in the important data into the proper table and column names
                         premiere.setPremiereTitle(str);
                         serviceProvider.setChannelNumber(str);
                         timeZone.setTimeZone(str);
@@ -139,12 +140,12 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                         premiere.setPremiereGenre(str);
                         premiere.setPremiereType(str);
                         premiere.setPremiereInfo(str);
-
+                        //Inserting it into the database
                         serviceProviderRepo.insert(serviceProvider);
                         premiereRepo.insert(premiere);
                         channelRepo.insert(channel);
                         timeZoneRepo.insert(timeZone);
-
+                        //Indexing Primary Key to the next increment.
                         i++;
 
                     }
@@ -162,10 +163,10 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
     }
     private void readPremieres() {
-
+        //Creating a list to index off of from the Database
         ServiceProviderRepo serviceProviderRepo = new ServiceProviderRepo();
         List<PremiereList> premiereLists = serviceProviderRepo.getServiceProvider();
-
+        //Naming the output columns (not sure if I need to or not)
         Log.d(TAG, String.format("%-35s", "PremiereDB ID") +
                 String.format("%-35s", "PremiereDB Title") +
                 String.format("%-35s", "PremiereDB Genre") +
@@ -177,7 +178,7 @@ public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
                 String.format("%-35s", "TimeZone") +
                 String.format("%-105s", "TimeZone Name")
         );
-
+        //Outputing the database to the user
         Log.d(TAG,"=============================================================");
         for (int i = 0; i< premiereLists.size(); i++ ){
             Log.d(TAG, "0000000000".substring( premiereLists.get(i).getPremiereId().length())+ premiereLists.get(i).getPremiereId() +
