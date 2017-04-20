@@ -20,10 +20,6 @@ import ics.infortainment_control.devices.DeviceRegistry;
 import ics.infortainment_control.devices.DeviceRegistryProvider;
 import ics.infortainment_control.devices.SimpleDeviceRegistryProvider;
 
-/**
- * Created by Jason on 3/5/2017.
- */
-
 public class tv_fragment extends Fragment {
 
     Button _power;
@@ -58,12 +54,10 @@ public class tv_fragment extends Fragment {
     Button nine;
     Button zero;
 
-    // non-infrared triggering button
     Button return_btn;
 
 
-    // TODO if Buttons can be (or are!) persistent (or Views!!), then this can be purposeful;
-    //      otherwise, delegating Command lookup to this is an indirection that saves nothing
+    // TODO if Buttons can be (or are!) persistent (or Views!!), then this can be more purposeful
     // TODO also: how to realize an enforcement strategy that Commands be of the DeviceType.TELEVISION subset?
     Map<Button, Command> commandAssociations;
 
@@ -91,6 +85,7 @@ public class tv_fragment extends Fragment {
         commandAssociations = new HashMap<>(27);
         final Map<Button, Command> mainButtonAssociations = new HashMap<>(17);
         final Map<Button, Command> numberPadButtonAssociations = new HashMap<>(10);
+
 
         // tie display resources to java objects
         View v = inflater.inflate(R.layout.tv_layout,container,false);
@@ -128,6 +123,7 @@ public class tv_fragment extends Fragment {
                 AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(tv_fragment.this.getContext());
                 View dialogView = getActivity().getLayoutInflater().inflate(R.layout.numpad_layout, null);
                 dialogBuilder.setView(dialogView);
+
                 final AlertDialog numpadDialog = dialogBuilder.create();
 
                 one = (Button) dialogView.findViewById(R.id.one);
@@ -143,209 +139,59 @@ public class tv_fragment extends Fragment {
 
                 // associate number pad buttons with Commands
                 assignNumberPadButtonAssociations(numberPadButtonAssociations);
-
                 // pull in the associated button:command map to the view's map
                 commandAssociations.putAll(numberPadButtonAssociations);
 
                 // doesn't delegate action to a Device
                 return_btn = (Button) dialogView.findViewById(R.id.return_btn);
 
-                one.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View view){
-                                               IRBlasterManager.getInstance().issueCommand("0000 006C 0022 0003 00AD 00AD 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0041 0016 06A4 00AD 00AD 0016 0041 0016 0E6C");
-                                               // ^ powers off/on an LG DVD player
+                return_btn.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // TODO something to the effect of the below commented line is what's needed
+                                // but the behavior is tricker to accommodate with the given interface
+                                //activeTVDevice.handleCommand(commandAssociations.get(return_btn));
+                                numpadDialog.dismiss();
+                          }
+                      }
+                );
 
-                                           }
-                                       }
-                );
-                two.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View view){
-
-                                           }
-                                       }
-                );
-                three.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View view){
-
-                                             }
-                                         }
-                );
-                four.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view){
-
-                                            }
-                                        }
-                );
-                five.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view){
-
-                                            }
-                                        }
-                );
-                six.setOnClickListener(new View.OnClickListener() {
-                                           @Override
-                                           public void onClick(View view){
-
-                                           }
-                                       }
-                );
-                seven.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View view){
-
-                                             }
-                                         }
-                );
-                eight.setOnClickListener(new View.OnClickListener() {
-                                             @Override
-                                             public void onClick(View view){
-
-                                             }
-                                         }
-                );
-                nine.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view){
-
-                                            }
-                                        }
-                );
-                zero.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View view){
-
-                                            }
-                                        }
-                );
-                return_btn.setOnClickListener(new View.OnClickListener() {
-                                                  @Override
-                                                  public void onClick(View view) {
-                                                      //Toast.makeText(tv_fragment.this.getContext(), "Success", Toast.LENGTH_SHORT).show();
-                                                      //AlertDialog numpadDialog = new AlertDialog.Builder(tv_fragment.this.getContext()).create();
-                                                      numpadDialog.dismiss();
-                                                  }
-                                              }
-                );
+                // delegate button command issuance to active TV device
+                delegateButtonOnClickListener(one,   activeTVDevice);
+                delegateButtonOnClickListener(two,   activeTVDevice);
+                delegateButtonOnClickListener(three, activeTVDevice);
+                delegateButtonOnClickListener(four,  activeTVDevice);
+                delegateButtonOnClickListener(five,  activeTVDevice);
+                delegateButtonOnClickListener(six,   activeTVDevice);
+                delegateButtonOnClickListener(seven, activeTVDevice);
+                delegateButtonOnClickListener(eight, activeTVDevice);
+                delegateButtonOnClickListener(nine,  activeTVDevice);
+                delegateButtonOnClickListener(zero,  activeTVDevice);
 
                 numpadDialog.show();
             }
         });
 
-
-
-
-        // event listeners for power and source buttons
-//        _power.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                DeviceID activeDevice = deviceManager.getActiveDevice();
-////                String code = deviceManager.getRawCommandCode(activeDevice, TelevisionCommand.POWER);
-////                Log.d("[TV_FRAGMENT]", "Issuing code: " + code);
-////                irBlasterManager.issueCommand(code);
-//
-//
-//
-//            }
-//        });
-        System.out.println("...");
-        delegateButtonOnClickListener(_power, activeTVDevice);
-
-        _source.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _volume_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _volume_down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _channel_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _channel_down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _down.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _left.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _right.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _return.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        // TODO check that this pattern works for all
-        delegateButtonOnClickListener(_tools, activeTVDevice);
-        _tools.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _mute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
-
-        _exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
-        });
+        // TODO surely with this much repetition....
+        // delegate button command issuance to active TV device
+        delegateButtonOnClickListener(_power,        activeTVDevice);
+        delegateButtonOnClickListener(_source,       activeTVDevice);
+        delegateButtonOnClickListener(_channel_up,   activeTVDevice);
+        delegateButtonOnClickListener(_channel_down, activeTVDevice);
+        delegateButtonOnClickListener(_volume_up,    activeTVDevice);
+        delegateButtonOnClickListener(_volume_down,  activeTVDevice);
+        delegateButtonOnClickListener(_up,           activeTVDevice);
+        delegateButtonOnClickListener(_down,         activeTVDevice);
+        delegateButtonOnClickListener(_left,         activeTVDevice);
+        delegateButtonOnClickListener(_right,        activeTVDevice);
+        delegateButtonOnClickListener(_ok,           activeTVDevice);
+        delegateButtonOnClickListener(_return,       activeTVDevice);
+        delegateButtonOnClickListener(_menu,         activeTVDevice);
+        delegateButtonOnClickListener(_exit,         activeTVDevice);
+        delegateButtonOnClickListener(_tools,        activeTVDevice);
+        delegateButtonOnClickListener(_mute,         activeTVDevice);
+        delegateButtonOnClickListener(_info,         activeTVDevice);
 
         return v;
     }
@@ -354,7 +200,6 @@ public class tv_fragment extends Fragment {
     //      of the TELEVISION Command EnumSet
 
     private void assignMainButtonAssociations(Map<Button, Command> map) {
-
         map.put(_power,        Command.POWER);
         map.put(_source,       Command.SOURCE);
         map.put(_channel_up,   Command.CHANNEL_UP);
@@ -379,7 +224,6 @@ public class tv_fragment extends Fragment {
     }
 
     private void assignNumberPadButtonAssociations(Map<Button, Command> map) {
-
         map.put(one,   Command.ONE);
         map.put(two,   Command.TWO);
         map.put(three, Command.THREE);
@@ -392,6 +236,11 @@ public class tv_fragment extends Fragment {
         map.put(zero,  Command.ZERO);
     }
 
+    /**
+     * Delegates issuing an infrared Command to the active television Device
+     * @param button - "I will take the infrared wavelength to Mordor......... But I do not know the way."
+     * @param device - "I will help you bear this burden, button."
+     */
     private void delegateButtonOnClickListener(Button button, final Device device) {
         // ensure the button has been registered with a Command
         if (commandAssociations.containsKey(button)) {
