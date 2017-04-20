@@ -9,6 +9,8 @@ import ics.infortainment_control.commands.TelevisionCommand;
  */
 public class SimpleDeviceManager implements DeviceManager {
 
+    private static final DeviceRegistry registry = new SimpleDeviceRegistry();
+
     @Override
     public CodeProvider getCodeProvider() {
         return null;
