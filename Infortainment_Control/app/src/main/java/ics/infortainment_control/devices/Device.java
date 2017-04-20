@@ -6,7 +6,7 @@ import java.util.Map;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.IRBlasterManager;
 
-public class Device {
+public class Device{//<C extends Command> {
 
     private String id;
 

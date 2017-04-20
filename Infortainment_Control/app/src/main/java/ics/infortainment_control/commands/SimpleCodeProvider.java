@@ -152,35 +152,3 @@ public class SimpleCodeProvider implements CodeProvider {
         return null;
     }
 }
-
-/*
-television commands
-
-        samsungTVCodes.put( Command.POWER,        null);
-        samsungTVCodes.put( Command.VOLUME_UP,    null);
-        samsungTVCodes.put( Command.VOLUME_DOWN,  null);
-        samsungTVCodes.put( Command.CHANNEL_UP,   null);
-        samsungTVCodes.put( Command.CHANNEL_DOWN, null);
-        samsungTVCodes.put( Command.SOURCE,       null);
-        samsungTVCodes.put( Command.MENU,         null);
-        samsungTVCodes.put( Command.UP,           null);
-        samsungTVCodes.put( Command.DOWN,         null);
-        samsungTVCodes.put( Command.LEFT,         null);
-        samsungTVCodes.put( Command.RIGHT,        null);
-        samsungTVCodes.put( Command.ENTER,        null);
-        samsungTVCodes.put( Command.EXIT,         null);
-        samsungTVCodes.put( Command.MUTE,         null);
-        samsungTVCodes.put( Command.INFO,         null);
-        samsungTVCodes.put( Command.ZERO,         null);
-        samsungTVCodes.put( Command.ONE,          null);
-        samsungTVCodes.put( Command.TWO,          null);
-        samsungTVCodes.put( Command.THREE,        null);
-        samsungTVCodes.put( Command.FOUR,         null);
-        samsungTVCodes.put( Command.FIVE,         null);
-        samsungTVCodes.put( Command.SIX,          null);
-        samsungTVCodes.put( Command.SEVEN,        null);
-        samsungTVCodes.put( Command.EIGHT,        null);
-        samsungTVCodes.put( Command.NINE,         null);
-
-
- */
