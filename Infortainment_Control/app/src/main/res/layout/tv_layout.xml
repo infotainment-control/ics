@@ -346,7 +346,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:paddingTop="20dp"
+        android:paddingTop="13dp"
         android:gravity="center">
 
         <Button
