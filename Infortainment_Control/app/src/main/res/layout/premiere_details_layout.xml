@@ -5,9 +5,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:orientation="vertical"
-        android:paddingTop="20dp">
+        android:paddingTop="10dp">
         <TextView
             android:id="@+id/vname"
             android:textStyle="bold"
@@ -15,6 +15,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="1dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:id="@+id/channel_label"
+            android:text="Network"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/plot_background2"/>
+        <TextView
+            android:id="@+id/date_label"
+            android:text="Date"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/channel_label"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/plot_background2"/>
+        <TextView
+            android:id="@+id/time_label"
+            android:text="Time"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/date_label"
+            android:gravity="center"
+            android:background="@drawable/plot_background2"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -28,17 +71,15 @@
         <TextView
             android:id="@+id/vchannel"
             android:textSize="13sp"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
-            android:paddingRight="5dp"
             android:gravity="center"
             android:background="@drawable/plot_background"/>
         <TextView
             android:id="@+id/vdate"
             android:textSize="13sp"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
-            android:paddingRight="5dp"
             android:layout_toRightOf="@id/vchannel"
             android:gravity="center"
             android:layout_gravity="center"
@@ -46,7 +87,7 @@
         <TextView
             android:id="@+id/vtime"
             android:textSize="13sp"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/vdate"
             android:gravity="center"
@@ -74,29 +115,68 @@
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="1dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <TextView
+            android:id="@+id/type_label"
+            android:text="Type"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/plot_background2"/>
+        <TextView
+            android:id="@+id/genre_label"
+            android:text="Genre"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/type_label"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/plot_background2"/>
+        <TextView
+            android:id="@+id/category_label"
+            android:text="Category"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/genre_label"
+            android:gravity="center"
+            android:background="@drawable/plot_background2"/>
+    </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
         <TextView
             android:id="@+id/vtype"
             android:textSize="13sp"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
-            android:paddingRight="5dp"
             android:gravity="center"
             android:background="@drawable/plot_background"/>
         <TextView
             android:id="@+id/vgenre"
             android:textSize="13sp"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
-            android:paddingRight="5dp"
             android:layout_toRightOf="@id/vtype"
             android:gravity="center"
             android:layout_gravity="center"
@@ -104,7 +184,7 @@
         <TextView
             android:id="@+id/vcategory"
             android:textSize="13sp"
-            android:layout_width="110dp"
+            android:layout_width="95dp"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/vgenre"
             android:gravity="center"
@@ -123,7 +203,7 @@
             android:textSize="20sp"
             android:layout_width="315dp"
             android:layout_height="45dp"
-            android:background="@drawable/button_square_black_border_selector"
+            android:background="@drawable/button_square_blue_border_selector"
             android:shadowColor="#A8A8A8"
             android:shadowDx="0"
             android:shadowDy="0"

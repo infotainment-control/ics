@@ -100,6 +100,7 @@ public class premieres_fragment extends Fragment {
                 // get the selected premiere
                 int pos=position+1;
                 Premiere p = premieres_copy.get(pos-1);
+
                 String name = p.name;
                 String type = p.type;
                 String genre = p.genre;
