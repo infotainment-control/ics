@@ -15,9 +15,9 @@ import java.util.Set;
  */
 public interface CodeProvider {
 
-    <C extends Command> String getCode(String deviceID, C command);
+    String getCode(String deviceID, Command command);
 
-    <C extends Command> Map<C, String> getCodes(String deviceID);
+    Map<Command, String> getCodes(String deviceID);
 
     Set<String> getAllDeviceIDs();
 

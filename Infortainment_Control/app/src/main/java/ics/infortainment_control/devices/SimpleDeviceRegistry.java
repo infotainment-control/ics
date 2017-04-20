@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ics.infortainment_control.commands.CodeProvider;
-import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.SimpleCodeProvider;
 
 public class SimpleDeviceRegistry implements DeviceRegistry {

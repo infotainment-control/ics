@@ -6,11 +6,11 @@ import java.util.Map;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.IRBlasterManager;
 
-public class Device<C extends Command> {
+public class Device {
 
     private String id;
 
-    private Map<C, String> commands;
+    private Map<Command, String> commands;
 
     private static IRBlasterManager irBlasterManager = null;
 
@@ -40,7 +40,7 @@ public class Device<C extends Command> {
     }
 
 
-    boolean handleCommand(C command) {
+    boolean handleCommand(Command command) {
         if (! commands.containsKey(command)) {
             System.err.printf("command '%s' not found for device %s%n", command, id);
             return false;
@@ -56,7 +56,7 @@ public class Device<C extends Command> {
         return id;
     }
 
-    public void setCommands(Map<C, String> commands) {
+    public void setCommands(Map<Command, String> commands) {
         this.commands = commands;
     }
 
