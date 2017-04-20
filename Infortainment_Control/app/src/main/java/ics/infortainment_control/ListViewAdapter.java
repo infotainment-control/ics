@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,23 +50,29 @@ public class ListViewAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
+        final ViewHolder holder;
         LayoutInflater inflater=activity.getLayoutInflater();
         if(convertView == null){
             convertView=inflater.inflate(R.layout.column_row, null);
-            txtFirst=(TextView) convertView.findViewById(R.id.name);
-            txtSecond=(TextView) convertView.findViewById(R.id.network);
-            txtThird=(TextView) convertView.findViewById(R.id.date);
-            txtFourth=(TextView) convertView.findViewById(R.id.time);
-
+            holder = new ViewHolder();
+            holder.txtFirst=(TextView) convertView.findViewById(R.id.name);
+            holder.txtSecond=(TextView) convertView.findViewById(R.id.network);
+            holder.txtThird=(TextView) convertView.findViewById(R.id.date);
+            holder.txtFourth=(TextView) convertView.findViewById(R.id.time);
+            convertView.setTag(holder);
+        }
+        else {
+            holder = (ViewHolder)convertView.getTag();
         }
 
         HashMap<String, String> map=list.get(position);
-        txtFirst.setText(map.get(FIRST_COLUMN));
-        txtSecond.setText(map.get(SECOND_COLUMN));
-        txtThird.setText(map.get(THIRD_COLUMN));
-        txtFourth.setText(map.get(FOURTH_COLUMN));
+        holder.txtFirst.setText(map.get(FIRST_COLUMN));
+        holder.txtSecond.setText(map.get(SECOND_COLUMN));
+        holder.txtThird.setText(map.get(THIRD_COLUMN));
+        holder.txtFourth.setText(map.get(FOURTH_COLUMN));
 
         return convertView;
     }
 
 }
+

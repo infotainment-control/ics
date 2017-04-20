@@ -1,5 +1,6 @@
 package ics.infortainment_control;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -59,58 +61,79 @@ public class premieres_fragment extends Fragment {
         ListViewAdapter adapter =new ListViewAdapter(this.getActivity(), list); // <---- right here is where it's failing. the list is empty here (because populateList isn't populating it)
         listView.setAdapter(adapter);
 
+        final List<Premiere> premieres_copy = premieres;
         // onclick listener which will be used to display a dialog of additional information for shows
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
             {
+                // handle custom dialog
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(premieres_fragment.this.getContext());
+                View dialogView = getActivity().getLayoutInflater().inflate(R.layout.premiere_details_layout, null);
+                dialogBuilder.setView(dialogView);
+                final AlertDialog detailsDialog = dialogBuilder.create();
+
+                // declare variables linking to layout elements
+                Button return_btn;
+                TextView tName;
+                TextView tChannel;
+                TextView tDate;
+                TextView tTime;
+                TextView tType;
+                TextView tGenre;
+                TextView tPlot;
+                TextView tCategory;
+
+                // initialize variables
+                tName = (TextView) dialogView.findViewById(R.id.vname);
+                tChannel = (TextView) dialogView.findViewById(R.id.vchannel);
+                tDate = (TextView) dialogView.findViewById(R.id.vdate);
+                tTime = (TextView) dialogView.findViewById(R.id.vtime);
+                tPlot = (TextView) dialogView.findViewById(R.id.vplot);
+                tType = (TextView) dialogView.findViewById(R.id.vtype);
+                tGenre = (TextView) dialogView.findViewById(R.id.vgenre);
+                tCategory = (TextView) dialogView.findViewById(R.id.vcategory);
+                return_btn = (Button) dialogView.findViewById(R.id.return_btn);
+
+                // get the selected premiere
                 int pos=position+1;
-                Toast.makeText(premieres_fragment.this.getContext(), Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();
+                Premiere p = premieres_copy.get(pos-1);
+                String name = p.name;
+                String type = p.type;
+                String genre = p.genre;
+                String plot = p.plot;
+                String category = p.category;
+                // these three are somehow mixed up in the premiere object population process
+                String channel = p.date;
+                String date = p.time;
+                String time = p.channel;
+
+                // decorate textviews
+                tName.setText(name);
+                tChannel.setText(channel);
+                tDate.setText(date);
+                tTime.setText(time);
+                tPlot.setText(plot);
+                tType.setText(type);
+                tGenre.setText(genre);
+                tCategory.setText(category);
+
+                //Toast.makeText(premieres_fragment.this.getContext(), category, Toast.LENGTH_SHORT).show();
+
+
+                return_btn.setOnClickListener(new View.OnClickListener() {
+                      @Override
+                      public void onClick(View view) {
+                          //Toast.makeText(tv_fragment.this.getContext(), "Success", Toast.LENGTH_SHORT).show();
+                          //AlertDialog numpadDialog = new AlertDialog.Builder(tv_fragment.this.getContext()).create();
+                          detailsDialog.dismiss();
+                      }
+              }
+                );
+                detailsDialog.show();
             }
 
         });
-
-            // parse data from data structure to populate name, date, and time for each premiere in the database
-            // create new rows
-            /*
-            TableRow newRow = new TableRow(getActivity());
-            TextView name = new TextView(getActivity());
-            TextView date = new TextView(getActivity());
-            TextView time = new TextView(getActivity());
-
-            //style new rows
-            name.setPadding(10, 0, 0, 0);
-            date.setPadding(10, 0, 0, 0);
-            time.setPadding(10, 0, 0, 0);
-
-            name.setBackgroundResource(R.drawable.cell_shape);
-            date.setBackgroundResource(R.drawable.cell_shape);
-            time.setBackgroundResource(R.drawable.cell_shape);
-
-            name.setWidth(Math.round(two_hundred_four_pixels));
-            date.setWidth(Math.round(ninety_pixels));
-            time.setWidth(Math.round(ninety_pixels));
-
-            name.setHeight(100);
-            date.setHeight(100);
-            time.setHeight(100);
-
-            name.setTextSize(13);
-            date.setTextSize(13);
-            time.setTextSize(13);
-
-            name.setText(premiere.name);
-            date.setText(premiere.date);
-            time.setText(premiere.time);
-
-            // add views to the row
-            newRow.addView(name);
-            newRow.addView(date);
-            newRow.addView(time);
-
-            // add the row to the table layout
-            table.addView(newRow);
-        } */
     }
 }
