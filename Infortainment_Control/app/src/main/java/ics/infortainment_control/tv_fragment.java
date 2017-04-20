@@ -39,9 +39,11 @@ public class tv_fragment extends Fragment {
     Button _menu;
     Button _exit;
     Button _tools;
-    Button _numpad;
     Button _mute;
     Button _info;
+
+    // non-infrared triggering button
+    Button _numpad;
 
     Button one;
     Button two;
@@ -53,10 +55,15 @@ public class tv_fragment extends Fragment {
     Button eight;
     Button nine;
     Button zero;
+
+    // non-infrared triggering button
     Button return_btn;
+
 
     // TODO if Buttons can be persistent (or Views!!), then this can be purposeful;
     //      otherwise, delegating Command lookup to this is an indirection that saves nothing
+
+    // TODO how to realize an enforcement strategy that Commands be of the DeviceType.TELEVISION subset?
     Map<Button, Command> commandAssociations;
 
     // TODO define retrieval of this and set it up in onCreateView,
@@ -67,6 +74,15 @@ public class tv_fragment extends Fragment {
     public IRBlasterManager irBlasterManager;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        // TODO define appropriately delegated retrieval
+        activeTVDevice = new Device("1");
+
+        // the map that links Buttons to the appropriate Command terms so the active TV Device may be delegated to
+        // when handling the button press (which will issue its IR pronto hex code string to the IRBlasterManager)
+        commandAssociations = new HashMap<>(27);
+        final Map<Button, Command> mainButtonAssociations = new HashMap<>(17);
+        final Map<Button, Command> numberPadButtonAssociations = new HashMap<>(10);
 
         // tie display resources to java objects
         View v = inflater.inflate(R.layout.tv_layout,container,false);
@@ -85,19 +101,18 @@ public class tv_fragment extends Fragment {
         _return = (Button) v.findViewById(R.id.return_btn);
         _tools = (Button) v.findViewById(R.id.tools_btn);
         _menu = (Button) v.findViewById(R.id.menu_btn);
-        _numpad = (Button) v.findViewById(R.id.numpad_btn);
         _mute = (Button) v.findViewById(R.id.mute_btn);
         _info = (Button) v.findViewById(R.id.info_btn);
         _exit = (Button) v.findViewById(R.id.exit_btn);
 
+        // associate buttons with Commands
+        assignMainButtonAssociations(mainButtonAssociations);
 
+        // pull in the associated button:command map to the view's map
+        commandAssociations.putAll(mainButtonAssociations);
 
-        // TODO assign numpad buttons here?
-
-        // TODO then delegate Command triggering
-
-
-
+        // doesn't delegate action to a Device
+        _numpad = (Button) v.findViewById(R.id.numpad_btn);
 
         _numpad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,16 +128,26 @@ public class tv_fragment extends Fragment {
                 four = (Button) dialogView.findViewById(R.id.four);
                 five = (Button) dialogView.findViewById(R.id.five);
                 six = (Button) dialogView.findViewById(R.id.six);
-                seven= (Button) dialogView.findViewById(R.id.seven);
-                eight= (Button) dialogView.findViewById(R.id.eight);
-                nine= (Button) dialogView.findViewById(R.id.nine);
+                seven = (Button) dialogView.findViewById(R.id.seven);
+                eight = (Button) dialogView.findViewById(R.id.eight);
+                nine = (Button) dialogView.findViewById(R.id.nine);
                 zero = (Button) dialogView.findViewById(R.id.zero);
+
+                // associate number pad buttons with Commands
+                assignNumberPadButtonAssociations(numberPadButtonAssociations);
+
+                // pull in the associated button:command map to the view's map
+                commandAssociations.putAll(numberPadButtonAssociations);
+
+                // doesn't delegate action to a Device
                 return_btn = (Button) dialogView.findViewById(R.id.return_btn);
 
                 one.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View view){
                                                IRBlasterManager.getInstance().issueCommand("0000 006C 0022 0003 00AD 00AD 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0041 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0041 0016 06A4 00AD 00AD 0016 0041 0016 0E6C");
+                                               // ^ powers off/on an LG DVD player
+
                                            }
                                        }
                 );
@@ -292,6 +317,8 @@ public class tv_fragment extends Fragment {
             }
         });
 
+        // TODO check that this pattern works for all
+        delegateButtonOnClickListener(_tools, activeTVDevice);
         _tools.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
@@ -311,5 +338,69 @@ public class tv_fragment extends Fragment {
         });
 
         return v;
+    }
+
+    // TODO there ought to be a mechanism in place to verify JUST ONCE that these are elements
+    //      of the TELEVISION Command EnumSet
+
+    private void assignMainButtonAssociations(Map<Button, Command> map) {
+
+        map.put(_power,        Command.POWER);
+        map.put(_source,       Command.SOURCE);
+        map.put(_channel_up,   Command.CHANNEL_UP);
+        map.put(_channel_down, Command.CHANNEL_DOWN);
+        map.put(_volume_up,    Command.VOLUME_UP);
+        map.put(_volume_down,  Command.VOLUME_DOWN);
+        map.put(_up,           Command.UP);
+        map.put(_down,         Command.DOWN);
+        map.put(_left,         Command.LEFT);
+        map.put(_right,        Command.RIGHT);
+        map.put(_ok,           Command.ENTER);
+
+        // TODO note the mismatch? This likely has standardization implications
+        map.put(_return, Command.EXIT);
+        map.put(_menu,   Command.MENU);
+        map.put(_exit,   Command.EXIT);
+
+        // TODO standardization mismatch?
+        map.put(_tools, Command.DISPLAY);
+        map.put(_mute,  Command.MUTE);
+        map.put(_info,  Command.INFO);
+    }
+
+    private void assignNumberPadButtonAssociations(Map<Button, Command> map) {
+
+        map.put(one,   Command.ONE);
+        map.put(two,   Command.TWO);
+        map.put(three, Command.THREE);
+        map.put(four,  Command.FOUR);
+        map.put(five,  Command.FIVE);
+        map.put(six,   Command.SIX);
+        map.put(seven, Command.SEVEN);
+        map.put(eight, Command.EIGHT);
+        map.put(nine,  Command.NINE);
+        map.put(zero,  Command.ZERO);
+    }
+
+    private void delegateButtonOnClickListener(Button button, final Device device) {
+
+        // ensure the button has been registered with a Command
+        if (commandAssociations.containsKey(button)) {
+
+            final Command commandToBeIssued = commandAssociations.get(button);
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    device.handleCommand(commandToBeIssued);
+                }
+            });
+        }
+
+        else {
+            throw new RuntimeException(
+                    "DEVELOPER ERROR - trying to issue a command from a button not associated with a Command"
+            );
+        }
     }
 }

@@ -40,7 +40,7 @@ public class Device{//<C extends Command> {
     }
 
 
-    boolean handleCommand(Command command) {
+    public boolean handleCommand(Command command) {
         if (! commands.containsKey(command)) {
             System.err.printf("command '%s' not found for device %s%n", command, id);
             return false;
