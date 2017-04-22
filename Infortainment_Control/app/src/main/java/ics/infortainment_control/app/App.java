@@ -4,8 +4,8 @@ package ics.infortainment_control.app;
 import android.app.Application;
 import android.content.Context;
 
-import ics.infortainment_control.devices.Data.DBHelper;
-import ics.infortainment_control.devices.Data.DatabaseManager;
+import ics.infortainment_control.premier.backend.Data.DBHelper;
+import ics.infortainment_control.premier.backend.Data.DatabaseManager;
 
 
 public class  App extends Application {

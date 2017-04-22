@@ -1,8 +1,5 @@
-package ics.infortainment_control;
+package ics.infortainment_control.premier;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

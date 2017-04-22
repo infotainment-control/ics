@@ -17,15 +17,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ics.infortainment_control.ListViewAdapter;
-import ics.infortainment_control.Premiere;
-import ics.infortainment_control.PremieresController;
+import ics.infortainment_control.premier.ListViewAdapter;
+import ics.infortainment_control.premier.Premiere;
+import ics.infortainment_control.premier.PremieresController;
 import ics.infortainment_control.R;
 
-import static ics.infortainment_control.constants.FIRST_COLUMN;
-import static ics.infortainment_control.constants.FOURTH_COLUMN;
-import static ics.infortainment_control.constants.SECOND_COLUMN;
-import static ics.infortainment_control.constants.THIRD_COLUMN;
+import static ics.infortainment_control.premier.constants.FIRST_COLUMN;
+import static ics.infortainment_control.premier.constants.FOURTH_COLUMN;
+import static ics.infortainment_control.premier.constants.SECOND_COLUMN;
+import static ics.infortainment_control.premier.constants.THIRD_COLUMN;
 
 /**
  * Created by Jason on 3/5/2017.
