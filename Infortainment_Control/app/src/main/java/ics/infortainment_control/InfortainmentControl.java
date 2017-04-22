@@ -35,6 +35,8 @@ public class InfortainmentControl extends ActionBarActivity {
           issueHardCommand();
         }
 
+
+
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
 

@@ -20,7 +20,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     }
 
     @Override
-    public AbstractDevice registerDevice(String deviceName) {
+    public AbstractDevice registerDevice(String deviceName, Device device) {
         if (userDevices.containsKey(deviceName)) {
             return userDevices.get(deviceName);
         }
@@ -50,6 +50,12 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         return userDevices.get(deviceName);
     }
 
+    @Override
+    public void loadRegisteredDevices() {
+        // TODO this is the
+    }
+
+    // TODO move to DeviceManager
     private AbstractDevice createDevice(String deviceID) {
         AbstractDevice abstractDevice = new Device(deviceID);
 

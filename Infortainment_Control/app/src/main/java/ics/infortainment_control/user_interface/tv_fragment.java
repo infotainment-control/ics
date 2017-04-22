@@ -15,12 +15,9 @@ import java.util.Map;
 import ics.infortainment_control.R;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.devices.AbstractDevice;
-import ics.infortainment_control.devices.Device;
 import ics.infortainment_control.devices.DeviceManager;
-import ics.infortainment_control.commands.IRBlasterManager;
-import ics.infortainment_control.devices.DeviceRegistry;
-import ics.infortainment_control.devices.DeviceRegistryProvider;
-import ics.infortainment_control.devices.SimpleDeviceRegistryProvider;
+import ics.infortainment_control.devices.DeviceType;
+import ics.infortainment_control.devices.SimpleDeviceManager;
 
 public class tv_fragment extends Fragment {
 
@@ -63,24 +60,12 @@ public class tv_fragment extends Fragment {
     // TODO also: how to realize an enforcement strategy that Commands be of the DeviceType.TELEVISION subset?
     Map<Button, Command> commandAssociations;
 
-    // TODO define retrieval of this and set it up in onCreateView,
-    //      which is a perfect time for the fragment to poll the DeviceManager
     AbstractDevice activeTVDevice;
 
-    public DeviceManager deviceManager;
-    public IRBlasterManager irBlasterManager;
-
-    // TODO gray out the buttons that cannot be used because their commands are missing?
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        DeviceManager deviceManager = SimpleDeviceManager.getInstance();
 
-        // TODO define appropriately delegated retrieval
-        DeviceRegistryProvider registryProvider_SHOULD_NOT_BE_HERE = new SimpleDeviceRegistryProvider();
-        DeviceRegistry registry_SHOULD_NOT_BE_HERE = registryProvider_SHOULD_NOT_BE_HERE.getDeviceRegistry();
-
-        String         insigniaID = Device.createDeviceID("Insignia", "NS-32D312NA15|CUSTOM_SEARCH");
-        AbstractDevice insigniaTV = registry_SHOULD_NOT_BE_HERE.registerDevice(insigniaID);
-
-        activeTVDevice = insigniaTV;
+        activeTVDevice = deviceManager.getActiveDevice(DeviceType.TELEVISION);;
 
         // the map that links Buttons to the appropriate Command terms so the active TV Device may be delegated to
         // when handling the button press (which will issue its IR pronto hex code string to the IRBlasterManager)
