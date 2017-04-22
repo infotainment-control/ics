@@ -10,44 +10,44 @@ import ics.infortainment_control.commands.SimpleCodeProvider;
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
     // maps deviceID to Device object
-    private Map<String, Device> registry;
+    private Map<String, Device> userDevices;
 
     private CodeProvider codeProvider;
 
     public SimpleDeviceRegistry() {
-        registry = new HashMap<>();
+        userDevices = new HashMap<>();
         codeProvider = new SimpleCodeProvider();
     }
 
     @Override
-    public Device registerDevice(String deviceID) {
-        if (registry.containsKey(deviceID)) {
-            return registry.get(deviceID);
+    public Device registerDevice(String deviceName) {
+        if (userDevices.containsKey(deviceName)) {
+            return userDevices.get(deviceName);
         }
 
-        Device newDevice = createDevice(deviceID);
+        Device newDevice = createDevice(deviceName);
 
-        registry.put(deviceID, newDevice);
+        userDevices.put(deviceName, newDevice);
 
         return newDevice;
     }
 
     @Override
-    public Device removeDevice(String deviceID) {
-        return registry.remove(deviceID);
+    public Device removeDevice(String deviceName) {
+        return userDevices.remove(deviceName);
     }
 
     @Override
-    public boolean isInRegistry(String deviceID) {
-        return registry.containsKey(deviceID);
+    public boolean isInRegistry(String deviceName) {
+        return userDevices.containsKey(deviceName);
     }
 
     // TODO there are messy interface considerations here: shouldn't that be willing to register it if it isn't in there?
     //      and why is that implementation *specific* to the SimpleDeviceRegistry? There is more similarity here that's being
     //      tossed aside yet...
     @Override
-    public Device getDevice(String deviceID) {
-        return registry.get(deviceID);
+    public Device getDevice(String deviceName) {
+        return userDevices.get(deviceName);
     }
 
     private Device createDevice(String deviceID) {

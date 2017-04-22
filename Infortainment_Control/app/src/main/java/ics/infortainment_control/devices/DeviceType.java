@@ -17,7 +17,8 @@ public enum DeviceType {
     TELEVISION,
     CABLE_BOX,
     DVD_PLAYER,
-    // note: UNKNOWN devices, what
+    // note: UNKNOWN devices are special cases. they are only a state a Device maps to during
+    //       the user's device setup process while they try to identify the device they own
     UNKNOWN;
 
     private EnumSet<Command> commandSet;
