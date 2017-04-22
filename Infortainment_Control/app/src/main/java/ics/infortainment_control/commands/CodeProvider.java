@@ -24,7 +24,7 @@ public interface CodeProvider {
     Set<String> getAllDeviceIDsForBrand(String brand);
 
     /**
-     * Allows for setup of an unknown device of a known brand. The power command for each device manufatured
+     * Allows for setup of an unknown device of a known brand. The power command for each device manufactured
      * by the brand will be offered to the user, and if the user discovers it works, it will be a candidate
      * deviceID (a possibly accurate mapping of their physical device to an entry in the device database)
      *
@@ -35,8 +35,4 @@ public interface CodeProvider {
      * @return a map of deviceID -> Power type of command TODO note the difficulty in type hierarchy here...
      */
     Map<String, String> getAllPowerCommandsForBrand(String brand);
-    // TODO the above, getAllPowerCommandsForBrand(), will look something like...
-    // for each deviceID in getAllDeviceIDs(brandID),
-    //   map.put(deviceID, getCode(deviceID, TelevisionCommand.POWER)
-    // return map
 }
