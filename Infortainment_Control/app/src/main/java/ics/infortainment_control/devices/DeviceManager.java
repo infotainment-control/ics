@@ -23,7 +23,7 @@ public interface DeviceManager {
     //                to cross-reference the name arg against existing registered devices (check for equality)
 
     // adds the device to the registry
-    void createDevice(String deviceName, DeviceType deviceType);
+    void createDevice(String deviceName, String deviceID, DeviceType deviceType);
 
     // TODO delegate to the registry to retrieve all information a user needs
     //      about its registered UserDevices in order to interact with them

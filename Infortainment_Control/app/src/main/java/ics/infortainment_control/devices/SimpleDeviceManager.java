@@ -2,8 +2,11 @@ package ics.infortainment_control.devices;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import ics.infortainment_control.commands.CodeProvider;
+import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.SimpleCodeProvider;
 
 /**
@@ -49,9 +52,18 @@ public class SimpleDeviceManager implements DeviceManager {
 
     }
 
-    @Override
-    public void createDevice(String deviceName, DeviceType deviceType) {
 
+    @Override
+    public void createDevice(String deviceName, String deviceID, DeviceType deviceType) {
+        // TODO does the below commmented-out abstraction make sense? Or is this a jumbled, awful mess? :)
+        //AbstractDevice abstractDevice = new Device(deviceID);
+        Device device = new Device(deviceID);
+
+        Map<Command, String> deviceCodes = codeProvider.getCodes(deviceID);
+
+        device.setCommands(deviceCodes);
+
+        registry.registerDevice(deviceName, device);
     }
 
     @Override
@@ -59,10 +71,19 @@ public class SimpleDeviceManager implements DeviceManager {
         return null;
     }
 
+    // TODO this is rough stuff: these are devices! They should be abstracted......
     @Override
     public void loadDeviceRegistry() {
-        registry.loadRegisteredDevices();
+        Set<AbstractDevice> allDevices = registry.loadRegisteredDevices();
 
+        // with all devices created, the next step is provisioning them with command codes
+        for (AbstractDevice device : allDevices) {
+            String id = device.getID();
+
+            Map<Command, String> deviceCodes = codeProvider.getCodes(id);
+
+            device.setCommands(deviceCodes);
+        }
     }
 
 

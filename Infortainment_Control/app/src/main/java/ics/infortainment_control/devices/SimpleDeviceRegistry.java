@@ -1,7 +1,9 @@
 package ics.infortainment_control.devices;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -28,11 +30,11 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
             return userDevices.get(deviceName);
         }
 
-        AbstractDevice newAbstractDevice = createDevice(deviceName);
+        AbstractDevice abstractDevice = new UserDevice(deviceName, device);
 
-        userDevices.put(deviceName, newAbstractDevice);
+        userDevices.put(deviceName, abstractDevice);
 
-        return newAbstractDevice;
+        return abstractDevice;
     }
 
     @Override
@@ -52,18 +54,20 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
 
     @Override
     public Set<AbstractDevice> loadRegisteredDevices() {
-        // TODO load them! Statically, I mean! Like, the devices SimpleCodeProvider will accomodate
+        // TODO load them! Statically, I mean! Like, the devices SimpleCodeProvider will accommodate
         return new HashSet<>(userDevices.values());
     }
 
-    // TODO move to DeviceManager
-    private AbstractDevice createDevice(String deviceID) {
-        AbstractDevice abstractDevice = new Device(deviceID);
 
-        Map<Command, String> commands = codeProvider.getCodes(deviceID);
+    @Override
+    public List<UserDevice> getOrderedListOfUserDevices(DeviceType deviceType) {
+        List<UserDevice> userDeviceList = new ArrayList<>(userDevices.size());
 
-        abstractDevice.setCommands(commands);
-
-        return abstractDevice;
+        // TODO process the registry >:)
+        for(Map.Entry<String, AbstractDevice> entry : userDevices.entrySet()) {
+            // order them by DeviceType and active and date created
+        }
+        return null;
     }
+
 }
