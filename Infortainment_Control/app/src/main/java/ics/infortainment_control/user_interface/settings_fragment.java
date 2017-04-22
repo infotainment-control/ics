@@ -1,4 +1,4 @@
-package ics.infortainment_control;
+package ics.infortainment_control.user_interface;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.text.DecimalFormat;
+
+import ics.infortainment_control.R;
 
 /**
  * Created by Jason on 3/5/2017.

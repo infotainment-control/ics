@@ -9,6 +9,10 @@ import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
 import ics.infortainment_control.commands.IRBlasterManager;
+import ics.infortainment_control.user_interface.dvd_fragment;
+import ics.infortainment_control.user_interface.premieres_fragment;
+import ics.infortainment_control.user_interface.settings_fragment;
+import ics.infortainment_control.user_interface.tv_fragment;
 
 public class InfortainmentControl extends ActionBarActivity {
 

@@ -1,5 +1,7 @@
+package ics.infortainment_control;
+
+public class LocationUtilities {
 /*
-public  class LocationUtilities {
     Context c;
     public LocationUtilities(Context context) {
         c = context;
@@ -31,5 +33,6 @@ public  class LocationUtilities {
             return "44240"; 
         }
     }
-}
 */
+}
+

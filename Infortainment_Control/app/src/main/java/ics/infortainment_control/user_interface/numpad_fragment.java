@@ -1,4 +1,4 @@
-package ics.infortainment_control;
+package ics.infortainment_control.user_interface;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,6 +6,8 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+
+import ics.infortainment_control.R;
 
 /**
  * Created by Jason on 4/4/2017.

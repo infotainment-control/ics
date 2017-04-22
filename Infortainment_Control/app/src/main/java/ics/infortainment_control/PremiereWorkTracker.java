@@ -1,6 +1,5 @@
 package ics.infortainment_control;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -13,16 +12,18 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import ics.infortainment_control.user_interface.premieres_fragment;
+
 /**
  * Created by Hawkaloo on 4/19/2017.
  */
 
 public class PremiereWorkTracker {
 
-    private int runningTasks;
+    private       int                runningTasks;
     private final premieres_fragment fragment;
-    private final String filename;
-    private final Context context;
+    private final String             filename;
+    private final Context            context;
 
     private ArrayList<List<Premiere>> premiereList;
     private final int taskMax;

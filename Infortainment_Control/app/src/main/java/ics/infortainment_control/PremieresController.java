@@ -6,7 +6,6 @@ import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
@@ -14,11 +13,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
+
+import ics.infortainment_control.user_interface.premieres_fragment;
 
 /**
  * Created by Kevin Maul on 3/17/2017.
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class PremieresController extends AsyncTask<Void, Void, List<Premiere>> {
 
-    private Context context;
+    private Context            context;
     private premieres_fragment fragment;
 
     private static final int NUMBER_OF_TASKS = 3;

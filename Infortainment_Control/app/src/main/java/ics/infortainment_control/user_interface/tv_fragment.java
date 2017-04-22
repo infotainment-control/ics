@@ -1,4 +1,4 @@
-package ics.infortainment_control;
+package ics.infortainment_control.user_interface;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import java.util.HashMap;
 import java.util.Map;
 
+import ics.infortainment_control.R;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.devices.AbstractDevice;
 import ics.infortainment_control.devices.Device;
