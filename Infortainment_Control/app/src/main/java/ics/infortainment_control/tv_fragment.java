@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ics.infortainment_control.commands.Command;
+import ics.infortainment_control.devices.AbstractDevice;
 import ics.infortainment_control.devices.Device;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.commands.IRBlasterManager;
@@ -63,7 +64,7 @@ public class tv_fragment extends Fragment {
 
     // TODO define retrieval of this and set it up in onCreateView,
     //      which is a perfect time for the fragment to poll the DeviceManager
-    Device activeTVDevice;
+    AbstractDevice activeTVDevice;
 
     public DeviceManager deviceManager;
     public IRBlasterManager irBlasterManager;
@@ -75,8 +76,8 @@ public class tv_fragment extends Fragment {
         DeviceRegistryProvider registryProvider_SHOULD_NOT_BE_HERE = new SimpleDeviceRegistryProvider();
         DeviceRegistry registry_SHOULD_NOT_BE_HERE = registryProvider_SHOULD_NOT_BE_HERE.getDeviceRegistry();
 
-        String insigniaID = Device.createDeviceID("Insignia", "NS-32D312NA15|CUSTOM_SEARCH");
-        Device insigniaTV = registry_SHOULD_NOT_BE_HERE.registerDevice(insigniaID);
+        String         insigniaID = Device.createDeviceID("Insignia", "NS-32D312NA15|CUSTOM_SEARCH");
+        AbstractDevice insigniaTV = registry_SHOULD_NOT_BE_HERE.registerDevice(insigniaID);
 
         activeTVDevice = insigniaTV;
 
@@ -238,10 +239,10 @@ public class tv_fragment extends Fragment {
 
     /**
      * Delegates issuing an infrared Command to the active television Device
-     * @param button - "I will take the infrared wavelength to Mordor......... But I do not know the way."
+     * @param button - "I will take it! I will take the infrared wavelength to Mordor... But I do not know the way."
      * @param device - "I will help you bear this burden, button."
      */
-    private void delegateButtonOnClickListener(Button button, final Device device) {
+    private void delegateButtonOnClickListener(Button button, final AbstractDevice device) {
         // ensure the button has been registered with a Command
         if (commandAssociations.containsKey(button)) {
             final Command commandToBeIssued = commandAssociations.get(button);

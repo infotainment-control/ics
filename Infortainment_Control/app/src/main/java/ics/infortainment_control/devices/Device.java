@@ -6,7 +6,7 @@ import java.util.Map;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.IRBlasterManager;
 
-public class Device {
+public class Device implements AbstractDevice {
 
     private String id;
     private DeviceType type;
@@ -40,6 +40,7 @@ public class Device {
         commands = new HashMap<>();
     }
 
+    @Override
     public boolean handleCommand(Command command) {
         if (! knowsCommand(command)) {
             System.err.printf("command '%s' not found for device %s%n", command, id);
@@ -54,14 +55,17 @@ public class Device {
 
     }
 
+    @Override
     public boolean knowsCommand(Command command) {
         return commands.containsKey(command);
     }
 
+    @Override
     public String getID() {
         return id;
     }
 
+    @Override
     public void setCommands(Map<Command, String> commands) {
         this.commands = commands;
     }

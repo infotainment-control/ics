@@ -1,10 +1,6 @@
 package ics.infortainment_control.devices;
 
 import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
-
-import ics.infortainment_control.commands.CodeProvider;
 
 /**
  *  A class to control use of Devices.
@@ -16,7 +12,7 @@ public class SimpleDeviceManager implements DeviceManager {
     // TODO enough indirection for you??? WELL????
     private static final DeviceRegistry registry = new SimpleDeviceRegistry();
 
-    private static EnumMap<DeviceType, Device> activeDevices = new EnumMap<>(DeviceType.class);
+    private static EnumMap<DeviceType, AbstractDevice> activeDevices = new EnumMap<>(DeviceType.class);
 
     // static block that
     // TODO this calls into question all sorts of issues: ought Devices know what type they are all over?
@@ -38,7 +34,7 @@ public class SimpleDeviceManager implements DeviceManager {
     }
 
     @Override
-    public Device getActiveDevice() {
+    public AbstractDevice getActiveDevice() {
         return null;
     }
 
@@ -47,7 +43,7 @@ public class SimpleDeviceManager implements DeviceManager {
     }
 
     @Override
-    public void setActiveDevice(Device device) {
+    public void setActiveDevice(AbstractDevice abstractDevice) {
 
     }
 

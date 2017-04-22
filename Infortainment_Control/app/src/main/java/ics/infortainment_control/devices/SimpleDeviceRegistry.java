@@ -10,7 +10,7 @@ import ics.infortainment_control.commands.SimpleCodeProvider;
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
     // maps deviceID to Device object
-    private Map<String, Device> userDevices;
+    private Map<String, AbstractDevice> userDevices;
 
     private CodeProvider codeProvider;
 
@@ -20,20 +20,20 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     }
 
     @Override
-    public Device registerDevice(String deviceName) {
+    public AbstractDevice registerDevice(String deviceName) {
         if (userDevices.containsKey(deviceName)) {
             return userDevices.get(deviceName);
         }
 
-        Device newDevice = createDevice(deviceName);
+        AbstractDevice newAbstractDevice = createDevice(deviceName);
 
-        userDevices.put(deviceName, newDevice);
+        userDevices.put(deviceName, newAbstractDevice);
 
-        return newDevice;
+        return newAbstractDevice;
     }
 
     @Override
-    public Device removeDevice(String deviceName) {
+    public AbstractDevice removeDevice(String deviceName) {
         return userDevices.remove(deviceName);
     }
 
@@ -46,17 +46,17 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     //      and why is that implementation *specific* to the SimpleDeviceRegistry? There is more similarity here that's being
     //      tossed aside yet...
     @Override
-    public Device getDevice(String deviceName) {
+    public AbstractDevice getDevice(String deviceName) {
         return userDevices.get(deviceName);
     }
 
-    private Device createDevice(String deviceID) {
-        Device device = new Device(deviceID);
+    private AbstractDevice createDevice(String deviceID) {
+        AbstractDevice abstractDevice = new Device(deviceID);
 
         Map<Command, String> commands = codeProvider.getCodes(deviceID);
 
-        device.setCommands(commands);
+        abstractDevice.setCommands(commands);
 
-        return device;
+        return abstractDevice;
     }
 }
