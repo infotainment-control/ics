@@ -10,8 +10,8 @@ import ics.infortainment_control.devices.Device;
 /**
  *  Provides hard-coded command codes, suitable for development, debugging, and testing.
  */
+// TODO ought to be a lazily instantiated singleton
 public class SimpleCodeProvider implements CodeProvider {
-
     // TODO I recall this needing an extra level to represent brand queries
     private static Map<String, Map<Command, String>> deviceCodesMap;
 

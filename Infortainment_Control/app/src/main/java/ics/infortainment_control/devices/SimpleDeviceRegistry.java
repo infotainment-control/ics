@@ -1,12 +1,15 @@
 package ics.infortainment_control.devices;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import ics.infortainment_control.commands.CodeProvider;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.SimpleCodeProvider;
 
+// TODO ought to be a lazily instantiated singleton
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
     // maps deviceID to Device object
@@ -42,17 +45,15 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         return userDevices.containsKey(deviceName);
     }
 
-    // TODO there are messy interface considerations here: shouldn't that be willing to register it if it isn't in there?
-    //      and why is that implementation *specific* to the SimpleDeviceRegistry? There is more similarity here that's being
-    //      tossed aside yet...
     @Override
     public AbstractDevice getDevice(String deviceName) {
         return userDevices.get(deviceName);
     }
 
     @Override
-    public void loadRegisteredDevices() {
-        // TODO this is the
+    public Set<AbstractDevice> loadRegisteredDevices() {
+        // TODO load them! Statically, I mean! Like, the devices SimpleCodeProvider will accomodate
+        return new HashSet<>(userDevices.values());
     }
 
     // TODO move to DeviceManager

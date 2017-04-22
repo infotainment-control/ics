@@ -1,14 +1,14 @@
 package ics.infortainment_control.devices;
 
+import java.util.Set;
 
-public interface DeviceRegistry {
+interface DeviceRegistry {
 
     /**
-     * TODO this description is no longer valid
-     * Creates a device, stores it in the registry, and makes the device active. TODO a bit much, eh?
+     * Uses the device to create a UserDevice and put that UserDevice, mapped to its name, into the registry
      *
-     * @param deviceName a manufacturer+model pair that uniquely identifies a device
-     * @return the device created during the registration process
+     * @param deviceName
+     * @return the UserDevice(????) TODO check if it ought to be created during the registration process
      */
     AbstractDevice registerDevice(String deviceName, Device device);
 
@@ -25,12 +25,15 @@ public interface DeviceRegistry {
     /**
      * Retrieves a device from the registry (typically to reference it as the new active device for its DeviceType)
      * @param deviceName
-     * @return the device referenced by the deviceID, or null if it does not exist TODO invalid DeviceIDs?
+     * @return the device referenced by the deviceID, or null if it does not exist
      */
     AbstractDevice getDevice(String deviceName);
 
     /**
-     * Pulls all registered devices into the registry.
+     * Pulls all registered devices into the registry and offers them.
+     *
+     * This will be used by DeviceManagers who ought to delegate code provision for each device
+     * with whatever CodeProvider implementation they deem fit.
      */
-    void loadRegisteredDevices();
+    Set<AbstractDevice> loadRegisteredDevices();
 }
