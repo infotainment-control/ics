@@ -13,6 +13,7 @@ import java.util.Set;
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
     // associates a UserDevice's name to its Device interface
+    // TODO how, if not at the Registry, will *anyone* know the UserDevice information needed to use the Devices?
     private static Map<String, AbstractDevice> userDevices;
 
     static {
@@ -91,6 +92,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         return userDevices.get(deviceName);
     }
 
+    // TODO a bit disingenuous, this implementation...
     @Override
     public Set<AbstractDevice> loadRegisteredDevices() {
         return new HashSet<>(userDevices.values());
@@ -108,4 +110,16 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         return null;
     }
 
+    // TODO consider building into the interface and exposing via that
+    // TODO also --- make it less of a hack, in that case!
+    public AbstractDevice getActiveDevice(DeviceType deviceType) {
+        switch(deviceType) {
+            case DVD_PLAYER:
+                return userDevices.get("my_LG_dvdplayer");
+            case TELEVISION:
+                return userDevices.get("my_Insignia_TV");
+            default:
+                return null;
+        }
+    }
 }

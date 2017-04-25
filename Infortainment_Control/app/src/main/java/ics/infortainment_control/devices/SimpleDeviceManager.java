@@ -19,16 +19,34 @@ public class SimpleDeviceManager implements DeviceManager {
 
     private static SimpleDeviceManager INSTANCE;
 
-    private SimpleDeviceManager() {
-        registry     = new SimpleDeviceRegistry();
-        codeProvider = new SimpleCodeProvider();
+    private static EnumMap<DeviceType, AbstractDevice> activeDevices;
 
+    private SimpleDeviceManager() {
+        registry      = new SimpleDeviceRegistry();
+        codeProvider  = new SimpleCodeProvider();
+        activeDevices = new EnumMap<>(DeviceType.class);
+
+        // fetch all devices from the registry
         Set<AbstractDevice> devices = registry.loadRegisteredDevices();
+
+        // for each device, instantiate its Command codes using the codeProvider
         for(AbstractDevice device : devices) {
             Map<Command, String> commands = codeProvider.getCodes(device.getID());
             device.setCommands(commands);
         }
-        // TODO construct roster ("activeDevices")
+
+        DeviceType dvd = DeviceType.DVD_PLAYER;
+        DeviceType tv  = DeviceType.TELEVISION;
+
+        // surely this is awful, and you know it
+        activeDevices.put(dvd, null);
+        activeDevices.put(tv,  null);
+
+        for(DeviceType typeOfDevice : activeDevices.keySet()) {
+            // TODO see the todo of the SimpleDeviceRegistry for thougts about this responsibility
+            AbstractDevice activeDevice = ((SimpleDeviceRegistry) registry).getActiveDevice(typeOfDevice);
+            activeDevices.put(typeOfDevice, activeDevice);
+        }
     }
 
     public static DeviceManager getInstance() {
@@ -38,23 +56,9 @@ public class SimpleDeviceManager implements DeviceManager {
         return INSTANCE;
     }
 
-
-    // TODO this represents the roster class, so that should get pulled out eventually
-    private static EnumMap<DeviceType, AbstractDevice> activeDevices = new EnumMap<>(DeviceType.class);
-
-    // static block that
-    // TODO this calls into question all sorts of issues: ought Devices know what type they are all over?
-    //      Or ought there be a really damn big, fundamental distinction between Device and UserDevice,
-    //      where a user's assertions truly make a clarification...
-    static {
-        for (DeviceType deviceType :
-             DeviceType.values() ) {
-        }
-    }
-
     @Override
     public AbstractDevice getActiveDevice(DeviceType deviceType) {
-        return null;
+        return activeDevices.get(deviceType);
     }
 
     @Override
