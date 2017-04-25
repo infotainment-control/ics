@@ -9,6 +9,10 @@ import ics.infortainment_control.commands.IRBlasterManager;
 public class Device implements AbstractDevice {
 
     private String id;
+
+    // TODO strongly consider eliminating this, in favor of positioning it in the elevated, wrapping UserDevice class
+    // (this class, for instance, may be free to gather up any and all Commands it finds, but the UserDevice class
+    //  would then only expose Commands in accordance with its DeviceType)
     private DeviceType type;
 
     private Map<Command, String> commands;

@@ -5,8 +5,6 @@ package ics.infortainment_control.commands;
  */
 public enum Command {
 
-    //TODO fill out names/descriptions
-
     CHANNEL_DOWN ("channel down", "decrements the device channel tuned in to"         ),
     CHANNEL_UP   ("channel up",   "increments the device channel tuned in to"         ),
     DISPLAY      ("",             ""                                                  ),

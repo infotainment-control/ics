@@ -7,9 +7,14 @@ import ics.infortainment_control.commands.Command;
 
 public class UserDevice implements AbstractDevice {
 
-    private Device device;
-    private String name;
-    private Date   dateAdded;
+    // TODO consider modifying to be the AbstractDevice within? I don't know if it's necessary, but it doesn't seem harmful
+    private Device  device;
+    private String  name;
+    private Date    dateAdded;
+
+    // TODO fields that are a bit more challenging to deal with, so assess and integrate
+    private boolean    active;
+    private DeviceType type;
 
     public UserDevice(String name, Device device) {
         this.device = device;
@@ -23,6 +28,22 @@ public class UserDevice implements AbstractDevice {
 
     public Date getDateCreated() {
         return dateAdded;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public DeviceType getType() {
+        return type;
+    }
+
+    public void setType(DeviceType type) {
+        this.type = type;
     }
 
     @Override

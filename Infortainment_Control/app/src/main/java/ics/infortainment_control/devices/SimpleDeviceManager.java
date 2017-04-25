@@ -14,9 +14,22 @@ import ics.infortainment_control.commands.SimpleCodeProvider;
  */
 public class SimpleDeviceManager implements DeviceManager {
 
+    private static DeviceRegistry registry;
+    private static CodeProvider   codeProvider;
+
     private static SimpleDeviceManager INSTANCE;
 
-    private SimpleDeviceManager() {}
+    private SimpleDeviceManager() {
+        registry     = new SimpleDeviceRegistry();
+        codeProvider = new SimpleCodeProvider();
+
+        Set<AbstractDevice> devices = registry.loadRegisteredDevices();
+        for(AbstractDevice device : devices) {
+            Map<Command, String> commands = codeProvider.getCodes(device.getID());
+            device.setCommands(commands);
+        }
+        // TODO any information on
+    }
 
     public static DeviceManager getInstance() {
         if (INSTANCE == null) {
@@ -24,9 +37,6 @@ public class SimpleDeviceManager implements DeviceManager {
         }
         return INSTANCE;
     }
-
-    private static final DeviceRegistry registry     = new SimpleDeviceRegistry();
-    private static final CodeProvider   codeProvider = new SimpleCodeProvider();
 
 
     // TODO this represents the roster class, so that should get pulled out eventually

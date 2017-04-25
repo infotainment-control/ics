@@ -7,25 +7,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import ics.infortainment_control.commands.CodeProvider;
-import ics.infortainment_control.commands.Command;
-import ics.infortainment_control.commands.SimpleCodeProvider;
-
 // TODO ought to be a lazily instantiated singleton
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
-    // maps deviceID to Device object
+    // associates a UserDevice's name to its Device interface
     private Map<String, AbstractDevice> userDevices;
 
-    private CodeProvider codeProvider;
-
-    public SimpleDeviceRegistry() {
-        userDevices = new HashMap<>();
-        codeProvider = new SimpleCodeProvider();
+    SimpleDeviceRegistry() {
+        userDevices  = new HashMap<>();
     }
 
     @Override
     public AbstractDevice registerDevice(String deviceName, Device device) {
+        // TODO this may be an error condition
         if (userDevices.containsKey(deviceName)) {
             return userDevices.get(deviceName);
         }

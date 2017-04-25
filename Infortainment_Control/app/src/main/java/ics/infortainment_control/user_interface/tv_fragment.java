@@ -65,7 +65,7 @@ public class tv_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DeviceManager deviceManager = SimpleDeviceManager.getInstance();
 
-        activeTVDevice = deviceManager.getActiveDevice(DeviceType.TELEVISION);;
+        activeTVDevice = deviceManager.getActiveDevice(DeviceType.TELEVISION);
 
         // the map that links Buttons to the appropriate Command terms so the active TV Device may be delegated to
         // when handling the button press (which will issue its IR pronto hex code string to the IRBlasterManager)
