@@ -61,9 +61,18 @@ public class SimpleDeviceManager implements DeviceManager {
         return activeDevices.get(deviceType);
     }
 
+    // TODO the constant casting brings into question the appropriateness of the abstraction
     @Override
     public void setActiveDevice(AbstractDevice abstractDevice) {
+        DeviceType type = ((UserDevice)abstractDevice).getType();
 
+        ((UserDevice)abstractDevice).setActive(true);
+
+        AbstractDevice previous = activeDevices.put(type, abstractDevice);
+        if( previous != null ) {
+            ((UserDevice)abstractDevice).setActive(false);
+            // TODO notify interested parties (the registry, perhaps?)
+        }
     }
 
 

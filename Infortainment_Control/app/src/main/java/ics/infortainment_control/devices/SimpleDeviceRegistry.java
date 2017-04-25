@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ics.infortainment_control.user_interface.settings_fragment;
+
 // TODO ought to be a lazily instantiated singleton
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
@@ -39,7 +41,8 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         String     Insignia_TV_Name    = "my_Insignia_TV";
         String     Insignia_TV_ID      = "2114";
         DeviceType Insignia_TV_Type    = DeviceType.TELEVISION;
-        boolean    Insignia_TV_Active  = true;
+        //boolean    Insignia_TV_Active  = true;
+        boolean    Insignia_TV_Active  = false;
         Date Insignia_TV_Creation_Date = new Date();
 
         try {
@@ -54,9 +57,26 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         Insignia_TV.setDateAdded(Insignia_TV_Creation_Date);
 
         // TODO save Samsung_TV for a hard-coded triggering of the device registration process, eh?
+        String     Samsung_TV_Name    = "my_Samsung_TV";
+        String     Samsung_TV_ID      = "1557";
+        DeviceType Samsung_TV_Type    = DeviceType.TELEVISION;
+        boolean    Samsung_TV_Active  = true;
+        Date Samsung_TV_Creation_Date = new Date();
+
+        try {
+            Samsung_TV_Creation_Date= UserDevice.USER_DEVICE_DATE_FORMAT.parse("2017-04-25_05:21:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        UserDevice Samsung_TV = new UserDevice(Samsung_TV_Name, new Device(Samsung_TV_ID));
+        Samsung_TV.setActive(Samsung_TV_Active);
+        Samsung_TV.setType(Samsung_TV_Type);
+        Samsung_TV.setDateAdded(Samsung_TV_Creation_Date);
 
         userDevices.put(LG_DVD_Name,      LG_DVD);
         userDevices.put(Insignia_TV_Name, Insignia_TV);
+        userDevices.put(Samsung_TV_Name, Samsung_TV);
     }
 
     SimpleDeviceRegistry() {}
@@ -93,6 +113,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     // TODO a bit disingenuous, this implementation...
     @Override
     public Set<AbstractDevice> loadRegisteredDevices() {
+        settings_fragment.devices = userDevices.values();
         return new HashSet<>(userDevices.values());
     }
 
@@ -110,14 +131,13 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
 
     // TODO consider building into the interface and exposing via that
     // TODO also --- make it less of a hack, in that case!
-    public AbstractDevice getActiveDevice(DeviceType deviceType) {
-        switch(deviceType) {
-            case DVD_PLAYER:
-                return userDevices.get("my_LG_dvdplayer");
-            case TELEVISION:
-                return userDevices.get("my_Insignia_TV");
-            default:
-                return null;
+    AbstractDevice getActiveDevice(DeviceType deviceType) {
+        for(AbstractDevice device : userDevices.values()) {
+            if(((UserDevice) device).getType() == deviceType
+                    && ((UserDevice) device).isActive()) {
+                return device;
+            }
         }
+        return null;
     }
 }
