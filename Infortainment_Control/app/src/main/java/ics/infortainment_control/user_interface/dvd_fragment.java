@@ -9,13 +9,15 @@ import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ics.infortainment_control.R;
-
-/**
- * Created by Jason on 3/5/2017.
- */
-
-
+import ics.infortainment_control.commands.Command;
+import ics.infortainment_control.devices.AbstractDevice;
+import ics.infortainment_control.devices.DeviceManager;
+import ics.infortainment_control.devices.DeviceType;
+import ics.infortainment_control.devices.SimpleDeviceManager;
 
 public class dvd_fragment extends Fragment {
 
@@ -34,12 +36,22 @@ public class dvd_fragment extends Fragment {
     Button _menu;
     Button _fastforward;
     Button _display;
-    Button _numpad;
     Button _mute;
     Button _rewind;
     Button _audio;
 
+    // TODO check what's up here
+    Button _numpad;
+
+    Map<Button, Command> commandAssociations;
+
+    AbstractDevice activeDVDDevice;
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        DeviceManager deviceManager = SimpleDeviceManager.getInstance();
+
+        activeDVDDevice = deviceManager.getActiveDevice(DeviceType.DVD_PLAYER);
+
         View v = inflater.inflate(R.layout.dvd_layout,container,false);
 
         // tie display resources to java objects
@@ -63,102 +75,10 @@ public class dvd_fragment extends Fragment {
         _next = (Button) v.findViewById(R.id.next_btn);
         _audio = (Button) v.findViewById(R.id.audio_btn);
 
-        // event listeners
-        _power.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                }
-            });
+        commandAssociations = new HashMap<>(18);
 
-        _topmenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _stop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _play.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _prev.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _up.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _down.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _left.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _right.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _return.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _menu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _fastforward.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _display.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _mute.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
-
-        _fastforward.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view){
-                }
-            });
+        // associate buttons with Commands
+        assignButtonAssociations(commandAssociations);
 
         _numpad.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -192,76 +112,6 @@ public class dvd_fragment extends Fragment {
                     zero = (Button) dialogView.findViewById(R.id.zero);
                     return_btn = (Button) dialogView.findViewById(R.id.return_btn);
 
-                    one.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view){
-
-                        }
-                    }
-                    );
-                    two.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    three.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    four.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    five.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    six.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    seven.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    eight.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    nine.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
-                    zero.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view){
-
-                            }
-                        }
-                    );
                     return_btn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view){
@@ -272,15 +122,80 @@ public class dvd_fragment extends Fragment {
 
                     numpadDialog.show();
                 }
-            });
-
-        _audio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-            }
         });
+
+        // delegate button command issuance to active TV device
+        delegateButtonOnClickListener(_audio,       activeDVDDevice);
+        delegateButtonOnClickListener(_rewind,      activeDVDDevice);
+        delegateButtonOnClickListener(_display,     activeDVDDevice);
+        delegateButtonOnClickListener(_fastforward, activeDVDDevice);
+        delegateButtonOnClickListener(_stop,        activeDVDDevice);
+        delegateButtonOnClickListener(_play,        activeDVDDevice);
+        delegateButtonOnClickListener(_prev,        activeDVDDevice);
+        delegateButtonOnClickListener(_next,        activeDVDDevice);
+        delegateButtonOnClickListener(_power,       activeDVDDevice);
+        delegateButtonOnClickListener(_up,          activeDVDDevice);
+        delegateButtonOnClickListener(_down,        activeDVDDevice);
+        delegateButtonOnClickListener(_left,        activeDVDDevice);
+        delegateButtonOnClickListener(_right,       activeDVDDevice);
+        delegateButtonOnClickListener(_ok,          activeDVDDevice);
+        delegateButtonOnClickListener(_return,      activeDVDDevice);
+        delegateButtonOnClickListener(_menu,        activeDVDDevice);
+        delegateButtonOnClickListener(_mute,        activeDVDDevice);
 
 
         return v;
+    }
+
+    private void assignButtonAssociations(Map<Button, Command> map) {
+        map.put(_audio, Command.AUDIO);
+        map.put(_rewind, Command.REWIND);
+        map.put(_mute, Command.MUTE);
+        map.put(_display, Command.DISPLAY);
+        map.put(_fastforward, Command.FASTFORWARD);
+        map.put(_menu, Command.MENU);
+        map.put(_return, Command.EXIT);
+        map.put(_ok, Command.ENTER);
+        map.put(_right, Command.RIGHT);
+        map.put(_left, Command.LEFT);
+        map.put(_up, Command.UP);
+        map.put(_down, Command.DOWN);
+        map.put(_stop, Command.PAUSE); // TODO this is blantant hacking of the map!
+        map.put(_topmenu, Command.EJECT);  // TODO this is *also* blantant hacking of the map!
+        map.put(_play, Command.PLAY);
+        map.put(_power, Command.POWER);
+        map.put(_prev, Command.REVERSE_STEP);
+        map.put(_next, Command.FORWARD_STEP);
+    }
+
+    /**
+     * Delegates issuing an infrared Command to the active television Device
+     * @param button - "I will take it! I will take the infrared wavelength to Mordor... But I do not know the way."
+     * @param device - "I will help you bear this burden, button."
+     */
+    private void delegateButtonOnClickListener(Button button, final AbstractDevice device) {
+        // ensure the button has been registered with a Command
+        if (commandAssociations.containsKey(button)) {
+            final Command commandToBeIssued = commandAssociations.get(button);
+
+            if (! device.knowsCommand(commandToBeIssued)) {
+                // TODO [developer guts]
+                button.setEnabled(false);
+            } else {
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        device.handleCommand(commandToBeIssued);
+                    }
+                });
+            }
+        }
+
+        else {
+            throw new RuntimeException(
+                    // TODO [developer guts]
+                    "DEVELOPER ERROR - trying to issue a command from a button not associated with a Command"
+            );
+        }
     }
 }

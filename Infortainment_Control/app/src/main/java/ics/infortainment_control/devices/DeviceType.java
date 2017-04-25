@@ -102,6 +102,7 @@ public enum DeviceType {
         );
 
         DVD_PLAYER.commandSet = EnumSet.of(
+                Command.AUDIO,
                 Command.DISPLAY,
                 Command.DOWN,
                 Command.EIGHT,
