@@ -28,7 +28,7 @@ public class SimpleDeviceManager implements DeviceManager {
             Map<Command, String> commands = codeProvider.getCodes(device.getID());
             device.setCommands(commands);
         }
-        // TODO any information on
+        // TODO construct roster ("activeDevices")
     }
 
     public static DeviceManager getInstance() {

@@ -1,16 +1,21 @@
 package ics.infortainment_control.devices;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 import ics.infortainment_control.commands.Command;
 
 public class UserDevice implements AbstractDevice {
 
+    public static final SimpleDateFormat USER_DEVICE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.US);
+
     // TODO consider modifying to be the AbstractDevice within? I don't know if it's necessary, but it doesn't seem harmful
     private Device  device;
     private String  name;
-    private Date    dateAdded;
+
+    private Date dateAdded;
 
     // TODO fields that are a bit more challenging to deal with, so assess and integrate
     private boolean    active;
@@ -26,10 +31,14 @@ public class UserDevice implements AbstractDevice {
         return name;
     }
 
-    public Date getDateCreated() {
+
+    public Date getDateAdded() {
         return dateAdded;
     }
 
+    public void setDateAdded(Date dateAdded) {
+        this.dateAdded = dateAdded;
+    }
     public boolean isActive() {
         return active;
     }

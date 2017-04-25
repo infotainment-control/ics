@@ -1,6 +1,8 @@
 package ics.infortainment_control.devices;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +13,50 @@ import java.util.Set;
 public class SimpleDeviceRegistry implements DeviceRegistry {
 
     // associates a UserDevice's name to its Device interface
-    private Map<String, AbstractDevice> userDevices;
+    private static Map<String, AbstractDevice> userDevices;
+
+    static {
+        userDevices = new HashMap<>(3);
+
+        String     LG_DVD_Name    = "my_LG_dvdplayer";
+        String     LG_DVD_ID      = "635";
+        DeviceType LG_DVD_Type    = DeviceType.DVD_PLAYER;
+        boolean    LG_DVD_Active  = true;
+        Date LG_DVD_Creation_Date = new Date();
+
+        try {
+            LG_DVD_Creation_Date = UserDevice.USER_DEVICE_DATE_FORMAT.parse("2017-04-22_15:21:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        UserDevice LG_DVD = new UserDevice(LG_DVD_Name, new Device(LG_DVD_ID));
+        LG_DVD.setActive(LG_DVD_Active);
+        LG_DVD.setType(LG_DVD_Type);
+        LG_DVD.setDateAdded(LG_DVD_Creation_Date);
+
+        String     Insignia_TV_Name    = "my_Insignia_TV";
+        String     Insignia_TV_ID      = "2114";
+        DeviceType Insignia_TV_Type    = DeviceType.TELEVISION;
+        boolean    Insignia_TV_Active  = true;
+        Date Insignia_TV_Creation_Date = new Date();
+
+        try {
+            Insignia_TV_Creation_Date= UserDevice.USER_DEVICE_DATE_FORMAT.parse("2017-04-22_15:21:10");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        UserDevice Insignia_TV = new UserDevice(Insignia_TV_Name, new Device(Insignia_TV_ID));
+        Insignia_TV.setActive(Insignia_TV_Active);
+        Insignia_TV.setType(Insignia_TV_Type);
+        Insignia_TV.setDateAdded(Insignia_TV_Creation_Date);
+
+        // TODO save Samsung_TV for a hard-coded triggering of the device registration process, eh?
+
+        userDevices.put(LG_DVD_Name,      LG_DVD);
+        userDevices.put(Insignia_TV_Name, Insignia_TV);
+    }
 
     SimpleDeviceRegistry() {
         userDevices  = new HashMap<>();
@@ -48,7 +93,6 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
 
     @Override
     public Set<AbstractDevice> loadRegisteredDevices() {
-        // TODO load them! Statically, I mean! Like, the devices SimpleCodeProvider will accommodate
         return new HashSet<>(userDevices.values());
     }
 
