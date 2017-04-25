@@ -59,9 +59,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         userDevices.put(Insignia_TV_Name, Insignia_TV);
     }
 
-    SimpleDeviceRegistry() {
-        userDevices  = new HashMap<>();
-    }
+    SimpleDeviceRegistry() {}
 
     @Override
     public AbstractDevice registerDevice(String deviceName, Device device) {

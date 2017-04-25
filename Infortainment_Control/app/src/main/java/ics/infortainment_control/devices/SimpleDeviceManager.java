@@ -43,7 +43,7 @@ public class SimpleDeviceManager implements DeviceManager {
         activeDevices.put(tv,  null);
 
         for(DeviceType typeOfDevice : activeDevices.keySet()) {
-            // TODO see the todo of the SimpleDeviceRegistry for thougts about this responsibility
+            // TODO see the todo of the SimpleDeviceRegistry for thoughts about this responsibility
             AbstractDevice activeDevice = ((SimpleDeviceRegistry) registry).getActiveDevice(typeOfDevice);
             activeDevices.put(typeOfDevice, activeDevice);
         }
