@@ -61,6 +61,14 @@ public class DatabaseInteraction extends AppCompatActivity {
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+//
+//        List itemIds = new ArrayList<>();
+//        while(cursor.moveToNext()) {
+//            long itemId = cursor.getLong(
+//                    cursor.getColumnIndexOrThrow(FeedEntry._ID));
+//            itemIds.add(itemId);
+//        }
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         //final TextView text = (TextView) findViewById(R.id.my_text_field);
