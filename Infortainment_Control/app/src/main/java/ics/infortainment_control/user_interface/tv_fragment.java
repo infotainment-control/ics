@@ -8,6 +8,7 @@ import android.view.View;
 import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ import ics.infortainment_control.devices.BackendDeviceManager;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.devices.DeviceType;
 import ics.infortainment_control.devices.SimpleDeviceManager;
+import ics.infortainment_control.devices.UserDevice;
 
 public class tv_fragment extends Fragment {
 
@@ -77,6 +79,9 @@ public class tv_fragment extends Fragment {
 
         // tie display resources to java objects
         View v = inflater.inflate(R.layout.tv_layout,container,false);
+
+        TextView activeDevice = (TextView) v.findViewById(R.id.activeDeviceTextView);
+        activeDevice.setText(((UserDevice)activeTVDevice).getName());
 
         _power = (Button) v.findViewById(R.id.power_btn);
         _source = (Button) v.findViewById(R.id.source_btn);

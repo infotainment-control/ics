@@ -16,6 +16,7 @@ import java.util.List;
 
 import ics.infortainment_control.R;
 import ics.infortainment_control.devices.AbstractDevice;
+import ics.infortainment_control.devices.BackendDeviceManager;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.devices.DeviceType;
 import ics.infortainment_control.devices.SimpleDeviceManager;
@@ -66,7 +67,7 @@ public class settings_fragment extends Fragment {
     }
 
     private void toggleTelevisions() {
-        DeviceManager manager = SimpleDeviceManager.getInstance();
+        DeviceManager manager = BackendDeviceManager.getInstance();
 
         AbstractDevice activeTelevision = manager.getActiveDevice(DeviceType.TELEVISION);
 
