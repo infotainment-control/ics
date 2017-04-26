@@ -1,8 +1,13 @@
 package ics.infortainment_control.devices;
 
+import android.support.v7.util.SortedList;
+import android.util.Log;
+
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,12 +18,18 @@ import ics.infortainment_control.user_interface.settings_fragment;
 
 // TODO ought to be a lazily instantiated singleton
 public class SimpleDeviceRegistry implements DeviceRegistry {
+    private static final String TAG = "[SD_REGISTRY]";
+
+    private static void log(String message) { Log.d(TAG, message); }
 
     // associates a UserDevice's name to its Device interface
     // TODO how, if not at the Registry, will *anyone* know the UserDevice information needed to use the Devices?
     private static Map<String, AbstractDevice> userDevices;
 
+    private static EnumMap<DeviceType, List<UserDevice>> registry;
+
     static {
+
         userDevices = new HashMap<>(3);
 
         String     LG_DVD_Name    = "my_LG_dvdplayer";
@@ -41,7 +52,6 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         String     Insignia_TV_Name    = "my_Insignia_TV";
         String     Insignia_TV_ID      = "2114";
         DeviceType Insignia_TV_Type    = DeviceType.TELEVISION;
-        //boolean    Insignia_TV_Active  = true;
         boolean    Insignia_TV_Active  = false;
         Date Insignia_TV_Creation_Date = new Date();
 
@@ -56,7 +66,6 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
         Insignia_TV.setType(Insignia_TV_Type);
         Insignia_TV.setDateAdded(Insignia_TV_Creation_Date);
 
-        // TODO save Samsung_TV for a hard-coded triggering of the device registration process, eh?
         String     Samsung_TV_Name    = "my_Samsung_TV";
         String     Samsung_TV_ID      = "1557";
         DeviceType Samsung_TV_Type    = DeviceType.TELEVISION;
@@ -76,16 +85,40 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
 
         userDevices.put(LG_DVD_Name,      LG_DVD);
         userDevices.put(Insignia_TV_Name, Insignia_TV);
-        userDevices.put(Samsung_TV_Name, Samsung_TV);
+        userDevices.put(Samsung_TV_Name,  Samsung_TV);
+
+        /**
+         *   below is the work-in-progress for refactoring the class / serving as a guide for refactoring the interface
+         */
+
+        registry = new EnumMap<>(DeviceType.class);
+        List<UserDevice> dvdPlayers = new ArrayList<>(1);
+        dvdPlayers.add(LG_DVD);
+
+        List<UserDevice> televisions = new ArrayList<>(2);
+        televisions.add(Insignia_TV);
+        televisions.add(Samsung_TV);
+
+        Collections.sort(televisions);
+
+        registry.put(DeviceType.DVD_PLAYER, dvdPlayers);
+        registry.put(DeviceType.TELEVISION, televisions);
+
+        // assign empty Lists for the remainder of DeviceTypes
+        for( DeviceType type : UserDevice.REGISTERABLE_DEVICES ) {
+            if( ! registry.containsKey(type)) {
+                registry.put(type, new ArrayList<UserDevice>());
+            }
+        }
     }
 
     SimpleDeviceRegistry() {}
 
     @Override
     public AbstractDevice registerDevice(String deviceName, Device device) {
-        // TODO this may be an error condition
-        if (userDevices.containsKey(deviceName)) {
-            return userDevices.get(deviceName);
+        // TODO validate name far prior to attempting to register device...
+        if (isInRegistry(deviceName)) {
+            throw new RuntimeException(TAG + " ERROR - device already exists in registry");
         }
 
         AbstractDevice abstractDevice = new UserDevice(deviceName, device);

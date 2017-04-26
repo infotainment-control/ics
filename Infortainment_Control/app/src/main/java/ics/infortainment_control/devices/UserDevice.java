@@ -1,19 +1,25 @@
 package ics.infortainment_control.devices;
 
+import android.support.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Map;
 
 import ics.infortainment_control.commands.Command;
 
-public class UserDevice implements AbstractDevice {
+public class UserDevice implements AbstractDevice, Comparable<UserDevice> {
 
     public static final SimpleDateFormat USER_DEVICE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.US);
 
+    // indicates subset of DeviceTypes allowed for registration TODO - consider proper location for such constraining
+    public static final EnumSet<DeviceType> REGISTERABLE_DEVICES = EnumSet.complementOf(EnumSet.of(DeviceType.UNKNOWN));
+
     // TODO consider modifying to be the AbstractDevice within? I don't know if it's necessary, but it doesn't seem harmful
-    private Device  device;
-    private String  name;
+    private Device device;
+    private String name;
 
     private Date dateAdded;
 
@@ -73,5 +79,22 @@ public class UserDevice implements AbstractDevice {
     @Override
     public void setCommands(Map<Command, String> commands) {
         device.setCommands(commands);
+    }
+
+    // compares by active status; if neither active, then compares by name
+    @Override
+    public int compareTo(@NonNull UserDevice o) {
+
+        // TODO this is an aggressive constraint that isn't statically enforced by any code - consider the refactor:
+        //      ought Devices be generics on the DeviceType they implement? WELL??? Yes, they should...
+        if(this.type != o.type) {
+            throw new RuntimeException("error -- attempting to compare different device types");
+        }
+
+        if(this.active) return 1;
+        else
+            if(o.active) return -1;
+        else
+            return this.getName().compareTo(o.getName());
     }
 }

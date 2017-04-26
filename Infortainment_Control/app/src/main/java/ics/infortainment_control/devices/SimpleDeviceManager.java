@@ -94,7 +94,6 @@ public class SimpleDeviceManager implements DeviceManager {
         return null;
     }
 
-    // TODO this is rough stuff: these are devices! They should be abstracted......
     @Override
     public void loadDeviceRegistry() {
         Set<AbstractDevice> allDevices = registry.loadRegisteredDevices();
@@ -108,6 +107,4 @@ public class SimpleDeviceManager implements DeviceManager {
             device.setCommands(deviceCodes);
         }
     }
-
-
 }

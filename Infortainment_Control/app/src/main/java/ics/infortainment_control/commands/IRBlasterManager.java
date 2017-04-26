@@ -33,6 +33,7 @@ public class IRBlasterManager {
 
     private IRBlasterManager() {}
 
+    // TODO refactor to lazily instantiate the IRBlasterManager
     public static IRBlasterManager getInstance() {
         if (irManager == null) {
             Context context = InfortainmentControl.getAppContext();
@@ -58,8 +59,8 @@ public class IRBlasterManager {
         // the 1st, 2nd, 3rd and 4th words are not part of the pulse sequence
         //     1st is a code to indicate if the pulse sequence was learned or given from the manufacturer
         //     2nd is the freq code: the carrier frequency in Hertz
-        //     3rd is the seq1 code
-        //     4th is the seq2 code
+        //     3rd is the burst pair sequence 1 code
+        //     4th is the burst pair sequence 2 code
         List<String> hexPulses = hexCodes.subList(4, hexCodes.size());
 
         // frequency is the 2nd word in the code string

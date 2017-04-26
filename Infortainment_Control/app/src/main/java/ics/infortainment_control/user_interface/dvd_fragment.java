@@ -50,6 +50,7 @@ public class dvd_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         DeviceManager deviceManager = SimpleDeviceManager.getInstance();
 
+        // This will always get the current DVD_PLAYER device
         activeDVDDevice = deviceManager.getActiveDevice(DeviceType.DVD_PLAYER);
 
         View v = inflater.inflate(R.layout.dvd_layout,container,false);
