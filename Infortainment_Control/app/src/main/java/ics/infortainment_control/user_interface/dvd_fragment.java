@@ -15,6 +15,7 @@ import java.util.Map;
 import ics.infortainment_control.R;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.devices.AbstractDevice;
+import ics.infortainment_control.devices.BackendDeviceManager;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.devices.DeviceType;
 import ics.infortainment_control.devices.SimpleDeviceManager;
@@ -48,7 +49,8 @@ public class dvd_fragment extends Fragment {
     AbstractDevice activeDVDDevice;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        DeviceManager deviceManager = SimpleDeviceManager.getInstance();
+//        DeviceManager deviceManager = SimpleDeviceManager.getInstance();
+        DeviceManager deviceManager = BackendDeviceManager.getInstance();
 
         // This will always get the current DVD_PLAYER device
         activeDVDDevice = deviceManager.getActiveDevice(DeviceType.DVD_PLAYER);

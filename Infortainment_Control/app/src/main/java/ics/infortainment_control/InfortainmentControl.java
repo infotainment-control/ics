@@ -40,7 +40,7 @@ public class InfortainmentControl extends ActionBarActivity {
         context = getApplicationContext();
 
         // hook to aid development, especially determining device infrared codes
-        if (true) devHook();
+        if (false) devHook();
 
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
@@ -71,13 +71,6 @@ public class InfortainmentControl extends ActionBarActivity {
 
             }
         });
-
-        // sets the color for each tab
-        /*
-        mBottomBar.mapColorForTab(0, "#000000");
-        mBottomBar.mapColorForTab(1, "#FF8F00");
-        mBottomBar.mapColorForTab(2, "#FFEB3B");
-        mBottomBar.mapColorForTab(3, "#616161");*/
 
 
         mBottomBar.mapColorForTab(0, "#90A4AE");

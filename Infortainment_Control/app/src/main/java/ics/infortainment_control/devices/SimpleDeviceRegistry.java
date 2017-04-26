@@ -1,6 +1,5 @@
 package ics.infortainment_control.devices;
 
-import android.support.v7.util.SortedList;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -28,6 +27,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
 
     private static EnumMap<DeviceType, List<UserDevice>> registry;
 
+    // TODO perhaps move to the loadRegisteredDevices() method to legitimize that impl & such
     static {
 
         userDevices = new HashMap<>(3);
@@ -146,7 +146,7 @@ public class SimpleDeviceRegistry implements DeviceRegistry {
     // TODO a bit disingenuous, this implementation...
     @Override
     public Set<AbstractDevice> loadRegisteredDevices() {
-        settings_fragment.devices = userDevices.values();
+        //settings_fragment.devices = userDevices.values();
         return new HashSet<>(userDevices.values());
     }
 

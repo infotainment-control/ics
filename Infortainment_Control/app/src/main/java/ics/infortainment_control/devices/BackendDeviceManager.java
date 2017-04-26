@@ -12,17 +12,17 @@ import ics.infortainment_control.commands.SimpleCodeProvider;
 /**
  *  A class to control use of Devices.
  */
-public class SimpleDeviceManager implements DeviceManager {
+public class BackendDeviceManager implements DeviceManager {
 
     private static DeviceRegistry registry;
     private static CodeProvider   codeProvider;
 
-    private static SimpleDeviceManager INSTANCE;
+    private static BackendDeviceManager INSTANCE;
 
     private static EnumMap<DeviceType, AbstractDevice> activeDevices;
 
-    private SimpleDeviceManager() {
-        registry      = new SimpleDeviceRegistry();
+    private BackendDeviceManager() {
+        registry      = new BackendDeviceRegistry();
         codeProvider  = new SimpleCodeProvider();
         activeDevices = new EnumMap<>(DeviceType.class);
 
@@ -44,14 +44,14 @@ public class SimpleDeviceManager implements DeviceManager {
 
         for(DeviceType typeOfDevice : activeDevices.keySet()) {
             // TODO see the todo of the SimpleDeviceRegistry for thoughts about this responsibility
-            AbstractDevice activeDevice = ((SimpleDeviceRegistry) registry).getActiveDevice(typeOfDevice);
+            AbstractDevice activeDevice = ((BackendDeviceRegistry) registry).getActiveDevice(typeOfDevice);
             activeDevices.put(typeOfDevice, activeDevice);
         }
     }
 
     public static DeviceManager getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new SimpleDeviceManager();
+            INSTANCE = new BackendDeviceManager();
         }
         return INSTANCE;
     }
@@ -94,10 +94,8 @@ public class SimpleDeviceManager implements DeviceManager {
         return null;
     }
 
-    // TODO note that this is not used, as the constructor does this lifting...
     @Override
     public void loadDeviceRegistry() {
-        /*
         Set<AbstractDevice> allDevices = registry.loadRegisteredDevices();
 
         // with all devices created, the next step is provisioning them with command codes
@@ -108,6 +106,5 @@ public class SimpleDeviceManager implements DeviceManager {
 
             device.setCommands(deviceCodes);
         }
-        */
     }
 }

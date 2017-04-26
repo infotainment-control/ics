@@ -11,7 +11,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        setForcedUpgrade();
+        //setForcedUpgrade();
         //super.setForcedUpgrade();
     }
 }

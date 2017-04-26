@@ -15,6 +15,7 @@ import java.util.Map;
 import ics.infortainment_control.R;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.devices.AbstractDevice;
+import ics.infortainment_control.devices.BackendDeviceManager;
 import ics.infortainment_control.devices.DeviceManager;
 import ics.infortainment_control.devices.DeviceType;
 import ics.infortainment_control.devices.SimpleDeviceManager;
@@ -63,7 +64,7 @@ public class tv_fragment extends Fragment {
     AbstractDevice activeTVDevice;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        DeviceManager deviceManager = SimpleDeviceManager.getInstance();
+        DeviceManager deviceManager = BackendDeviceManager.getInstance();//SimpleDeviceManager.getInstance();
 
         activeTVDevice = deviceManager.getActiveDevice(DeviceType.TELEVISION);
 
