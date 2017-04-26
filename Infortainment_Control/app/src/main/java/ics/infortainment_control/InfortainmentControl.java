@@ -2,16 +2,19 @@ package ics.infortainment_control;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.util.Pair;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
 import java.io.IOException;
+import java.util.List;
 
 import ics.infortainment_control.commands.IRBlasterManager;
 import ics.infortainment_control.devices.database.DatabaseHelper;
@@ -95,8 +98,17 @@ public class InfortainmentControl extends ActionBarActivity {
 
     private void issueDBInteractions() {
 
-        DatabaseHelper helper = new DatabaseHelper(context);
-        SQLiteDatabase db     = helper.getReadableDatabase();
+        DatabaseHelper             helper    = new DatabaseHelper(context);
+        SQLiteDatabase             db        = helper.getWritableDatabase();
+        List<Pair<String, String>> databases = db.getAttachedDbs();
+
+        String table = db.getPath();
+
+        boolean dbIsOpen = db.isOpen();
+        Cursor cursor = db.rawQuery("SELECT * FROM user_devices;", new String[0]);
+
+        cursor.moveToFirst();
+        Log.d("[InfortainmentControl]", cursor.getString(1));
 
         Log.d("[InfortainmentControl]", "how did your database opening go?");
 
