@@ -148,13 +148,13 @@ public class SimpleCodeProvider implements CodeProvider {
     @Override
     public String getCode(String deviceID, Command command) {
 
-        Map<Command, String> allCommandsForDevice = getCodes(deviceID);
+        Map<Command, String> allCommandsForDevice = getStandardCommandCodesOfDevice(deviceID);
 
         return allCommandsForDevice.get(command);
     }
 
     @Override
-    public Map<Command, String> getCodes(String deviceID) {
+    public Map<Command, String> getStandardCommandCodesOfDevice(String deviceID) {
         return deviceCodesMap.get(deviceID);
     }
 

@@ -31,7 +31,7 @@ public class SimpleDeviceManager implements DeviceManager {
 
         // for each device, instantiate its Command codes using the codeProvider
         for(AbstractDevice device : devices) {
-            Map<Command, String> commands = codeProvider.getCodes(device.getID());
+            Map<Command, String> commands = codeProvider.getStandardCommandCodesOfDevice(device.getID());
             device.setCommands(commands);
         }
 
@@ -82,7 +82,7 @@ public class SimpleDeviceManager implements DeviceManager {
         //AbstractDevice abstractDevice = new Device(deviceID);
         Device device = new Device(deviceID);
 
-        Map<Command, String> deviceCodes = codeProvider.getCodes(deviceID);
+        Map<Command, String> deviceCodes = codeProvider.getStandardCommandCodesOfDevice(deviceID);
 
         device.setCommands(deviceCodes);
 
@@ -104,7 +104,7 @@ public class SimpleDeviceManager implements DeviceManager {
         for (AbstractDevice device : allDevices) {
             String id = device.getID();
 
-            Map<Command, String> deviceCodes = codeProvider.getCodes(id);
+            Map<Command, String> deviceCodes = codeProvider.getStandardCommandCodesOfDevice(id);
 
             device.setCommands(deviceCodes);
         }

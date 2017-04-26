@@ -87,7 +87,7 @@ public class BackendDeviceRegistry implements DeviceRegistry {
 
             String name = cursor.getString(USER_DEVICE_NAME_COL);
             int id = cursor.getInt(USER_DEVICE_ID_COL);
-            DeviceType type = getDeviceType(cursor.getString(USER_DEVICE_TYPE_COL));
+            DeviceType type = getDeviceTypeFromString(cursor.getString(USER_DEVICE_TYPE_COL));
             boolean active = ( 1 == cursor.getInt(USER_DEVICE_IS_ACTIVE_COL) );
 
             Date creationDate = new Date();
@@ -139,7 +139,7 @@ public class BackendDeviceRegistry implements DeviceRegistry {
         return null;
     }
 
-    private DeviceType getDeviceType(String type) {
+    private DeviceType getDeviceTypeFromString(String type) {
         return DeviceType.valueOf(type);
     }
 }

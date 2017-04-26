@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ics.infortainment_control.commands.BackendCodeProvider;
 import ics.infortainment_control.commands.CodeProvider;
 import ics.infortainment_control.commands.Command;
 import ics.infortainment_control.commands.SimpleCodeProvider;
@@ -23,7 +24,7 @@ public class BackendDeviceManager implements DeviceManager {
 
     private BackendDeviceManager() {
         registry      = new BackendDeviceRegistry();
-        codeProvider  = new SimpleCodeProvider();
+        codeProvider  = new BackendCodeProvider();
         activeDevices = new EnumMap<>(DeviceType.class);
 
         // fetch all devices from the registry
@@ -31,7 +32,7 @@ public class BackendDeviceManager implements DeviceManager {
 
         // for each device, instantiate its Command codes using the codeProvider
         for(AbstractDevice device : devices) {
-            Map<Command, String> commands = codeProvider.getCodes(device.getID());
+            Map<Command, String> commands = codeProvider.getStandardCommandCodesOfDevice(device.getID());
             device.setCommands(commands);
         }
 
@@ -82,7 +83,7 @@ public class BackendDeviceManager implements DeviceManager {
         //AbstractDevice abstractDevice = new Device(deviceID);
         Device device = new Device(deviceID);
 
-        Map<Command, String> deviceCodes = codeProvider.getCodes(deviceID);
+        Map<Command, String> deviceCodes = codeProvider.getStandardCommandCodesOfDevice(deviceID);
 
         device.setCommands(deviceCodes);
 
@@ -102,7 +103,7 @@ public class BackendDeviceManager implements DeviceManager {
         for (AbstractDevice device : allDevices) {
             String id = device.getID();
 
-            Map<Command, String> deviceCodes = codeProvider.getCodes(id);
+            Map<Command, String> deviceCodes = codeProvider.getStandardCommandCodesOfDevice(id);
 
             device.setCommands(deviceCodes);
         }

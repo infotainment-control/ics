@@ -17,8 +17,9 @@ public interface CodeProvider {
 
     String getCode(String deviceID, Command command);
 
-    Map<Command, String> getCodes(String deviceID);
+    Map<Command, String> getStandardCommandCodesOfDevice(String deviceID);
 
+    // TODO what exactly is this supposed to do? .......
     Set<String> getAllDeviceIDs();
 
     Set<String> getAllDeviceIDsForBrand(String brand);
