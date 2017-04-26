@@ -2,13 +2,19 @@ package ics.infortainment_control;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
+
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
+import java.io.IOException;
+
 import ics.infortainment_control.commands.IRBlasterManager;
+import ics.infortainment_control.devices.database.DatabaseHelper;
 import ics.infortainment_control.user_interface.dvd_fragment;
 import ics.infortainment_control.user_interface.premieres_fragment;
 import ics.infortainment_control.user_interface.settings_fragment;
@@ -31,11 +37,7 @@ public class InfortainmentControl extends ActionBarActivity {
         context = getApplicationContext();
 
         // hook to aid development, especially determining device infrared codes
-        if (false) {
-          issueHardCommand();
-        }
-
-
+        if (true) devHook();
 
         // sets tv as default fragment
         tv_fragment f = new tv_fragment();
@@ -85,7 +87,22 @@ public class InfortainmentControl extends ActionBarActivity {
         return context;
     }
 
-    public void issueHardCommand() {
+    private void devHook() {
+        //issueHardCommand();
+        //alternateHardCommands();
+        issueDBInteractions();
+    }
+
+    private void issueDBInteractions() {
+
+        DatabaseHelper helper = new DatabaseHelper(context);
+        SQLiteDatabase db     = helper.getReadableDatabase();
+
+        Log.d("[InfortainmentControl]", "how did your database opening go?");
+
+    }
+
+    private void issueHardCommand() {
         for(int i = 0; i < 3; ++i) {
             IRBlasterManager.getInstance().issueCommand("0000 006C 0022 0003 00AD 00AD 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0016 0016 0016 0016 0016 0016 0041 0016 0041 0016 0016 0016 0041 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0016 0016 0016 0016 0041 0016 0041 0016 06A4 00AD 00AD 0016 0041 0016 0E6C");
             // ^open/close for an LG dvd player
@@ -99,7 +116,8 @@ public class InfortainmentControl extends ActionBarActivity {
             }
         }
     }
-    public void alternateHardCommands() {
+
+    private void alternateHardCommands() {
         String brp_a = "0000 0069 0000 000d 0060 0018 0030 0018 0018 0018 0030 0018 0018 0018 0030 0018 0018 0018 0018 0018 0030 0018 0018 0018 0018 0018 0018 0018 0018 0411";
         for(int i = 0; i < 5; ++i) {
 
