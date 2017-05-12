@@ -83,23 +83,23 @@ public class tv_fragment extends Fragment {
         TextView activeDevice = (TextView) v.findViewById(R.id.activeDeviceTextView);
         activeDevice.setText(((UserDevice)activeTVDevice).getName());
 
-        _power = (Button) v.findViewById(R.id.power_btn);
-        _source = (Button) v.findViewById(R.id.source_btn);
-        _channel_down = (Button) v.findViewById(R.id.channel_down_btn);
-        _channel_up = (Button) v.findViewById(R.id.channel_up_btn);
-        _volume_down = (Button) v.findViewById(R.id.volume_down_btn);
-        _volume_up = (Button) v.findViewById(R.id.volume_up_btn);
-        _up = (Button) v.findViewById(R.id.directional_up_btn);
-        _down = (Button) v.findViewById(R.id.directional_down_btn);
-        _left = (Button) v.findViewById(R.id.directional_left_btn);
-        _right = (Button) v.findViewById(R.id.directional_right_btn);
-        _ok = (Button) v.findViewById(R.id.ok_btn);
-        _return = (Button) v.findViewById(R.id.return_btn);
-        _tools = (Button) v.findViewById(R.id.tools_btn);
-        _menu = (Button) v.findViewById(R.id.menu_btn);
-        _mute = (Button) v.findViewById(R.id.mute_btn);
-        _info = (Button) v.findViewById(R.id.info_btn);
-        _exit = (Button) v.findViewById(R.id.exit_btn);
+        _power         =  (Button)  v.findViewById(R.id.power_btn);
+        _source        =  (Button)  v.findViewById(R.id.source_btn);
+        _channel_down  =  (Button)  v.findViewById(R.id.channel_down_btn);
+        _channel_up    =  (Button)  v.findViewById(R.id.channel_up_btn);
+        _volume_down   =  (Button)  v.findViewById(R.id.volume_down_btn);
+        _volume_up     =  (Button)  v.findViewById(R.id.volume_up_btn);
+        _up            =  (Button)  v.findViewById(R.id.directional_up_btn);
+        _down          =  (Button)  v.findViewById(R.id.directional_down_btn);
+        _left          =  (Button)  v.findViewById(R.id.directional_left_btn);
+        _right         =  (Button)  v.findViewById(R.id.directional_right_btn);
+        _ok            =  (Button)  v.findViewById(R.id.ok_btn);
+        _return        =  (Button)  v.findViewById(R.id.return_btn);
+        _tools         =  (Button)  v.findViewById(R.id.tools_btn);
+        _menu          =  (Button)  v.findViewById(R.id.menu_btn);
+        _mute          =  (Button)  v.findViewById(R.id.mute_btn);
+        _info          =  (Button)  v.findViewById(R.id.info_btn);
+        _exit          =  (Button)  v.findViewById(R.id.exit_btn);
 
         // associate buttons with Commands
         assignMainButtonAssociations(mainButtonAssociations);
@@ -119,16 +119,16 @@ public class tv_fragment extends Fragment {
 
                 final AlertDialog numpadDialog = dialogBuilder.create();
 
-                one = (Button) dialogView.findViewById(R.id.one);
-                two = (Button) dialogView.findViewById(R.id.two);
-                three = (Button) dialogView.findViewById(R.id.three);
-                four = (Button) dialogView.findViewById(R.id.four);
-                five = (Button) dialogView.findViewById(R.id.five);
-                six = (Button) dialogView.findViewById(R.id.six);
-                seven = (Button) dialogView.findViewById(R.id.seven);
-                eight = (Button) dialogView.findViewById(R.id.eight);
-                nine = (Button) dialogView.findViewById(R.id.nine);
-                zero = (Button) dialogView.findViewById(R.id.zero);
+                one    =  (Button)  dialogView.findViewById(R.id.one);
+                two    =  (Button)  dialogView.findViewById(R.id.two);
+                three  =  (Button)  dialogView.findViewById(R.id.three);
+                four   =  (Button)  dialogView.findViewById(R.id.four);
+                five   =  (Button)  dialogView.findViewById(R.id.five);
+                six    =  (Button)  dialogView.findViewById(R.id.six);
+                seven  =  (Button)  dialogView.findViewById(R.id.seven);
+                eight  =  (Button)  dialogView.findViewById(R.id.eight);
+                nine   =  (Button)  dialogView.findViewById(R.id.nine);
+                zero   =  (Button)  dialogView.findViewById(R.id.zero);
 
                 // associate number pad buttons with Commands
                 assignNumberPadButtonAssociations(numberPadButtonAssociations);

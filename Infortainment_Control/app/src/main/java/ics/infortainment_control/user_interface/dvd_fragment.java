@@ -58,25 +58,25 @@ public class dvd_fragment extends Fragment {
         View v = inflater.inflate(R.layout.dvd_layout,container,false);
 
         // tie display resources to java objects
-        _power = (Button) v.findViewById(R.id.power_btn);
-        _menu = (Button) v.findViewById(R.id.menu_btn);
-        _topmenu = (Button) v.findViewById(R.id.topmenu_btn);
-        _up = (Button) v.findViewById(R.id.directional_up_btn);
-        _down = (Button) v.findViewById(R.id.directional_down_btn);
-        _left = (Button) v.findViewById(R.id.directional_left_btn);
-        _right = (Button) v.findViewById(R.id.directional_right_btn);
-        _ok = (Button) v.findViewById(R.id.ok_btn);
-        _return = (Button) v.findViewById(R.id.return_btn);
-        _display = (Button) v.findViewById(R.id.display_btn);
-        _numpad = (Button) v.findViewById(R.id.numpad_btn);
-        _mute = (Button) v.findViewById(R.id.mute_btn);
-        _rewind = (Button) v.findViewById(R.id.rewind_btn);
-        _fastforward = (Button) v.findViewById(R.id.fastforward_btn);
-        _prev = (Button) v.findViewById(R.id.prev_btn);
-        _play = (Button) v.findViewById(R.id.play_btn);
-        _stop = (Button) v.findViewById(R.id.stop_btn);
-        _next = (Button) v.findViewById(R.id.next_btn);
-        _audio = (Button) v.findViewById(R.id.audio_btn);
+        _power        =  (Button)  v.findViewById(R.id.power_btn);
+        _menu         =  (Button)  v.findViewById(R.id.menu_btn);
+        _topmenu      =  (Button)  v.findViewById(R.id.topmenu_btn);
+        _up           =  (Button)  v.findViewById(R.id.directional_up_btn);
+        _down         =  (Button)  v.findViewById(R.id.directional_down_btn);
+        _left         =  (Button)  v.findViewById(R.id.directional_left_btn);
+        _right        =  (Button)  v.findViewById(R.id.directional_right_btn);
+        _ok           =  (Button)  v.findViewById(R.id.ok_btn);
+        _return       =  (Button)  v.findViewById(R.id.return_btn);
+        _display      =  (Button)  v.findViewById(R.id.display_btn);
+        _numpad       =  (Button)  v.findViewById(R.id.numpad_btn);
+        _mute         =  (Button)  v.findViewById(R.id.mute_btn);
+        _rewind       =  (Button)  v.findViewById(R.id.rewind_btn);
+        _fastforward  =  (Button)  v.findViewById(R.id.fastforward_btn);
+        _prev         =  (Button)  v.findViewById(R.id.prev_btn);
+        _play         =  (Button)  v.findViewById(R.id.play_btn);
+        _stop         =  (Button)  v.findViewById(R.id.stop_btn);
+        _next         =  (Button)  v.findViewById(R.id.next_btn);
+        _audio        =  (Button)  v.findViewById(R.id.audio_btn);
 
         commandAssociations = new HashMap<>(18);
 
@@ -103,16 +103,17 @@ public class dvd_fragment extends Fragment {
                     Button zero;
                     Button return_btn;
 
-                    one = (Button) dialogView.findViewById(R.id.one);
-                    two = (Button) dialogView.findViewById(R.id.two);
-                    three = (Button) dialogView.findViewById(R.id.three);
-                    four = (Button) dialogView.findViewById(R.id.four);
-                    five = (Button) dialogView.findViewById(R.id.five);
-                    six = (Button) dialogView.findViewById(R.id.six);
-                    seven= (Button) dialogView.findViewById(R.id.seven);
-                    eight= (Button) dialogView.findViewById(R.id.eight);
-                    nine= (Button) dialogView.findViewById(R.id.nine);
-                    zero = (Button) dialogView.findViewById(R.id.zero);
+                    one    =  (Button)  dialogView.findViewById(R.id.one);
+                    two    =  (Button)  dialogView.findViewById(R.id.two);
+                    three  =  (Button)  dialogView.findViewById(R.id.three);
+                    four   =  (Button)  dialogView.findViewById(R.id.four);
+                    five   =  (Button)  dialogView.findViewById(R.id.five);
+                    six    =  (Button)  dialogView.findViewById(R.id.six);
+                    seven  =  (Button)  dialogView.findViewById(R.id.seven);
+                    eight  =  (Button)  dialogView.findViewById(R.id.eight);
+                    nine   =  (Button)  dialogView.findViewById(R.id.nine);
+                    zero   =  (Button)  dialogView.findViewById(R.id.zero);
+
                     return_btn = (Button) dialogView.findViewById(R.id.return_btn);
 
                     return_btn.setOnClickListener(new View.OnClickListener() {
@@ -151,24 +152,24 @@ public class dvd_fragment extends Fragment {
     }
 
     private void assignButtonAssociations(Map<Button, Command> map) {
-        map.put(_audio, Command.AUDIO);
-        map.put(_rewind, Command.REWIND);
-        map.put(_mute, Command.MUTE);
-        map.put(_display, Command.DISPLAY);
-        map.put(_fastforward, Command.FASTFORWARD);
-        map.put(_menu, Command.MENU);
-        map.put(_return, Command.EXIT);
-        map.put(_ok, Command.ENTER);
-        map.put(_right, Command.RIGHT);
-        map.put(_left, Command.LEFT);
-        map.put(_up, Command.UP);
-        map.put(_down, Command.DOWN);
-        map.put(_stop, Command.PAUSE); // TODO this is blantant hacking of the map!
-        map.put(_topmenu, Command.EJECT);  // TODO this is *also* blantant hacking of the map!
-        map.put(_play, Command.PLAY);
-        map.put(_power, Command.POWER);
-        map.put(_prev, Command.REVERSE_STEP);
-        map.put(_next, Command.FORWARD_STEP);
+        map.put(_audio,        Command.AUDIO);
+        map.put(_rewind,       Command.REWIND);
+        map.put(_mute,         Command.MUTE);
+        map.put(_display,      Command.DISPLAY);
+        map.put(_fastforward,  Command.FASTFORWARD);
+        map.put(_menu,         Command.MENU);
+        map.put(_return,       Command.EXIT);
+        map.put(_ok,           Command.ENTER);
+        map.put(_right,        Command.RIGHT);
+        map.put(_left,         Command.LEFT);
+        map.put(_up,           Command.UP);
+        map.put(_down,         Command.DOWN);
+        map.put(_stop,         Command.PAUSE);
+        map.put(_topmenu,      Command.EJECT);
+        map.put(_play,         Command.PLAY);
+        map.put(_power,        Command.POWER);
+        map.put(_prev,         Command.REVERSE_STEP);
+        map.put(_next,         Command.FORWARD_STEP);
     }
 
     /**
